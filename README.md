@@ -1,8 +1,8 @@
 # mikemajara/skills
 
-Installable agent skills. Each skill lives under `skills/<name>/` with a
-`SKILL.md` the harness loads. Most skills are self-contained there; only skills
-that need a human Getting Started guide ship a `README.md` beside `SKILL.md`.
+Installable agent skills. Each skill lives under `skills/<name>/` with a `SKILL.md`
+the harness loads. Agents follow that file (and on-demand `references/`); optional
+per-skill `README.md` files are brief listing pages only.
 
 ## Install
 
@@ -27,7 +27,7 @@ See `CHANGELOG.md` for release notes and migrations.
 
 | Skill | What it is |
 | ----- | ---------- |
-| [`backlog`](skills/backlog/) | Capture work and move GitHub issues through research → refine → implement → qa. **Has a Getting Started README.** |
+| [`backlog`](skills/backlog/) | Capture work and move GitHub issues through research → refine → implement → qa. |
 | [`sdlc-first-principles`](skills/sdlc-first-principles/) | Apply a five-step first-principles process lens to SDLC work. |
 | [`conversation`](skills/conversation/) | Pressure-test a mostly formed idea (gaps, contradictions, edges). |
 | [`brainstorm`](skills/brainstorm/) | Generate new angles and option catalogs. |
