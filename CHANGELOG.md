@@ -4,11 +4,9 @@
 
 ### Changed
 
-- `backlog` `references/qa.md`: real PR judgment — PASS does not merge/close;
-  find change (Fixes #N / linked / search); verdict + review on the PR; depth
-  (AC + touched regressions; prefer suite/CLI, browser needs HITL); HITL for
-  merge-ready and product calls. No private/org repo allowlist in this shared
-  file — harnesses may supply one locally.
+- `backlog` `references/qa.md`: rewrite around validating AC from refine/plan
+  plus in-scope regressions; PASS ≠ agent merge/close (human ships); harness
+  ops (allowlists, find-PR, review buttons) stay out of this shared file.
 
 ### Added
 
