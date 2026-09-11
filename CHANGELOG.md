@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Changed
+
+- Docs: slim top-level `README.md` to a skills catalog; add Getting Started
+  `skills/backlog/README.md` (install, flow, LTM, layout). Per-skill how-to
+  lives next to the skill when needed — not in the repo root.
+
 ### Added
 
 - `backlog`: coding-agents long-term memory flow — promote conventions /
