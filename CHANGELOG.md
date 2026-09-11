@@ -5,9 +5,10 @@
 ### Changed
 
 - `backlog` `references/qa.md`: real PR judgment — PASS does not merge/close;
-  repo allowlist; find change (Fixes #N / linked / search); verdict + review on
-  the PR; depth (AC + touched regressions; prefer suite/CLI, browser needs HITL);
-  HITL rules for merge-ready and product calls.
+  find change (Fixes #N / linked / search); verdict + review on the PR; depth
+  (AC + touched regressions; prefer suite/CLI, browser needs HITL); HITL for
+  merge-ready and product calls. No private/org repo allowlist in this shared
+  file — harnesses may supply one locally.
 
 ### Added
 
@@ -27,9 +28,6 @@
   new direction.
 - Added `brainstorm`, a generative skill for new angles and option catalogs.
   Handoff to `conversation` when an idea is picked and needs pressure-testing.
-
-- `voice-miguel`: opt-in multi-register voice (email, Slack/messaging,
-  blog/essay, short summary). `disable-model-invocation: true`.
 
 - `google-docs`: connector-agnostic create/format/edit/comment/suggest/review
   rules; Markdown draft default; no connector lock-in.
@@ -65,7 +63,7 @@ Label mapping for existing issues:
    PLAN files as obsolete.
 
 The important invariant is: if an item has an issue, the issue owns status
-and phase.
+AND phase.
 
 ### Added
 
@@ -86,6 +84,8 @@ and phase.
 ### Removed
 
 - Removed `todoist-api` as out of scope for this repository.
+- `voice-miguel`: not shipped in this repo (Grok-local / personal only). Do not
+  add it here.
 
 ### Added
 
