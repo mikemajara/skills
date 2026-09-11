@@ -9,6 +9,11 @@
   Optional `skills/<name>/README.md` is a brief skills.sh / listing blurb only
   (backlog: one-liner + install). No separate Getting Started guide.
 
+### Removed
+
+- `voice-miguel`: not shipped in this repo (Grok-local / personal only). Do not
+  add it here.
+
 ### Added
 
 - `backlog`: coding-agents long-term memory flow — promote conventions /
@@ -27,9 +32,6 @@
   new direction.
 - Added `brainstorm`, a generative skill for new angles and option catalogs.
   Handoff to `conversation` when an idea is picked and needs pressure-testing.
-
-- `voice-miguel`: opt-in multi-register voice (email, Slack/messaging,
-  blog/essay, short summary). `disable-model-invocation: true`.
 
 - `google-docs`: connector-agnostic create/format/edit/comment/suggest/review
   rules; Markdown draft default; no connector lock-in.
