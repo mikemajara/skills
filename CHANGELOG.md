@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Changed
+
+- Docs: slim top-level `README.md` to a skills catalog (what each skill is +
+  install). Agents follow `SKILL.md` / `references/` — not per-skill READMEs.
+  Optional `skills/<name>/README.md` is a brief skills.sh / listing blurb only
+  (backlog: one-liner + install). No separate Getting Started guide.
+
 ### Added
 
 - `backlog`: coding-agents long-term memory flow — promote conventions /
