@@ -1,6 +1,16 @@
-# Agentfiles
+# mikemajara/skills
 
-This repository publishes installable skills.
+Installable agent skills. Each skill lives under `skills/<name>/` with a
+`SKILL.md` the harness loads. Most skills are self-contained there; only skills
+that need a human Getting Started guide ship a `README.md` beside `SKILL.md`.
+
+## Install
+
+```bash
+npx skills add mikemajara/skills --skill <name>
+```
+
+Examples:
 
 ```bash
 npx skills add mikemajara/skills --skill backlog
@@ -8,93 +18,24 @@ npx skills add mikemajara/skills --skill sdlc-first-principles
 npx skills add mikemajara/skills --skill conversation
 npx skills add mikemajara/skills --skill brainstorm
 npx skills add mikemajara/skills --skill google-docs
-npx skills add mikemajara/skills --skill voice-miguel
 npx skills add mikemajara/skills --skill nightly-learn
 ```
 
-## backlog
+See `CHANGELOG.md` for release notes and migrations.
 
-Workflow for capturing work and moving issues through research → refine →
-implement → qa. GitHub Issues are the default source of truth.
+## Skills
 
-```text
-.backlog/
-  inbox.md
-  plans/
-  memory.md
-```
+| Skill | What it is |
+| ----- | ---------- |
+| [`backlog`](skills/backlog/) | Capture work and move GitHub issues through research → refine → implement → qa. **Has a Getting Started README.** |
+| [`sdlc-first-principles`](skills/sdlc-first-principles/) | Apply a five-step first-principles process lens to SDLC work. |
+| [`conversation`](skills/conversation/) | Pressure-test a mostly formed idea (gaps, contradictions, edges). |
+| [`brainstorm`](skills/brainstorm/) | Generate new angles and option catalogs. |
+| [`google-docs`](skills/google-docs/) | Connector-agnostic Google Docs create / format / edit / review rules. |
+| [`nightly-learn`](skills/nightly-learn/) | Promote sticky how-to from an agent’s own memory into skills (HITL for shared). |
 
-- `inbox.md` — optional local scratch until promoted.
-- `plans/` — product specs only (what/why/in/out/AC), when the issue body is not enough.
-- `memory.md` — durable decisions, blockers, conventions, gotchas.
-- A **plan** is the product spec for one issue. Split oversized work into more issues. No implementation-sequence docs.
+## Contributing
 
-Example prompts:
-
-```text
-Use the backlog skill to initialize this project.
-Use the backlog skill to capture this task.
-Use the backlog skill to refine the next issue.
-```
-
-After install:
-
-```bash
-node path/to/skills/backlog/scripts/backlog-setup.mjs
-```
-
-`--check` reports skill version and label schema. See `CHANGELOG.md` for
-label-schema 3 migration (`status:unknown` / `status:ready` → `phase:*` +
-`status:open`).
-
-## sdlc-first-principles
-
-The `sdlc-first-principles` skill applies Elon Musk's five-step process
-improvement algorithm to software delivery: challenge requirements, delete
-unnecessary work, simplify what remains, accelerate cycle time, and automate
-last.
-
-## conversation
-
-Use `conversation` when the idea is already mostly formed. The agent
-pressure-tests it with you: gaps, contradictions, missing constraints, and
-edge cases. It does not invent a new direction or dump an option catalog.
-
-Example prompts:
-
-```text
-Think this through with me — what am I missing?
-Pressure-test this plan before I build it.
-```
-
-## brainstorm
-
-Use `brainstorm` when you want new angles. The agent generates options,
-including unconventional ones, and follows what lands. It does not audit a
-plan you already have.
-
-Example prompts:
-
-```text
-Brainstorm this with me.
-Give me more creative directions for this idea.
-```
-
-## google-docs
-
-Thin, connector-agnostic operating rules for Google Docs: create, format,
-edit, comments, suggestions, and review. Draft in Markdown; use whatever Docs
-tools the harness exposes — do not hard-code a connector.
-
-## voice-miguel
-
-Opt-in voice skill for Miguel Alcalde (`disable-model-invocation: true`).
-One thin skill with registers for email, Slack/messaging, blog/essay, and
-short summaries. Invoke with "voice-miguel" / "in my voice" — never apply by
-default.
-
-## nightly-learn
-
-Periodic (e.g. nightly) consolidation: promote sticky how-to facts from an
-agent's **own** memory into skills (or skill patches). Harness-agnostic;
-schedule is a per-agent routine. HITL before rewriting shared upstream skills.
+Prefer thin, harness-agnostic skills. Shared source of truth is this repo; do not
+treat a local harness install as canonical. Document breaking label or layout
+changes in `CHANGELOG.md`.
