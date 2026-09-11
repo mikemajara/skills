@@ -1,113 +1,89 @@
 # QA
 
-Judge a change against the **product plan** on the issue (`references/plan.md`).
-Not a restatement of how to open a PR. Do **not** merge PRs or close issues on
-pass — that stays with the human owner.
+`phase:qa` is where the backlog pipeline **checks the change against the plan**.
+Earlier phases already defined the product intent: research (if any), then refine
+locked the plan — problem, goal, in/out of scope, and **acceptance criteria**
+(`references/plan.md`). QA does not invent new product criteria; it verifies
+those.
 
-## When
+## Goal
 
-`phase:qa` — a reviewable change exists that claims this issue.
+1. **Validate every acceptance criterion** with concrete evidence.
+2. **Check for regressions** in what the change touches (and happy paths the AC
+   imply).
+3. **Guard scope** — behavior outside the plan fails or goes back to refine.
 
-## Scope
+Do not turn QA into open-ended exploratory testing unless the issue asks for it.
 
-Default: the issue's own repo (or the repo the human named for this QA).
+## Inputs (from earlier phases)
 
-If this harness or project defines a **repo allowlist** (persona, `AGENTS.md`, or
-a local scope skill), respect it. Outside that list: **BLOCKED** — comment why
-and ping the human; do not review. Do **not** put private or org-specific repo
-names in this shared file.
+| Source | Use |
+| ------ | --- |
+| Issue (canonical) | Goal, in/out, AC; open questions should be empty or answered |
+| Change under review | Diff, CI/checks, preview only if the project usually has one |
+| `.backlog/plans/…` | Only if still a draft buffer — the issue wins when both exist |
 
-## Find the change (PR ↔ issue)
+If AC are missing or not testable, that is a **refine** gap: send the issue back;
+do not invent criteria.
 
-Resolve **one** reviewable change before judging. Prefer, in order:
+## Standards
 
-1. PR body / commits with `Fixes #N`, `Closes #N`, or `Resolves #N` for this issue.
-2. PR linked from the issue (Development / linked pull requests).
-3. Search open PRs in the same repo for the issue number or clear title match
-   (`gh pr list --search "<N>"` / issue URL).
-4. If still none (or several ambiguous): **BLOCKED** — comment what you tried;
-   ask the human or implementer to link the PR. Do not invent a change to review.
+### Acceptance criteria
 
-Diff is enough to start; use a preview/deploy URL when the issue or PR provides
-one (or the project usually has one).
+- Walk AC **one by one**. Each needs a short evidence line (test name, CLI
+  output, check run, or a precise diff/pointer).
+- Prefer the project's **automated tests and CLI** when they can show the AC.
+- Manual checks only when an AC cannot be shown otherwise — keep them minimal
+  and tied to named criteria.
 
-## Depth
+### Regressions
 
-Default bar: **plan / AC compliance** on the claimed change.
+- Exercise or inspect coverage for **touched** paths and their obvious callers.
+- A broken happy path in a touched area is a fail even when AC did not spell it
+  out.
+- Stay out of unrelated product areas.
 
-Also check:
+### Scope
 
-- Obvious regressions in **touched** paths (broken happy path, clearly broken
-  related UI/API in the diff).
-- Edge cases **only when AC or in/out implies them**.
+- Extras not in the plan: **FAIL** (out of scope) or back to **refine** (plan
+  hole). Say which.
 
-Do **not** turn QA into open-ended exploratory testing unless the issue asks.
-Prefer preview when available; otherwise judge from the PR diff + checks.
+## Verdict
 
-Prefer using the test suite and/or CLI. If you have to use the browser or the
-computer manually because a test suite and/or CLI are not available, always ask
-for HITL authorization first.
-
-Extras in the change that are not in the plan: **FAIL** (out of scope) or send
-back to **refine** (plan hole) — say which.
-
-## Verdict comment (on the PR)
-
-Always leave a short comment on the **PR** (required). Use this shape:
+Leave a short written verdict that cites AC. Prefer the PR when the project uses
+pull requests; otherwise comment on the issue.
 
 ```text
 ### QA: PASS | FAIL | BLOCKED
-Repo: <owner/name>  PR: <#n or none>  Preview: <url or n/a>
 
 AC:
 - [x] <criterion> — <one-line evidence>
 - [ ] <criterion> — <why it fails / blocked>
 
-Notes: <optional, ≤3 lines>
-Next: <merge-ready for human | back to implement | back to refine | waiting on human>
+Regressions: <touched paths checked / gaps>
+Next: <ready for human ship | back to implement | back to refine | waiting>
 ```
 
-## GitHub PR review actions
+| Verdict | Meaning | Labels |
+| ------- | ------- | ------ |
+| **PASS** | AC met; no blocking in-scope regressions | Leave `phase:qa` (or project “ready”); clear `doing` → `status:open`. Agent QA does **not** merge or close — shipping stays with the human / project convention. |
+| **FAIL** | Bug in the change | `phase:implement` + `status:open` |
+| Plan wrong | Product/AC hole | `phase:refine` + `status:open` (or `blocked`) |
+| **BLOCKED** | No clear change, no access, or needs a human call | Comment why; `status:blocked` when waiting |
 
-- On the PR, submit a review matching the verdict:
-  - **PASS** → Approve (do **not** merge, do **not** close the issue).
-  - **FAIL** → Request changes.
-  - **BLOCKED** → Comment on the PR (no approve); leave issue `status:blocked` or
-    open with a clear wait reason.
-- Label moves are on the **issue**, not a substitute for the comment.
-
-## HITL (when to ping the human)
-
-Ping the human when:
-
-- **PASS** — ready for them to merge/ship (QA does not merge).
-- Product judgment call (ambiguous AC, scope dispute, "is this good enough?").
-- Repo outside a configured allowlist, missing/ambiguous PR, or security /
-  data-loss risk.
-
-Otherwise decide yourself: **FAIL** → `phase:implement` + `status:open`;
-plan hole → `phase:refine` + `status:open` (or `blocked`); clear **BLOCKED**
-with reason on the issue.
+Harness-specific rules (repo allowlists, how to find PRs, which review button to
+click) belong in the harness or persona — not in this shared file.
 
 ## Procedure
 
-1. If a harness/project repo allowlist applies, confirm the repo is in scope (or
-   the human explicitly authorized you). Else BLOCKED + ping.
-2. Claim `status:doing` (while `phase:qa`).
-3. Find the change (section above). Else BLOCKED.
-4. Read the issue (canonical plan) and the change (diff; preview if available).
-5. Check AC and in/out of scope at the depth above.
-6. Verdict on the PR (template). Submit the matching PR review action above.
-7. **PASS** — leave issue open at `phase:qa` (or project "ready to merge"
-   convention); clear `doing` → `status:open`; **do not** close or merge;
-   ping human that it is merge-ready.
-8. **FAIL (bug in the change)** — `phase:implement` + `status:open`; clear `doing`.
-9. **Plan wrong / product hole** — `phase:refine` + `status:open` (or `blocked`);
-   clear `doing`.
-10. **BLOCKED** — comment + ping as needed; `status:blocked` when waiting on human.
+1. Claim `status:doing` while `phase:qa`.
+2. Identify **one** reviewable change for this issue. If none or ambiguous:
+   **BLOCKED**.
+3. Read the inputs above; list the AC you will check.
+4. Validate AC, then regressions, at the standards above.
+5. Record the verdict; move labels; clear `doing`.
 
 ## Done when
 
-A written verdict on the PR (PASS / FAIL / BLOCKED) with AC cited, matching PR
-review action when a PR exists, and issue labels updated — without merging or
-closing on pass.
+Every AC has an evidence line, in-scope regressions were considered, and the
+issue has a clear next step (or a human handoff on PASS).
