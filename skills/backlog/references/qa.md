@@ -8,20 +8,14 @@ pass — that stays with the human owner.
 
 `phase:qa` — a reviewable change exists that claims this issue.
 
-## Scope (repo allowlist)
+## Scope
 
-Only run this procedure on allowlisted repos unless the human explicitly asks for
-another repo:
+Default: the issue's own repo (or the repo the human named for this QA).
 
-- `mikemajara/super-app`
-- `mikemajara/bill-parser`
-- `mikemajara/agents`
-- `mikemajara/nblog`
-- `mikemajara/agent-history`
-
-Stay off `texto.sh` / `numero.sh` (and other Aron lanes) unless asked. If the
-issue's repo is outside the allowlist: **BLOCKED** — comment why and ping the
-human; do not review.
+If this harness or project defines a **repo allowlist** (persona, `AGENTS.md`, or
+a local scope skill), respect it. Outside that list: **BLOCKED** — comment why
+and ping the human; do not review. Do **not** put private or org-specific repo
+names in this shared file.
 
 ## Find the change (PR ↔ issue)
 
@@ -88,7 +82,8 @@ Ping the human when:
 
 - **PASS** — ready for them to merge/ship (QA does not merge).
 - Product judgment call (ambiguous AC, scope dispute, "is this good enough?").
-- Repo outside allowlist, missing/ambiguous PR, or security / data-loss risk.
+- Repo outside a configured allowlist, missing/ambiguous PR, or security /
+  data-loss risk.
 
 Otherwise decide yourself: **FAIL** → `phase:implement` + `status:open`;
 plan hole → `phase:refine` + `status:open` (or `blocked`); clear **BLOCKED**
@@ -96,8 +91,8 @@ with reason on the issue.
 
 ## Procedure
 
-1. Confirm repo is allowlisted (list above), or the human explicitly authorized
-   you. Else BLOCKED + ping.
+1. If a harness/project repo allowlist applies, confirm the repo is in scope (or
+   the human explicitly authorized you). Else BLOCKED + ping.
 2. Claim `status:doing` (while `phase:qa`).
 3. Find the change (section above). Else BLOCKED.
 4. Read the issue (canonical plan) and the change (diff; preview if available).
