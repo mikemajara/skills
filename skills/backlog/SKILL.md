@@ -87,6 +87,7 @@ Read only what the current action needs (one level from this file):
 | `phase:research` | `references/research.md` |
 | What a plan is / whether it is done | `references/plan.md` |
 | `phase:refine` | `references/refine.md` |
+| `phase:implement` | `references/implement.md` |
 | `phase:qa` | `references/qa.md` |
 | Labels look wrong | `references/drift.md` |
 | Tracker is GitHub (`gh`, scripts) | `references/github.md` |
@@ -107,13 +108,17 @@ Review does not pick the next task; triage does.
 1. List `status:doing`. Resume or unblock before starting something new.
 2. Dedupe overlapping open issues; close extras as `status:duplicate` with `Duplicate of #N`.
 3. Sort remaining by `phase:*`. Confirm `status:blocked` still has a linked reason.
+4. Optional: dirty-vs-main PR sweep — propose close vs rebase for open PRs behind
+   the default branch (`references/implement.md`).
 
 ## Execute (`phase:implement`)
 
 1. Read the issue (canonical) and the plan if one exists.
 2. Keep the change inside that product scope. Do not invent behavior the plan left open — send back to `phase:refine` or `status:blocked`.
-3. When a reviewable change exists, set `phase:qa` and `status:open` (clear `doing`).
-4. Record durable decisions, facts, choices, and gotchas in `.backlog/memory.md`
+3. Follow PR/issue hygiene in `references/implement.md` (one active PR per
+   concern; close superseded issue+PR in the same turn; no orphan drafts).
+4. When a reviewable change exists, set `phase:qa` and `status:open` (clear `doing`).
+5. Record durable decisions, facts, choices, and gotchas in `.backlog/memory.md`
    (transactional log — see `references/long-term-memory.md`).
 
 ## Long-term memory (coding agents)
@@ -143,6 +148,8 @@ Setup does not delete legacy labels. Rerun setup to stamp schema 3 names.
 ## Rules
 
 - Smallest useful artifact.
+- One active implement PR per concern; close superseded issue+PR when a
+  merge folds older work (`references/implement.md`).
 - Issues are canonical; do not keep a second editable copy of promoted work.
 - A plan has no implementation details.
 - Split oversized work into more issues; do not add a parent PRD.

@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- `backlog`: implement PR/issue hygiene — one active implement PR per concern; close superseded issue+PR in the same turn when a merge folds older work; no orphan drafts when main already has the behavior; optional dirty-vs-main sweep (`references/implement.md`).
+
 ### Changed
 
 - Docs: slim top-level `README.md` to a skills catalog (what each skill is +
