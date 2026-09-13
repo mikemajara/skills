@@ -4,6 +4,10 @@
 
 ### Added
 
+- Backlog **v2.2.0**: **PM role** — this chat coordinates; other agents do
+  phases. Trigger is explicit role intent: manager, product manager, or
+  orchestrator (not “keep the work going”). `references/pm.md`,
+  `references/spawn.md`. Spec: issue #9.
 - `backlog`: reference `references/vercel-toolbar.md` — fold Vercel Toolbar / preview comment triage into backlog (not a standalone skill); do not default to 1 comment→1 issue (1:1 OK after evaluation); CLI or MCP only, not browser/headless/computer.
 
 - Backlog **v2.1.0**: read-only **catch-up** (`references/catch-up.md`) —

@@ -1,20 +1,20 @@
 ---
 name: backlog
-version: 2.1.1
+version: 2.2.0
 description: |
   Catch me up on this repo or project: where work left off, what is in
   flight, open issues and PRs, worktrees, leftover branches, collision
   with other agents. GitHub Issues backlog: capture, triage, research,
   refine, implement, qa, initialize `.backlog/`, promote memory into
-  AGENTS.md. Use when the user says catch me up, catch up, where did we
-  leave off, what's going on, project status, briefing, don't step on
-  other agents, or what to do next on an issue. Read references only for
-  the current action.
+  AGENTS.md. Use when the user says catch me up; or asks you to be the
+  manager, product manager, or orchestrator for the backlog cycle (you
+  coordinate, other agents do the phases); or what to do next on an
+  issue. Read references only for the current action.
 ---
 
 # Backlog
 
-Skill version **2.1.1**. Label schema **3**.
+Skill version **2.2.0**. Label schema **3**.
 
 Issues are the source of truth (GitHub by default). Create the smallest artifact
 that reduces ambiguity. Labels are a signal: audit them against the issue before
@@ -22,9 +22,17 @@ trusting them.
 
 ## What to do next
 
+Match **intent**, not a passphrase.
+
 Returning, catching up, or checking collision before your own task: open
 `references/catch-up.md` only. **Read-only** — do not continue into the
 list below.
+
+This chat should be the **manager / product manager / orchestrator**
+(they named that role): open `references/pm.md` (spawn: `references/spawn.md`).
+Do not do phase craft. No time window → ping. A duration after that role
+is on (“keep going two hours”) → autonomous. “Keep the work going” alone
+does **not** select this role.
 
 1. **Review** — claimed work (`status:doing`) first, then duplicates, then sort by phase.
 2. **Triage** — pick unblocked work; prefer `priority:high`, then medium, then low.
@@ -98,6 +106,8 @@ Read only what the current action needs (one level from this file):
 | Labels look wrong | `references/drift.md` |
 | Tracker is GitHub (`gh`, scripts) | `references/github.md` |
 | Catch-up / collision recap (read-only) | `references/catch-up.md` |
+| Manager / product manager / orchestrator | `references/pm.md` |
+| How to start a phase worker | `references/spawn.md` |
 | Consolidate memory → `AGENTS.md` | `references/long-term-memory.md` |
 | Vercel Toolbar / preview comments | `references/vercel-toolbar.md` |
 
