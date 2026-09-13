@@ -1,19 +1,20 @@
 ---
 name: backlog
-version: 2.1.0
+version: 2.1.1
 description: |
-  Lightweight project backlog: capture work, keep issues honest, and move them
-  through research, refine, implement, and qa. Use when initializing `.backlog/`,
-  capturing or promoting ideas, reviewing or triaging issues, refining a product
-  plan, checking what to do next on an issue, catching up after time away,
-  checking collision with other agents before starting, or consolidating
-  `.backlog/memory.md` into `AGENTS.md` (coding agents). Default source of
-  truth is GitHub Issues. Read references only for the current action.
+  Catch me up on this repo or project: where work left off, what is in
+  flight, open issues and PRs, worktrees, leftover branches, collision
+  with other agents. GitHub Issues backlog: capture, triage, research,
+  refine, implement, qa, initialize `.backlog/`, promote memory into
+  AGENTS.md. Use when the user says catch me up, catch up, where did we
+  leave off, what's going on, project status, briefing, don't step on
+  other agents, or what to do next on an issue. Read references only for
+  the current action.
 ---
 
 # Backlog
 
-Skill version **2.1.0**. Label schema **3**.
+Skill version **2.1.1**. Label schema **3**.
 
 Issues are the source of truth (GitHub by default). Create the smallest artifact
 that reduces ambiguity. Labels are a signal: audit them against the issue before

@@ -11,6 +11,10 @@
 
 ### Changed
 
+- Backlog **v2.1.1**: skill description leads with catch-up phrasing
+  (`catch me up`, where we left off, in flight, repo status) so the
+  harness matches ordinary recap requests, not only “use the backlog skill”.
+
 - Docs: slim top-level `README.md` to a skills catalog (what each skill is +
   install). Agents follow `SKILL.md` / `references/` — not per-skill READMEs.
   Optional `skills/<name>/README.md` is a brief skills.sh / listing blurb only
