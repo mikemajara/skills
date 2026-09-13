@@ -4,6 +4,8 @@
 
 ### Added
 
+- `backlog`: reference `references/vercel-toolbar.md` — fold Vercel Toolbar / preview comment triage into backlog (not a standalone skill); do not default to 1 comment→1 issue (1:1 OK after evaluation); CLI or MCP only, not browser/headless/computer.
+
 - Backlog **v2.1.0**: read-only **catch-up** (`references/catch-up.md`) —
   recap of leftover work and local collision (recent commits, issues, PRs,
   worktrees). `scripts/catch-up-gather.mjs`. Does not triage or claim.

@@ -99,10 +99,13 @@ Read only what the current action needs (one level from this file):
 | Tracker is GitHub (`gh`, scripts) | `references/github.md` |
 | Catch-up / collision recap (read-only) | `references/catch-up.md` |
 | Consolidate memory → `AGENTS.md` | `references/long-term-memory.md` |
+| Vercel Toolbar / preview comments | `references/vercel-toolbar.md` |
 
 ## Capture and promote
 
 Capture: short inbox line, or create an issue immediately (`phase:research` or `phase:refine`, `status:open`).
+
+Preview / Vercel Toolbar feedback: triage via `references/vercel-toolbar.md` before capture or promote.
 
 Promote: shaped issue — title, goal, scope, AC as known, one label per axis. Never paste a plan dump into an unrelated issue. After promote, drop the inbox line or replace it with the issue URL.
 
