@@ -6,9 +6,16 @@
 
 - `backlog`: reference `references/vercel-toolbar.md` — fold Vercel Toolbar / preview comment triage into backlog (not a standalone skill); do not default to 1 comment→1 issue (1:1 OK after evaluation); CLI or MCP only, not browser/headless/computer.
 
+- Backlog **v2.1.0**: read-only **catch-up** (`references/catch-up.md`) —
+  recap of leftover work and local collision (recent commits, issues, PRs,
+  worktrees). `scripts/catch-up-gather.mjs`. Does not triage or claim.
 - `backlog`: implement PR/issue hygiene — one active implement PR per concern; close superseded issue+PR in the same turn when a merge folds older work; no orphan drafts when main already has the behavior; optional dirty-vs-main sweep (`references/implement.md`).
 
 ### Changed
+
+- Backlog **v2.1.1**: skill description leads with catch-up phrasing
+  (`catch me up`, where we left off, in flight, repo status) so the
+  harness matches ordinary recap requests, not only “use the backlog skill”.
 
 - Docs: slim top-level `README.md` to a skills catalog (what each skill is +
   install). Agents follow `SKILL.md` / `references/` — not per-skill READMEs.

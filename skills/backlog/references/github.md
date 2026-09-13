@@ -15,6 +15,7 @@ node scripts/backlog-setup.mjs --check
 node scripts/backlog-setup.mjs --skip-labels --skip-scaffold --skip-agent-hint
 
 node scripts/backlog-status.mjs
+node scripts/catch-up-gather.mjs --format json
 node scripts/backlog-refinement-candidates.mjs
 node scripts/backlog-issue-audit.mjs 123
 node scripts/backlog-dedupe.mjs --title "Repair login redirect"
