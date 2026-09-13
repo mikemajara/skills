@@ -4,6 +4,9 @@
 
 ### Added
 
+- Backlog **v2.1.0**: read-only **catch-up** (`references/catch-up.md`) —
+  recap of leftover work and local collision (recent commits, issues, PRs,
+  worktrees). `scripts/catch-up-gather.mjs`. Does not triage or claim.
 - `backlog`: implement PR/issue hygiene — one active implement PR per concern; close superseded issue+PR in the same turn when a merge folds older work; no orphan drafts when main already has the behavior; optional dirty-vs-main sweep (`references/implement.md`).
 
 ### Changed

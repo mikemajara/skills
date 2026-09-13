@@ -1,24 +1,29 @@
 ---
 name: backlog
-version: 2.0.0
+version: 2.1.0
 description: |
   Lightweight project backlog: capture work, keep issues honest, and move them
   through research, refine, implement, and qa. Use when initializing `.backlog/`,
   capturing or promoting ideas, reviewing or triaging issues, refining a product
-  plan, checking what to do next on an issue, or consolidating `.backlog/memory.md`
-  into `AGENTS.md` (coding agents). Default source of truth is GitHub Issues.
-  Read references only for the current action.
+  plan, checking what to do next on an issue, catching up after time away,
+  checking collision with other agents before starting, or consolidating
+  `.backlog/memory.md` into `AGENTS.md` (coding agents). Default source of
+  truth is GitHub Issues. Read references only for the current action.
 ---
 
 # Backlog
 
-Skill version **2.0.0**. Label schema **3**.
+Skill version **2.1.0**. Label schema **3**.
 
 Issues are the source of truth (GitHub by default). Create the smallest artifact
 that reduces ambiguity. Labels are a signal: audit them against the issue before
 trusting them.
 
 ## What to do next
+
+Returning, catching up, or checking collision before your own task: open
+`references/catch-up.md` only. **Read-only** — do not continue into the
+list below.
 
 1. **Review** — claimed work (`status:doing`) first, then duplicates, then sort by phase.
 2. **Triage** — pick unblocked work; prefer `priority:high`, then medium, then low.
@@ -91,6 +96,7 @@ Read only what the current action needs (one level from this file):
 | `phase:qa` | `references/qa.md` |
 | Labels look wrong | `references/drift.md` |
 | Tracker is GitHub (`gh`, scripts) | `references/github.md` |
+| Catch-up / collision recap (read-only) | `references/catch-up.md` |
 | Consolidate memory → `AGENTS.md` | `references/long-term-memory.md` |
 
 ## Capture and promote
