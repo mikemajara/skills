@@ -4,6 +4,10 @@
 
 ### Added
 
+- `vercel-toolbar-comments`: triage Toolbar threads into backlog; batch nits; never 1 comment→1 issue; API/MCP/CLI only, no browser.
+
+### Added
+
 - `backlog`: implement PR/issue hygiene — one active implement PR per concern; close superseded issue+PR in the same turn when a merge folds older work; no orphan drafts when main already has the behavior; optional dirty-vs-main sweep (`references/implement.md`).
 
 ### Changed
