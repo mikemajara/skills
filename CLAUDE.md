@@ -20,6 +20,7 @@ project scaffold files unless explicitly requested.
 ```text
 README.md
 CHANGELOG.md
+AGENTS.md
 CLAUDE.md
 docs/backlog-skill-plan.md
 skills/backlog/SKILL.md

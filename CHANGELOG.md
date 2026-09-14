@@ -17,6 +17,9 @@
 
 ### Changed
 
+- Backlog **v2.3.1**: default agent hint / `AGENTS.md` — work on `main`,
+  commit and push when changes are made unless the action is irreversible.
+
 - Backlog **v2.3.0**: PM spawn is **one pane per specialist role** (refiner /
   implementer / QA / research), reused across issues. Hard-clear sessions
   (no compact); capture on the GitHub issue; short comments + ping to the
