@@ -1,6 +1,6 @@
 ---
 name: backlog
-version: 2.2.0
+version: 2.3.0
 description: |
   Catch me up on this repo or project: where work left off, what is in
   flight, open issues and PRs, worktrees, leftover branches, collision
@@ -14,7 +14,7 @@ description: |
 
 # Backlog
 
-Skill version **2.2.0**. Label schema **3**.
+Skill version **2.3.0**. Label schema **3**.
 
 Issues are the source of truth (GitHub by default). Create the smallest artifact
 that reduces ambiguity. Labels are a signal: audit them against the issue before

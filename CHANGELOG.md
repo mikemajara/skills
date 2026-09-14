@@ -17,6 +17,14 @@
 
 ### Changed
 
+- Backlog **v2.3.0**: PM spawn is **one pane per specialist role** (refiner /
+  implementer / QA / research), reused across issues. Hard-clear sessions
+  (no compact); capture on the GitHub issue; short comments + ping to the
+  PM. Role benches do not die with the lane.
+
+- Backlog **v2.2.1**: PM spawn reuses **one worker pane per lane**; close it
+  when the lane ends or on stop. Do not stack a new pane per phase.
+
 - Backlog **v2.1.1**: skill description leads with catch-up phrasing
   (`catch me up`, where we left off, in flight, repo status) so the
   harness matches ordinary recap requests, not only “use the backlog skill”.

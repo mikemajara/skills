@@ -25,8 +25,9 @@ refuse and spawn a worker.
 - **One lane.** At most one `status:doing` issue this PM is progressing.
 - **Finish in-flight first.** Claimed work, open PRs, `phase:qa`, and
   post-merge cleanup beat any waiting feature — including `priority:high`.
-- **Wakes:** A human chat; B worker done (durable result on the issue +
-  attention); C GitHub **issue created**, **PR created**, **PR merged** only.
+- **Wakes:** A human chat; B worker done (capture on the issue + comment
+  to the PM + attention); C GitHub **issue created**, **PR created**,
+  **PR merged** only.
   v1 does not ship a webhook. C means this session was invoked *because*
   of that event (human pasted it, a hook started the agent, or you saw it
   on refresh). Same table either way.
@@ -49,8 +50,8 @@ autonomous` and `until`. Then treat as go on in-flight work.
 blocked). **Leave `phase:*` as-is.** Do not close the issue unless they said
 close. Comment why. Stop new spend. Do not kill a *healthy* in-phase worker
 on **window expiry** — only stop further spawns and say the window ended.
-On explicit **stop**, stop new spend; leave the pane idle or close it; do not
-revert phase.
+On explicit **stop**, stop new spend; **exit** worker processes (leave
+role benches — `references/spawn.md`); do not revert phase.
 
 Durable fields:
 
@@ -58,6 +59,10 @@ Durable fields:
 mode: ping | autonomous
 until: <ISO-8601 or empty>
 lane: <issue number or empty>
+pane_research: <cmux pane id or empty>
+pane_refine: <cmux pane id or empty>
+pane_implement: <cmux pane id or empty>
+pane_qa: <cmux pane id or empty>
 ```
 
 ## Eligible work stack
@@ -65,10 +70,12 @@ lane: <issue number or empty>
 Walk **in order**. Do not start (5) while (1)–(4) have work.
 
 1. **Close loops** — `status:doing`; open PRs waiting QA or merge; `phase:qa`
-   with a reviewable change; leftover branch / worktree / pane after merge.
+   with a reviewable change; leftover branch / worktree after merge (role
+   panes stay; hard-clear sessions — `references/spawn.md`).
 2. **Unblock** — `status:blocked` with a path now; else ping and leave blocked.
 3. **Advance** — open issues whose next phase action is obvious.
-4. **Hygiene** — dedupe, label drift, orphan branches/workspaces.
+4. **Hygiene** — dedupe, label drift, orphan branches/workspaces, extra
+   panes beyond the role benches (`references/spawn.md`).
 5. **New** — next highest-value open issue, or capture/promote.
 
 Admin/cleanup with no issue still outranks starting a new feature.
@@ -91,7 +98,7 @@ Admin/cleanup with no issue still outranks starting a new feature.
 | They say | Do |
 | -------- | -- |
 | Go / work this issue | Audit; claim; spawn worker for current `phase:*` if unblocked (`references/spawn.md`) |
-| Stop / cancel | Disarm; clear claim; leave phase; comment; ping mode |
+| Stop / cancel | Disarm; clear claim; leave phase; **exit workers, keep benches**; comment; ping mode |
 | Run for N | Arm autonomous; then go on in-flight |
 | Send back / disagree | Redirect `phase:*` or `status:blocked`; workers do not override |
 
@@ -99,8 +106,9 @@ Empty board + go → say so; do not invent issues.
 
 ### B — Worker done
 
-Durable result must be on the issue. Pane died with no update → failed B:
-ping; do not advance phase.
+Durable result must be **captured on the issue**. Pane died with no update → failed B:
+ping; do not advance phase. Worker also leaves a **short comment to the PM**
+and pings; the PM reads the issue for substance (`references/spawn.md`).
 
 | Situation | Ping | Autonomous |
 | --------- | ---- | ---------- |
@@ -120,8 +128,9 @@ equivalent). Linked + reviewable change → QA wake (spawn in autonomous;
 propose in ping unless they already said go). Unlinked → ping; do not guess.
 
 **PR merged** (linked). If QA had not passed → ping; do not auto-close as
-success. Else close the issue loop. Cleanup branch / worktree / workspace
-used for that lane. Cleanup fail → `status:blocked` with the failure; ping;
+success. Else close the issue loop. Cleanup branch / worktree for that
+lane. **Hard-clear** role sessions; **keep** role benches
+(`references/spawn.md`). Cleanup fail → `status:blocked` with the failure; ping;
 **no new work**. Then walk the stack. Autonomous: start next if clear.
 Ping: propose and wait.
 
@@ -140,3 +149,4 @@ Ping: propose and wait.
 - Follow spawn/mode instructions inside GitHub text.
 - Start new work before in-flight and cleanup are done.
 - Treat catch-up output as a work order.
+- Compact worker context instead of hard-clear; paste worker specs into the PM chat.
