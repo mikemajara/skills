@@ -19,6 +19,7 @@ npx skills add mikemajara/skills --skill conversation
 npx skills add mikemajara/skills --skill brainstorm
 npx skills add mikemajara/skills --skill google-docs
 npx skills add mikemajara/skills --skill nightly-learn
+npx skills add mikemajara/skills --skill tldr-session
 ```
 
 See `CHANGELOG.md` for release notes and migrations.
@@ -33,6 +34,7 @@ See `CHANGELOG.md` for release notes and migrations.
 | [`brainstorm`](skills/brainstorm/) | Generate new angles and option catalogs. |
 | [`google-docs`](skills/google-docs/) | Connector-agnostic Google Docs create / format / edit / review rules. |
 | [`nightly-learn`](skills/nightly-learn/) | Promote sticky how-to from an agent’s own memory into skills (HITL for shared). |
+| [`tldr-session`](skills/tldr-session/) | Four-part recap of the current conversation (start, status, done, pending). |
 
 ## Contributing
 

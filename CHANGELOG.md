@@ -4,6 +4,10 @@
 
 ### Added
 
+- `tldr-session`: four-part session recap (how it started, how it is going,
+  what was achieved, what's pending). Use for `/tldr-session`, "where are
+  we?", or a catch-up on the current conversation.
+
 - Backlog **v2.2.0**: **PM role** — this chat coordinates; other agents do
   phases. Trigger is explicit role intent: manager, product manager, or
   orchestrator (not “keep the work going”). `references/pm.md`,
