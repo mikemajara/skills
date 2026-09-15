@@ -1,9 +1,14 @@
 # Spawn (PM adapter, v1)
 
-How the PM starts a **phase worker** in a separate session. Product rules live
-in `references/pm.md`. This file is the v1 adapter: Cursor `agent` CLI in
-**cmux panes**. Other runtimes (Codex, extra accounts) are later — same
-spawn *intent*, different adapter.
+How the PM starts a **phase worker** in a **separate pane**. Product rules live
+in `references/pm.md`. This file is the v1 adapter: Cursor `agent` in Herdr or
+cmux panes. Other runtimes (Codex, extra accounts) are later — same spawn
+*intent*, different adapter.
+
+**Forbidden:** Cursor `Task`, `best-of-n-runner`, explore / generalPurpose /
+shell subagents, or any nested agent in the PM conversation. Those are not
+benches. Do not “dispatch” by launching a subagent. Do not run `herdr --skill`
+for this job — that vendor text forbids delegation; this file is the contract.
 
 ## Intent (portable)
 
@@ -50,8 +55,8 @@ Checkout/cwd follows the **current lane** when you start the next job.
 
 - **Capture** — product lives on the GitHub **issue** (body, plan, AC,
   durable result). Example: refine *happens* on the issue.
-- **Ping** — short **comment directed at the PM** plus cmux attention so
-  this orchestrator wakes. Example: “refine done, AC on the issue.” Not a
+- **Ping** — short **comment directed at the PM** plus a harness **attention
+  cue** so this orchestrator wakes. Example: “refine done, AC on the issue.” Not a
   second copy of the spec in the PM transcript.
 
 The PM reads the issue for substance. Do not paste worker transcripts into
@@ -72,7 +77,7 @@ Give the worker this, and nothing that asks it to be the PM:
    re-claims when it starts the next worker.
 5. Do not start a different issue. Do not implement during refine, etc.
 6. When finished: a **short comment to the PM** on the issue, then **ping**
-   (cmux attention). Then the session will be hard-cleared — do not rely on
+   (harness attention). Then the session will be hard-cleared — do not rely on
    the pane as memory.
 
 PR ↔ issue: workers opening a PR must name the issue (`Fixes #N`).
@@ -106,35 +111,99 @@ Verdict on this issue: each AC pass / fail / not-reached.
 Do not merge. Different session from the implementer.
 ```
 
-If the harness already has a richer mandate (cmux `agent` spawn), use that
-and skip a duplicate `@cursor` comment — one worker per lane.
+If the harness already has a richer mandate (Herdr `agent start` / cmux
+`agent` spawn), use that and skip a duplicate `@cursor` comment — one worker
+per lane.
 
-## How to spawn (v1)
+## Harness selection
 
-Prefer **cmux**. Look up the pane id for this **role** in
-`.backlog/pm-state.md`.
+Read `.backlog/pm-state.md` at spawn time. Treat `harness: subagent` (legacy)
+as empty and detect again.
 
-1. If that role’s pane exists: **reuse it**. Do not `new-pane`.
+| `harness` value | Use |
+| --------------- | --- |
+| `herdr` | Herdr adapter below |
+| `cmux` | cmux adapter below |
+| *(empty)* | Detect once, then persist |
+
+**Detection** (when `harness` is empty). Run these in the shell; do not guess:
+
+1. `test "${HERDR_ENV:-}" = 1` and `herdr pane current --current` succeeds
+   → `herdr`
+2. Else `cmux identify --json` succeeds → `cmux`
+3. Else **no harness**. Do not spawn. `status:blocked` on the issue —
+   cannot start a separate pane. Do not do the phase in the PM thread.
+   Do not use Cursor `Task`.
+
+Write the detected value back to `pm-state.md`. The human can override
+(`harness: herdr` or `harness: cmux`). For cmux topology, open the `cmux`
+skill. Stay on this file for Herdr PM spawn.
+
+## How to spawn (shared steps)
+
+Look up this **role**’s pane handle in `.backlog/pm-state.md`
+(`pane_research`, etc.).
+
+1. If that role’s pane exists: **reuse it**. Do not create a duplicate.
 2. Reuse only after any previous agent in that pane has **exited**. If
    another specialist is still running, wait (one lane).
 3. **Hard-clear** that pane’s session before the new agent (empty
-   transcript). Then run Cursor `agent` with the model and mandate above.
+   transcript). Then dispatch with the model and mandate above.
 4. If no pane for this role: create **exactly one** (not the PM surface).
    Record its id (`pane_refine`, etc.).
 5. Extra panes beyond the role set (sprawl): close extras, keep the benches.
-
-If cmux is missing but this harness can launch an **isolated** subagent,
-use **one slot per role** the same way and tell the human auditability is
-reduced (no native pane).
-
-If neither works: `status:blocked` on the issue — cannot spawn a separate
-session. Do not do the phase in the PM thread.
 
 **Do not** close role benches on merge or on starting the next issue.
 Hard-clear them. Exit processes on explicit **stop**; leave benches unless
 the human wants the layout torn down. Do not kill a healthy worker on
 window expiry. Failed B (pane died, no issue capture): keep the pane;
 ping; hard-clear before the next spawn.
+
+### Herdr adapter
+
+Requires `HERDR_ENV=1` on the PM pane. `pane_*` values are Herdr pane ids
+(`w1:p1`, etc.). Agent names are stable per role (store as `agent_research`,
+`agent_refine`, … — lowercase `[a-z][a-z0-9_-]{0,31}`).
+
+Keep user focus on the PM pane (`--no-focus`). Parse IDs from JSON.
+
+1. Reuse the recorded pane; do not split again for that role.
+2. Hard-clear: wait for the prior agent to finish or exit; `herdr pane
+   release-agent` if needed so the pane is an interactive shell prompt.
+   Transcript must not carry over to the next mandate.
+3. Create missing bench (once per role):
+
+   ```bash
+   herdr pane layout --pane "$HERDR_PANE_ID"
+   herdr pane split --current --direction right --cwd "$PWD" --no-focus
+   ```
+
+   Wide pane → `right`; tall/narrow → `down`. Record `.result.pane.pane_id`
+   as `pane_*`.
+4. Dispatch (do **not** `--wait` — the PM does not sit in the worker loop):
+
+   ```bash
+   herdr agent start <agent_name> --kind cursor --pane <pane_id>
+   herdr agent prompt <agent_name> "<mandate>"
+   ```
+
+   Pass native Cursor args after `--` only if needed for the phase model.
+5. **Ping:** `herdr notification show "<title>" --body "<short>" --sound request`
+
+Prefer `herdr agent` over raw `pane send-text` when the worker is a
+recognized coding agent.
+
+### cmux adapter
+
+`pane_*` values are cmux pane or surface ids (`pane:N`, `surface:N`).
+
+1. Reuse the recorded pane/surface; do not `new-pane` again for that role.
+2. Hard-clear: ensure the previous Cursor `agent` process has exited; start
+   fresh in the same surface.
+3. Create missing bench: `cmux new-split` (or equivalent) **once** per role,
+   not on the PM surface. Record the id.
+4. Run Cursor `agent` with the model and mandate in that surface.
+5. **Ping:** `cmux trigger-flash` on the PM surface or workspace.
 
 ## Deduping QA
 

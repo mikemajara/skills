@@ -1,6 +1,6 @@
 ---
 name: backlog
-version: 2.4.0
+version: 2.4.1
 description: |
   Catch me up on this repo or project: where work left off, what is in
   flight, open issues and PRs, worktrees, leftover branches, collision
@@ -8,13 +8,14 @@ description: |
   refine, implement, qa, initialize `.backlog/`, promote memory into
   AGENTS.md. Use when the user says catch me up; or asks you to be the
   manager, product manager, or orchestrator for the backlog cycle (you
-  coordinate, other agents do the phases); or what to do next on an
+  only allocate: start phase workers in Herdr or cmux panes — never the
+  Cursor Task tool, never in-chat subagents); or what to do next on an
   issue. Read references only for the current action.
 ---
 
 # Backlog
 
-Skill version **2.4.0**. Label schema **3**.
+Skill version **2.4.1**. Label schema **3**.
 
 Issues are the source of truth (GitHub by default). Create the smallest artifact
 that reduces ambiguity. Labels must track the work: audit artifacts and relabel
@@ -29,11 +30,26 @@ Returning, catching up, or checking collision **before** your own task: open
 list below. If this chat is already the PM, skip catch-up — use
 `references/pm.md`.
 
-This chat should be the **manager / product manager / orchestrator**
-(they named that role): open `references/pm.md` (spawn: `references/spawn.md`).
-Do not do phase craft. No time window → ping. A duration after that role
-is on (“keep going two hours”) → autonomous. “Keep the work going” alone
-does **not** select this role.
+### Manager / product manager / orchestrator
+
+They named that role (“be my PM”, “act as product manager”, “orchestrate”).
+“Keep the work going” alone does **not** select this role.
+
+1. **Do not** research, refine, implement, or QA in this chat.
+2. **Do not** call Cursor `Task`, `best-of-n-runner`, explore/generalPurpose
+   subagents, or any nested agent in this conversation. Those are not workers.
+3. Probe the harness in the shell **before** any spawn (see
+   `references/spawn.md`): `test "${HERDR_ENV:-}" = 1`, then `herdr pane current
+   --current` or `cmux identify --json`.
+4. Open `references/pm.md` and `references/spawn.md`. No time window → ping.
+   A duration after this role is on (“keep going two hours”) → autonomous.
+5. Allocate: claim the issue, spawn one pane worker for the current `phase:*`,
+   wait for issue capture + ping. If Herdr and cmux are both missing, block —
+   do not fall back to an in-chat agent.
+
+### Solo (this chat does the craft)
+
+They asked *this* chat to capture, triage, research, refine, implement, or QA.
 
 1. **Review** — claimed work (`status:doing`) first, then duplicates, then sort by phase.
 2. **Triage** — pick unblocked work; prefer `priority:high`, then medium, then low.
@@ -108,7 +124,7 @@ Read only what the current action needs (one level from this file):
 | Tracker is GitHub (`gh`, scripts) | `references/github.md` |
 | Catch-up / collision recap (read-only) | `references/catch-up.md` |
 | Manager / product manager / orchestrator | `references/pm.md` |
-| How to start a phase worker / `@cursor` kickoff | `references/spawn.md` |
+| How to start a phase worker (Herdr / cmux panes; `@cursor` kickoff) | `references/spawn.md` |
 | Consolidate memory → `AGENTS.md` | `references/long-term-memory.md` |
 | Vercel Toolbar / preview comments | `references/vercel-toolbar.md` |
 

@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Changed
+
+- Backlog **v2.4.1**: PM spawn is Herdr or cmux panes only. Cursor `Task` /
+  in-chat subagents are forbidden. Empty harness detects Herdr, then cmux,
+  then blocks. `SKILL.md` splits catch-up, PM, and solo loops. Do not load
+  `herdr --skill` for PM dispatch.
+
 ### Added
 
 - `tldr-session`: four-part session recap (how it started, how it is going,
