@@ -2,6 +2,12 @@
 
 ## Unreleased
 
+### Changed
+
+- `backlog` `references/qa.md`: rewrite around validating AC from refine/plan
+  plus in-scope regressions; PASS ≠ agent merge/close (human ships); harness
+  ops (allowlists, find-PR, review buttons) stay out of this shared file.
+
 ### Added
 
 - Backlog **v2.2.0**: **PM role** — this chat coordinates; other agents do
@@ -95,7 +101,7 @@ Label mapping for existing issues:
    PLAN files as obsolete.
 
 The important invariant is: if an item has an issue, the issue owns status
-and phase.
+AND phase.
 
 ### Added
 
@@ -116,6 +122,8 @@ and phase.
 ### Removed
 
 - Removed `todoist-api` as out of scope for this repository.
+- `voice-miguel`: not shipped in this repo (Grok-local / personal only). Do not
+  add it here.
 
 ### Added
 
