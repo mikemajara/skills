@@ -28,6 +28,10 @@ Furniture persists. **Context does not.** Cap: PM + these specialists. Only
 | `implement` | implementer | `pane_implement` |
 | `qa` | QA | `pane_qa` |
 
+Name the **role**, not a persona. Do not call the QA worker Quinn or any
+other bot name. Do not rename cmux panes/windows to a persona unless the
+human asked for that convention.
+
 QA bounce (fix after QA) → **reuse the implementer** pane. Never a second
 implementer.
 
@@ -72,6 +76,38 @@ Give the worker this, and nothing that asks it to be the PM:
    the pane as memory.
 
 PR ↔ issue: workers opening a PR must name the issue (`Fixes #N`).
+Implementers **do not merge**. QA **does not merge**.
+
+## Harness kickoff (`@cursor` and similar)
+
+When the PM (or a human) starts a phase by commenting `@cursor` (or another
+harness mention) on the issue, the comment **is the mandate**. Keep it brief
+and in-phase. Do not paste this whole skill. Do not ask the worker to be the
+PM. Do not tell it to merge.
+
+Implement:
+
+```text
+@cursor implement #N
+
+Branch from `main`, PR against `main`, `Fixes #N`.
+Do phase:implement only (backlog implement.md). Stay inside this issue's plan.
+When a reviewable PR exists: label phase:qa + status:open. Do not merge.
+Do not start another issue.
+```
+
+QA:
+
+```text
+@cursor qa #N
+
+Do phase:qa only (backlog qa.md) on the linked PR.
+Verdict on this issue: each AC pass / fail / not-reached.
+Do not merge. Different session from the implementer.
+```
+
+If the harness already has a richer mandate (cmux `agent` spawn), use that
+and skip a duplicate `@cursor` comment — one worker per lane.
 
 ## How to spawn (v1)
 

@@ -1,6 +1,6 @@
 ---
 name: backlog
-version: 2.3.1
+version: 2.4.0
 description: |
   Catch me up on this repo or project: where work left off, what is in
   flight, open issues and PRs, worktrees, leftover branches, collision
@@ -14,19 +14,20 @@ description: |
 
 # Backlog
 
-Skill version **2.3.1**. Label schema **3**.
+Skill version **2.4.0**. Label schema **3**.
 
 Issues are the source of truth (GitHub by default). Create the smallest artifact
-that reduces ambiguity. Labels are a signal: audit them against the issue before
-trusting them.
+that reduces ambiguity. Labels must track the work: audit artifacts and relabel
+when they lag (`references/drift.md`). Until corrected, artifacts win.
 
 ## What to do next
 
 Match **intent**, not a passphrase.
 
-Returning, catching up, or checking collision before your own task: open
+Returning, catching up, or checking collision **before** your own task: open
 `references/catch-up.md` only. **Read-only** — do not continue into the
-list below.
+list below. If this chat is already the PM, skip catch-up — use
+`references/pm.md`.
 
 This chat should be the **manager / product manager / orchestrator**
 (they named that role): open `references/pm.md` (spawn: `references/spawn.md`).
@@ -59,7 +60,7 @@ Do not change `phase:*` unless that phase actually finished.
 | **Research brief** | Facts and questions before a plan. Not AC. Lives as an issue comment (file optional). |
 | **Inbox** | Optional local line items until promoted. |
 | **memory.md** | Transactional log for the repo. Promote lasting guidance into `AGENTS.md` — see `references/long-term-memory.md`. |
-| **AGENTS.md** | Project soul for coding agents (outside `.backlog/`). |
+| **AGENTS.md** | Project context (architecture, stack, commands, policies). Not PM / QA / merge. |
 
 Writing the plan **is refine**. If the work is too big, split into more issues. Do not keep a separate implementation-plan document.
 
@@ -107,7 +108,7 @@ Read only what the current action needs (one level from this file):
 | Tracker is GitHub (`gh`, scripts) | `references/github.md` |
 | Catch-up / collision recap (read-only) | `references/catch-up.md` |
 | Manager / product manager / orchestrator | `references/pm.md` |
-| How to start a phase worker | `references/spawn.md` |
+| How to start a phase worker / `@cursor` kickoff | `references/spawn.md` |
 | Consolidate memory → `AGENTS.md` | `references/long-term-memory.md` |
 | Vercel Toolbar / preview comments | `references/vercel-toolbar.md` |
 
@@ -137,7 +138,8 @@ Review does not pick the next task; triage does.
 2. Keep the change inside that product scope. Do not invent behavior the plan left open — send back to `phase:refine` or `status:blocked`.
 3. Follow PR/issue hygiene in `references/implement.md` (one active PR per
    concern; close superseded issue+PR in the same turn; no orphan drafts).
-4. When a reviewable change exists, set `phase:qa` and `status:open` (clear `doing`).
+4. When a reviewable change exists, set `phase:qa` and `status:open` (clear
+   `doing`) **in the same turn**. Do not merge; the PM merges after QA.
 5. Record durable decisions, facts, choices, and gotchas in `.backlog/memory.md`
    (transactional log — see `references/long-term-memory.md`).
 
@@ -174,6 +176,7 @@ Setup does not delete legacy labels. Rerun setup to stamp schema 3 names.
 - A plan has no implementation details.
 - Split oversized work into more issues; do not add a parent PRD.
 - Never let a local markdown file override issue labels.
+- Keep `phase:*` / `status:*` current when a PR or verdict lands.
 - When blocked, write the blocker on the issue.
 - Preserve human-written memory.
 - `.backlog/memory.md` is a log: on merge conflict, keep all changes (never drop entries).

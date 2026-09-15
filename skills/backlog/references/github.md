@@ -72,6 +72,19 @@ Advance phase (remove the old `phase:*` first):
 gh issue edit 123 --remove-label "phase:refine" --add-label "phase:implement"
 ```
 
+`@cursor` (and similar) kickoff comments: `references/spawn.md`. Always include
+the issue number, the phase, `Fixes #N` / `Closes #N` for implement, and
+**do not merge**.
+
+PM merge after QA pass (`references/pm.md` guardrails):
+
+```bash
+gh pr merge 123 --squash --delete-branch
+```
+
+Match the repo's recent merge style (`--merge` / `--rebase`) if it is not
+squash. Never `--admin`. Never skip failing required checks.
+
 Promote:
 
 ```bash

@@ -4,6 +4,9 @@
 recommend what to do next. After the brief, stop — do not continue into
 review → triage → claim.
 
+If this chat is already the **PM**, skip this file and use `references/pm.md`.
+Parallel work / collision while PM is a wake, not catch-up.
+
 The user was away or is walking in with their own task. They need a short
 map of leftover work and live collision—then they drill down.
 

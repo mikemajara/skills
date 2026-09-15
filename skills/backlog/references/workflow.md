@@ -13,7 +13,7 @@ stateDiagram-v2
   implement --> qa: change ready to judge
   implement --> refine: scope hole
   implement --> blocked: need a human
-  qa --> [*]: pass / close
+  qa --> [*]: pass / PM merges
   qa --> implement: bug in the change
   qa --> refine: plan was wrong
 ```

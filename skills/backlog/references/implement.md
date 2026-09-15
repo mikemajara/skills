@@ -2,7 +2,11 @@
 
 `phase:implement` turns a locked plan into a reviewable change. Keep the change
 inside the issue's product scope (`references/plan.md`). When a reviewable
-change exists, move to `phase:qa`.
+change exists, move to `phase:qa` **in the same turn** (labels must not lag
+the PR). **Do not merge** — the PM merges after QA (`references/pm.md`).
+
+If this run was kicked off with `@cursor` (or similar), follow that comment's
+mandate; it should already say not to merge (`references/spawn.md`).
 
 ## PR and issue hygiene
 

@@ -11,7 +11,7 @@ but the surfaces are repo files: `.backlog/memory.md` → `AGENTS.md`.
 | File | Role |
 | ---- | ---- |
 | `.backlog/memory.md` | **Transactional** project log: decisions, facts, choices, blockers, conventions-in-progress, gotchas. Entries may later become irrelevant. Append-oriented. |
-| `AGENTS.md` | Project **soul** for coding agents: lasting conventions, critical/medium-term decisions, and gotchas that should shape every wake. Normal conflict resolution applies. |
+| `AGENTS.md` | Project context for coding agents: architecture, stack, commands, policies, gotchas. **Not** PM / refine / QA / merge — that stays in this skill. |
 
 Day to day, coding agents should **write** into `memory.md` when they learn
 something the repo should not forget: key decisions, facts, product/tech
@@ -35,7 +35,9 @@ No cron is required; the harness or human triggers it.
    Skip ephemeral blockers and one-off notes that are already done or obsolete.
 3. Fold each candidate into `AGENTS.md` in the right section (or add a short
    section). Prefer durable, imperative guidance over chatty log tone. Do not
-   invent policy that was not in memory or already agreed in the repo.
+   invent policy that was not in memory or already agreed in the repo. Do
+   **not** promote backlog workflow (phases, labels, merge authority, spawn)
+   into `AGENTS.md`.
 4. **Prune** the promoted entries from `memory.md` so the two files do not
    duplicate. Leave a one-line pointer only if useful (`promoted to AGENTS.md
    on YYYY-MM-DD`); otherwise remove the entry.

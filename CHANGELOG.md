@@ -17,6 +17,12 @@
 
 ### Changed
 
+- Backlog **v2.4.0**: PM **merges** after a QA pass (workers never merge).
+  QA pass is a binary bar on the issue (every AC cited; repro AC for
+  `type:fix`; different session from implementer). Labels must track
+  artifacts (`references/drift.md`); `@cursor` kickoff templates live in
+  `references/spawn.md`. `AGENTS.md` is project context, not PM/QA/merge.
+
 - Backlog **v2.3.1**: default agent hint / `AGENTS.md` — work on `main`,
   commit and push when changes are made unless the action is irreversible.
 
