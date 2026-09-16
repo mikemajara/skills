@@ -76,7 +76,13 @@ Give the worker this, and nothing that asks it to be the PM:
    with the question). Clear `doing` if the phase reference says so; the PM
    re-claims when it starts the next worker.
 5. Do not start a different issue. Do not implement during refine, etc.
-6. When finished: a **short comment to the PM** on the issue, then **ping**
+6. Stay inside **this checkout**. Edits and deletes **in the repo** are
+   normal (git can restore). Do not wait for a human to approve them.
+7. **Stop** (do not run it, do not sit on a permission dialog): work
+   outside this project, irreversible git, production-only side effects,
+   leaking secrets. Write `status:blocked` + the question on the issue,
+   ping the PM.
+8. When finished: a **short comment to the PM** on the issue, then **ping**
    (harness attention). Then the session will be hard-cleared — do not rely on
    the pane as memory.
 
@@ -98,7 +104,8 @@ Implement:
 Branch from `main`, PR against `main`, `Fixes #N`.
 Do phase:implement only (backlog implement.md). Stay inside this issue's plan.
 When a reviewable PR exists: label phase:qa + status:open. Do not merge.
-Do not start another issue.
+Do not start another issue. Stay in this repo. Stop (block + comment) for
+irreversible / out-of-project work — do not wait on a permission prompt.
 ```
 
 QA:
@@ -109,6 +116,8 @@ QA:
 Do phase:qa only (backlog qa.md) on the linked PR.
 Verdict on this issue: each AC pass / fail / not-reached.
 Do not merge. Different session from the implementer.
+Stay in this repo. Stop (block + comment) for irreversible /
+out-of-project work — do not wait on a permission prompt.
 ```
 
 If the harness already has a richer mandate (Herdr `agent start` / cmux
@@ -159,6 +168,43 @@ the human wants the layout torn down. Do not kill a healthy worker on
 window expiry. Failed B (pane died, no issue capture): keep the pane;
 ping; hard-clear before the next spawn.
 
+## Worker permissions (v1)
+
+The human is **not** watching worker panes. A Cursor approval prompt in
+that window stalls the lane. Autonomy is **not** “run anything.”
+
+| In this checkout (auto) | Stop — block on the issue, ping PM |
+| ----------------------- | ---------------------------------- |
+| Edit / delete files in the repo (incl. `rm` / unlink). Git-tracked is enough undo. | Paths **outside** this workspace |
+| `git` / `gh` / tests / package installs for **this** project | Force-push, hard reset, drop published history, delete a shared remote branch |
+| Fetch/docs needed to do the phase | Production-only side effects, dumping secrets, other people’s repos |
+
+Harness (every Cursor worker, Herdr and cmux):
+
+```bash
+--force --sandbox enabled --workspace "$PWD" --model <phase model>
+```
+
+- `--force` — do not prompt. Denied tools fail; the worker treats that as
+  a stop, not a dialog.
+- `--sandbox enabled` — v1 fence: default shell stays in this workspace.
+  GitHub / package registries for **this** repo are in scope (network
+  may leave the sandbox; that is still this project).
+- `--workspace` — the lane cwd from the split, not `$HOME`.
+
+Do **not** `--print` (benches are interactive). Do **not** `--approve-mcps`
+in v1. `--force` still auto-allows MCP unless denied — workers must not
+use MCP that is not this repo; a `Mcp(*:*)` deny is later. Do **not** deny
+`Shell(rm)` or in-repo `Write` — those are routine.
+
+`--force` will still *allow* irreversible git unless the worker refuses.
+That refusal is **mandate + AGENTS.md**, not a click. A tight
+`permissions.deny` (project `.cursor/cli.json`) is later work. Until then
+do not paper over it with allowlist prompts.
+
+If the tool cannot finish **inside** this project: `status:blocked`,
+comment, ping. Never escalate to “please approve in the pane.”
+
 ### Herdr adapter
 
 Requires `HERDR_ENV=1` on the PM pane. `pane_*` values are Herdr pane ids
@@ -183,11 +229,14 @@ Keep user focus on the PM pane (`--no-focus`). Parse IDs from JSON.
 4. Dispatch (do **not** `--wait` — the PM does not sit in the worker loop):
 
    ```bash
-   herdr agent start <agent_name> --kind cursor --pane <pane_id>
+   herdr agent start <agent_name> --kind cursor --pane <pane_id> -- \
+     --force --sandbox enabled --workspace "$PWD" --model <phase model>
    herdr agent prompt <agent_name> "<mandate>"
    ```
 
-   Pass native Cursor args after `--` only if needed for the phase model.
+   Native args after `--` always include **Worker permissions** plus the
+   phase model. Never start a Cursor worker that can block on tool
+   approval.
 5. **Ping:** `herdr notification show "<title>" --body "<short>" --sound request`
 
 Prefer `herdr agent` over raw `pane send-text` when the worker is a
@@ -202,7 +251,9 @@ recognized coding agent.
    fresh in the same surface.
 3. Create missing bench: `cmux new-split` (or equivalent) **once** per role,
    not on the PM surface. Record the id.
-4. Run Cursor `agent` with the model and mandate in that surface.
+4. Run Cursor `agent` with **Worker permissions** flags, the phase
+   model, and the mandate in that surface. Same `--force --sandbox
+   enabled --workspace` rule as Herdr.
 5. **Ping:** `cmux trigger-flash` on the PM surface or workspace.
 
 ## Deduping QA

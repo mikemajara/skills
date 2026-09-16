@@ -4,6 +4,12 @@
 
 ### Changed
 
+- Backlog **v2.4.2**: PM worker spawn is unattended **in this checkout**
+  (`--force` + sandbox). In-repo deletes/edits do not wait for a click.
+  Out-of-project or irreversible work: stop, block, ping — do not prompt
+  in the pane. Tight `permissions.deny` is later; do not deny `rm` / repo
+  writes.
+
 - Backlog **v2.4.1**: PM spawn is Herdr or cmux panes only. Cursor `Task` /
   in-chat subagents are forbidden. Empty harness detects Herdr, then cmux,
   then blocks. `SKILL.md` splits catch-up, PM, and solo loops. Do not load

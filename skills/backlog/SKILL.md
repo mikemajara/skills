@@ -1,6 +1,6 @@
 ---
 name: backlog
-version: 2.4.1
+version: 2.4.2
 description: |
   Catch me up on this repo or project: where work left off, what is in
   flight, open issues and PRs, worktrees, leftover branches, collision
@@ -15,7 +15,7 @@ description: |
 
 # Backlog
 
-Skill version **2.4.1**. Label schema **3**.
+Skill version **2.4.2**. Label schema **3**.
 
 Issues are the source of truth (GitHub by default). Create the smallest artifact
 that reduces ambiguity. Labels must track the work: audit artifacts and relabel
@@ -124,7 +124,7 @@ Read only what the current action needs (one level from this file):
 | Tracker is GitHub (`gh`, scripts) | `references/github.md` |
 | Catch-up / collision recap (read-only) | `references/catch-up.md` |
 | Manager / product manager / orchestrator | `references/pm.md` |
-| How to start a phase worker (Herdr / cmux panes; `@cursor` kickoff) | `references/spawn.md` |
+| How to start a phase worker (Herdr / cmux; unattended in-repo) | `references/spawn.md` |
 | Consolidate memory → `AGENTS.md` | `references/long-term-memory.md` |
 | Vercel Toolbar / preview comments | `references/vercel-toolbar.md` |
 

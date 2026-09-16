@@ -12,6 +12,9 @@ refine, QA, and merge live here.
 
 Workers are **Herdr or cmux panes**. Cursor `Task` / in-chat subagents are
 not workers. If you cannot open a pane, block — do not nest an agent here.
+Spawn with `references/spawn.md` permissions: unattended **in this
+checkout**; stop on out-of-project or irreversible work. Never leave a
+worker sitting on a tool-approval prompt.
 
 ## When
 
