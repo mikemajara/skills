@@ -3,7 +3,7 @@ name: conversation
 description: >
   Stress-test a mostly formed idea with the user: find gaps, contradictions,
   missing constraints, and overlooked consequences. Use when the user already
-  knows what they want and asks to think it through, check what they might be
+  knows what they want and asks to think it through or discuss it, check what they might be
   missing, discover edge cases together, or pressure-test a plan before acting.
   Do not use when they want new creative directions or a catalog of options
   (that is the brainstorm skill).
