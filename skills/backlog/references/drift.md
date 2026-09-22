@@ -18,6 +18,7 @@ fix the labels in the same turn and comment *why*.
 | Multiple `phase:*` or `status:*` | Keep one of each |
 | Legacy `status:unknown` | `phase:refine` + `status:open` |
 | Legacy `status:ready` | `phase:implement` + `status:open` |
-| Plan file contains file paths / task order | Strip them; still `phase:refine` if product spec is incomplete |
+| Plan has task order, function outlines, or sample code | Strip; still `phase:refine` if product / touch / direction is incomplete |
+| `phase:implement` with no touch and no skip note (`type:feat` / non-trivial `type:fix`) | `phase:refine` |
 
 Always comment *why* when relabeling.

@@ -1,6 +1,6 @@
 # Refine
 
-Get the issue to the bar in `references/plan.md`. Refine **writes the product plan**. It does not sequence implementation.
+Get the issue to the bar in `references/plan.md`. Refine **writes the product plan**, including a rough **touch** map and any **direction-locking** library/stack choice. It does not sequence implementation or generate the implementer’s code.
 
 ## When
 
@@ -12,8 +12,10 @@ Get the issue to the bar in `references/plan.md`. Refine **writes the product pl
 2. Dedupe (`SKILL.md`).
 3. Read `references/plan.md`. Put the spec on the **issue**. Use `.backlog/plans/PLAN-[slug].md` only as a buffer, then fold in.
 4. Run **hardening** for this `type:*` (below). Skip only with an explicit note.
-5. Unresolved product decisions → `status:blocked` with the question on the issue. Do not invent behavior.
-6. Plan done → `phase:implement` + `status:open`. Clear `doing`. Too large → split issues instead of growing one spec.
+5. Put **touch** on the issue (rough files/repos). For `type:nit`, `touch skipped: trivial` is enough if the one-line scope already points at the change.
+6. If the spec is otherwise complete but would still fork (store, mailer, auth library, …), lock **direction** on the issue or `status:blocked` with the question. Do not invent that choice.
+7. Unresolved product decisions → `status:blocked` with the question on the issue. Do not invent behavior.
+8. Plan done → `phase:implement` + `status:open`. Clear `doing`. Too large → split issues instead of growing one spec.
 
 ## Hardening
 

@@ -1,9 +1,13 @@
 # Implement
 
 `phase:implement` turns a locked plan into a reviewable change. Keep the change
-inside the issue's product scope (`references/plan.md`). When a reviewable
-change exists, move to `phase:qa` **in the same turn** (labels must not lag
-the PR). **Do not merge** — the PM merges after QA (`references/pm.md`).
+inside the issue's product scope (`references/plan.md`). You own **how** the
+code is written. Touch on the issue is **advisory**: extra files found in the
+checkout → capture them on the issue and continue. Product behavior or a
+direction-locking choice that contradicts the plan → `phase:refine` or
+`status:blocked`. When a reviewable change exists, move to `phase:qa` **in the
+same turn** (labels must not lag the PR). **Do not merge** — the PM merges
+after QA (`references/pm.md`).
 
 If this run was kicked off with `@cursor` (or similar), follow that comment's
 mandate; it should already say not to merge (`references/spawn.md`).

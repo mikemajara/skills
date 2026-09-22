@@ -4,6 +4,13 @@
 
 ### Changed
 
+- Backlog **v2.5.0**: Refine/plan include a rough **touch** map (files/repos)
+  and **direction-locking** libraries only when the spec would otherwise fork.
+  Still no implementation sequence, function outlines, or generated code.
+  Implementer captures extra files on the issue (advisory) and owns how the
+  code is written. PM spawn points at shared Cursor CLI permissions
+  (`install-cli-permissions.sh`); in-repo `rm` stays allowed.
+
 - Backlog **v2.4.2**: PM worker spawn is unattended **in this checkout**
   (`--force` + sandbox). In-repo deletes/edits do not wait for a click.
   Out-of-project or irreversible work: stop, block, ping — do not prompt

@@ -197,10 +197,15 @@ in v1. `--force` still auto-allows MCP unless denied — workers must not
 use MCP that is not this repo; a `Mcp(*:*)` deny is later. Do **not** deny
 `Shell(rm)` or in-repo `Write` — those are routine.
 
-`--force` will still *allow* irreversible git unless the worker refuses.
-That refusal is **mandate + AGENTS.md**, not a click. A tight
-`permissions.deny` (project `.cursor/cli.json`) is later work. Until then
-do not paper over it with allowlist prompts.
+Herdr + Cursor default: shared CLI allow/deny from
+`~/.dotfiles/configs/cursor/cli-permissions.json` (install with
+`install-cli-permissions.sh` into `~/.cursor/cli-config.json`). Denied
+tools fail; the worker treats that as stop + `status:blocked` + ping, not
+a pane prompt.
+
+`--force` will still *allow* irreversible git unless it is in `permissions.deny`
+or the worker refuses (mandate + `AGENTS.md`). Force-push, hard reset, and
+dropping published history stay **stop** even if the CLI would run them.
 
 If the tool cannot finish **inside** this project: `status:blocked`,
 comment, ping. Never escalate to “please approve in the pane.”
