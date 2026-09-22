@@ -1,6 +1,5 @@
 ---
 name: backlog
-version: 2.4.2
 description: |
   Catch me up on this repo or project: where work left off, what is in
   flight, open issues and PRs, worktrees, leftover branches, collision
