@@ -14,7 +14,7 @@ description: |
 
 # Backlog
 
-Skill version **2.4.2**. Label schema **3**.
+Skill version **2.5.0**. Label schema **3**.
 
 Issues are the source of truth (GitHub by default). Create the smallest artifact
 that reduces ambiguity. Labels must track the work: audit artifacts and relabel
@@ -71,7 +71,7 @@ Do not change `phase:*` unless that phase actually finished.
 | Artifact | Role |
 | -------- | ---- |
 | **Issue** | Canonical unit of work. One issue ≈ one coherent first change. |
-| **Plan** | Product spec for that issue: problem, goal, in/out, AC. **No** files, APIs, or task order. |
+| **Plan** | Product spec for that issue: problem, goal, in/out, AC, rough touch (files/repos), direction-locking libs when the spec would otherwise fork. **No** task order, function outlines, or generated code. |
 | **Research brief** | Facts and questions before a plan. Not AC. Lives as an issue comment (file optional). |
 | **Inbox** | Optional local line items until promoted. |
 | **memory.md** | Transactional log for the repo. Promote lasting guidance into `AGENTS.md` — see `references/long-term-memory.md`. |
@@ -188,7 +188,8 @@ Setup does not delete legacy labels. Rerun setup to stamp schema 3 names.
 - One active implement PR per concern; close superseded issue+PR when a
   merge folds older work (`references/implement.md`).
 - Issues are canonical; do not keep a second editable copy of promoted work.
-- A plan has no implementation details.
+- A plan has no implementation sequence or generated code. Touch and
+  direction-locking choices are part of refine (`references/plan.md`).
 - Split oversized work into more issues; do not add a parent PRD.
 - Never let a local markdown file override issue labels.
 - Keep `phase:*` / `status:*` current when a PR or verdict lands.

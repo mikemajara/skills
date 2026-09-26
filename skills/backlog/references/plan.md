@@ -1,12 +1,17 @@
 # Plan (product spec)
 
-A plan is the product spec for **one issue**. It is what used to be called a PRD. It is **not** an implementation sequence.
+A plan is the product spec for **one issue**. It is what used to be called a PRD. It is **not** an implementation sequence and not generated code.
 
 ## Done when
 
-A competent implementer would not invent product behavior. In scope and out of scope are explicit. Acceptance criteria are testable. Open questions are listed or there are none.
+A competent implementer would not invent **product behavior** or a **direction-locking** stack choice. In scope and out of scope are explicit. Acceptance criteria are testable. Open questions are listed or there are none.
 
-**A plan does not include:** file paths, APIs, schemas, task order, or “how we will implement.” If those appear, they are not the plan — strip them or the work is still in refine.
+Also on the issue (skip only with a note, typical for `type:nit`):
+
+- **Touch** — rough map of files and/or repos involved. Enough to see overlap with other issues. Not a complete file list, not per-function edits.
+- **Direction** — a library, store, or similar **only when leaving it open would fork the implementation** (e.g. Zustand vs Redux for client cart state). Do not list every helper the implementer might import. Prefer what `AGENTS.md` already standardizes.
+
+**A plan does not include:** task order, function outlines, API/schema design as “how we will implement,” or sample code for the implementer to paste. If those appear, strip them — they are implementer’s job.
 
 If the document is too big for one first change, it is not done: **split issues**.
 
@@ -40,6 +45,14 @@ created_at: [ISO-8601]
 ## Acceptance criteria
 
 - [ ]
+
+## Touch
+
+- (paths / repos — rough)
+
+## Direction
+
+- (only if the spec would otherwise fork; else omit or `N/A`)
 
 ## Open questions
 ```
