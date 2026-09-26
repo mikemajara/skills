@@ -20,6 +20,8 @@ npx skills add mikemajara/skills --skill brainstorm
 npx skills add mikemajara/skills --skill google-docs
 npx skills add mikemajara/skills --skill nightly-learn
 npx skills add mikemajara/skills --skill tldr-session
+npx skills add mikemajara/skills --skill publish
+npx skills add mikemajara/skills --skill voice
 ```
 
 See `CHANGELOG.md` for release notes and migrations.
@@ -35,6 +37,8 @@ See `CHANGELOG.md` for release notes and migrations.
 | [`google-docs`](skills/google-docs/) | Connector-agnostic Google Docs create / format / edit / review rules. |
 | [`nightly-learn`](skills/nightly-learn/) | Promote sticky how-to from an agent’s own memory into skills (HITL for shared). |
 | [`tldr-session`](skills/tldr-session/) | Four-part recap of the current conversation (start, status, done, pending). |
+| [`publish`](skills/publish/) | Review and reshape work announcements, long-form writing, and social posts before publication. |
+| [`voice`](skills/voice/) | Apply a concise, warm, direct personal voice to work or personal writing when explicitly requested. |
 
 ## Contributing
 

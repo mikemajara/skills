@@ -17,6 +17,12 @@
 
 ### Added
 
+- `publish`: editorial review and restructuring for work announcements,
+  long-form writing, and social posts, with destination-specific references.
+- `voice`: explicit-only personal voice profile with separate work and personal
+  references.
+- Repository guidance for deriving these skills from private source material
+  without copying identifying details or real examples.
 - `tldr-session`: four-part session recap (how it started, how it is going,
   what was achieved, what's pending). Use for `/tldr-session`, "where are
   we?", or a catch-up on the current conversation.

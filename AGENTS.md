@@ -18,3 +18,12 @@ hard reset, dropping published history, deleting a remote branch the team
 uses, production-only side effects, leaking secrets). If it is, stop and
 ask. If it is not, commit and push without waiting to be asked.
 <!-- backlog-skill:agent-hint:end -->
+
+## Skill content safety
+
+`publish` and `voice` may be improved from private workplace material. Extract
+the reusable behavior, then write instructions and examples from scratch. Do
+not copy or lightly redact source material. Do not include real employers,
+customers, partners, coworkers, products, email addresses, domains, links,
+identifiers, or recognizable combinations of private facts. Use neutral roles
+and synthetic placeholders when an example is necessary.
