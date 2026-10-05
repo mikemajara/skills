@@ -9,9 +9,6 @@ direction-locking choice that contradicts the plan → `phase:refine` or
 same turn** (labels must not lag the PR). **Do not merge** — the PM merges
 after QA (`references/pm.md`).
 
-If this run was kicked off with `@cursor` (or similar), follow that comment's
-mandate; it should already say not to merge (`references/spawn.md`).
-
 ## PR and issue hygiene
 
 Overlapping implement work is a common failure mode: several draft PRs for the

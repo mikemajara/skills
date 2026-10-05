@@ -11,10 +11,12 @@ named persona — do not call it Quinn or any other bot name.
 ## Procedure
 
 1. Claim `status:doing`.
-2. Read the issue (canonical plan) and the linked change.
-3. Check acceptance criteria and in/out of scope. Implementation extras that
-   are not in the plan are either out of scope (fail) or a plan hole (back to
-   refine).
+2. Read the issue (canonical plan, including the QA checklist) and the linked change.
+3. Execute that checklist. Do not invent checks and do not drop checks.
+   Judge from the issue, the diff, and CI. Do not run `agent-browser` or any
+   other browser automation unless the human explicitly enabled browser QA
+   for this work. Implementation extras that are not in the plan are either
+   out of scope (fail) or a plan hole (back to refine).
 4. Write the **verdict on the issue** (not only the PR).
 5. Labels:
    - **Pass** — leave `phase:qa`. Clear `doing` → `status:open`. **Do not
@@ -34,7 +36,7 @@ A comment that says “PASS” is not a pass. All of the following must hold:
 | **Every** AC listed as `pass`, `fail`, or `not-reached` | Not a pass |
 | No in-scope AC is `fail` | `implement-again` |
 | For `type:fix`, the **repro** AC is `pass` (not `not-reached`) | `implement-again` or `status:blocked` |
-| QA ran in a **different session** from the implementer | Not QA |
+| When a PM split the roles, QA ran in a **different session** from the implementer. A single agent walking every phase may QA here, and still must write this verdict | Not QA when roles were split |
 | Linked PR (`Fixes #N` / `Closes #N`); required CI green when CI exists | Not merge-ready |
 
 `not-reached` on an in-scope AC the change claims to fix is **not** a pass.

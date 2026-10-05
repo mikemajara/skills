@@ -72,9 +72,9 @@ Advance phase (remove the old `phase:*` first):
 gh issue edit 123 --remove-label "phase:refine" --add-label "phase:implement"
 ```
 
-`@cursor` (and similar) kickoff comments: `references/spawn.md`. Always include
-the issue number, the phase, `Fixes #N` / `Closes #N` for implement, and
-**do not merge**.
+Do not post a comment to launch an agent. The PM starts the role, or this
+session does the phase itself. A PR still names the issue (`Fixes #N` /
+`Closes #N`). Workers do not merge.
 
 PM merge after QA pass (`references/pm.md` guardrails):
 

@@ -6,6 +6,8 @@ A plan is the product spec for **one issue**. It is what used to be called a PRD
 
 A competent implementer would not invent **product behavior** or a **direction-locking** stack choice. In scope and out of scope are explicit. Acceptance criteria are testable. Open questions are listed or there are none.
 
+The issue also has a **QA checklist**: concrete checks a cheaper reviewer can mark `pass`, `fail`, or `not-reached` without deciding what “good” means. One check per acceptance criterion, plus any hardening check that must be re-verified. Do not require a browser unless the human has explicitly enabled browser QA. Skip with `qa checklist skipped: trivial` for a nit.
+
 Also on the issue (skip only with a note, typical for `type:nit`):
 
 - **Touch** — rough map of files and/or repos involved. Enough to see overlap with other issues. Not a complete file list, not per-function edits.
@@ -45,6 +47,10 @@ created_at: [ISO-8601]
 ## Acceptance criteria
 
 - [ ]
+
+## QA checklist
+
+- [ ] (one executable check per AC; no browser unless the human enabled it)
 
 ## Touch
 

@@ -4,6 +4,15 @@
 
 ### Changed
 
+- Backlog **v2.6.0**: The procedure stays harness-agnostic. Herdr commands
+  live in `references/herdr.md` and are opened only when `HERDR_ENV=1`.
+  cmux is no longer a harness. The default Herdr agent is Cursor; another
+  Herdr `--kind` is an explicit override. The PM blocks on
+  `herdr agent prompt --wait` and advances only when the outcome is on the
+  issue. Refine writes a QA checklist; the cheaper model executes it.
+  Browser QA, including `agent-browser`, runs only when the human enables
+  it. `@cursor` kickoff comments are not how work starts.
+
 - Backlog **v2.5.0**: Refine/plan include a rough **touch** map (files/repos)
   and **direction-locking** libraries only when the spec would otherwise fork.
   Still no implementation sequence, function outlines, or generated code.
