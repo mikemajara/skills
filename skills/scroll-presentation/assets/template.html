@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TITLE</title>
+<!-- Local files only. `scripts/sp.py build` inlines every local <link>/<script> into one offline file. -->
+<link rel="stylesheet" href="kit/kit.css">
+<style>
+  /* Per-presentation palette: neutral ink + ONE accent. Add a second color only for a real job
+     (a second data series, good vs bad), and pair it with a label or symbol. */
+  :root{ --accent:#2f6fec; }
+</style>
+</head>
+<body>
+<div class="sp-progress" aria-hidden="true"></div>
+
+<!-- ============ OPENING ============ -->
+<header class="sp-hero">
+  <p class="sp-eyebrow">EYEBROW (optional)</p>
+  <h1>One-line question or promise</h1>
+  <p>One sentence on what the audience will see.</p>
+  <div class="sp-cue" aria-hidden="true"><i></i>Scroll</div>
+</header>
+
+<!-- ============ SCENE: copy this block per scene ============
+     One .sp-cap per step. The kit pins the scene, scrubs it, snaps to each step's end state, and adds step dots. -->
+<section class="sp-scene" id="s-example">
+  <div class="sp-head"><p class="sp-eyebrow">1 / N</p><h2>Scene headline</h2></div>
+  <div class="sp-vis">
+    <div class="sp-overlay">
+      <span></span>
+      <div class="sp-readout"><span class="sp-label">Live counter</span><span class="sp-value" id="ex-count">0</span></div>
+    </div>
+    <svg id="ex-svg" viewBox="0 0 360 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Describe what the visual shows"></svg>
+  </div>
+  <div class="sp-caps">
+    <p class="sp-cap">Step 1 caption: what the characters are.</p>
+    <p class="sp-cap">Step 2 caption: the transformation.</p>
+    <p class="sp-cap">Step 3 caption: the result, stated plainly.</p>
+  </div>
+</section>
+
+<!-- ============ HANDS-ON (optional, not pinned so it never fights the scroll) ============ -->
+<section class="sp-section" id="s-try">
+  <p class="sp-eyebrow" data-sp-reveal>Try it</p>
+  <h2 data-sp-reveal>Hands-on headline</h2>
+  <p data-sp-reveal>Drag the handle. The readout updates live.</p>
+  <div class="sp-panel">
+    <div class="sp-dragbox" id="try-box"><svg viewBox="0 0 360 200" id="try-svg" role="img" aria-label="Interactive chart"></svg></div>
+    <div class="sp-readout" style="margin-top:8px"><span class="sp-label">Readout</span><span class="sp-value" id="try-out">0</span></div>
+  </div>
+  <p class="sp-note">Example data, made up for illustration.</p>
+</section>
+
+<footer class="sp-footer">All data on this page is synthetic example data.</footer>
+
+<script src="kit/vendor/gsap.min.js"></script>
+<script src="kit/vendor/ScrollTrigger.min.js"></script>
+<script src="kit/kit.js"></script>
+<script>
+(function(){
+  var S = ScrollStory, U = S.util;
+
+  /* ---- example scene: 12 dots in a row (the "characters") regroup into a circle, then the counter fills ---- */
+  var svg = document.getElementById('ex-svg'), N = 12, dots = [];
+  var row = [], ring = [];
+  for (var i = 0; i < N; i++){
+    row.push({x: 40 + i * 25, y: 150});
+    var a = -Math.PI / 2 + i / N * 2 * Math.PI; ring.push({x: 180 + 100 * Math.cos(a), y: 150 + 100 * Math.sin(a)});
+    dots.push(U.svg('circle', {r: 8, fill: 'var(--accent)'}, svg));
+  }
+  var count = S.counter('#ex-count');
+  S.scene('#s-example', {
+    steps: [{dur: .6}, {dur: 1}, {dur: .8, hold: .2}],
+    render: function(t){
+      dots.forEach(function(d, i){ d.setAttribute('opacity', U.seg(t[0] * N, i, i + 1)); });
+      S.place(dots, S.morph(row, ring, t[1], {stagger: .4, arc: 20}));
+      count.set(Math.round(t[2] * N));
+    }
+  });
+
+  /* ---- hands-on: a draggable point ---- */
+  var tsvg = document.getElementById('try-svg'), pt = {x: 120, y: 100};
+  U.svg('line', {x1: 20, x2: 340, y1: 100, y2: 100, stroke: 'var(--rule)'}, tsvg);
+  var dot = U.svg('circle', {r: 4, fill: 'var(--accent)'}, tsvg);
+  var out = S.counter('#try-out', {decimals: 0});
+  function draw(){ dot.setAttribute('cx', pt.x); dot.setAttribute('cy', pt.y); out.set(pt.x); }
+  S.dragHandle(document.getElementById('try-box'), {get: function(){ return pt; }, set: function(q){ pt = q; draw(); }, axis: 'x', bounds: {x0: 20, x1: 340, y0: 0, y1: 200}, label: 'Move the point'});
+  draw();
+})();
+</script>
+</body>
+</html>

@@ -2,6 +2,17 @@
 
 ## Unreleased
 
+### Added
+
+- `scroll-presentation`: build scroll-driven story pages (Apple-style) as one
+  offline, mobile-first HTML file with a reduced-motion fallback. Ships a scene
+  kit on GSAP ScrollTrigger (`assets/kit.js`, `kit.css`: pinning, snap-to-step,
+  step dots, live counters, `morph`, touch-safe drag), a starter
+  `assets/template.html`, vendored GSAP + ScrollTrigger 3.15.0 (GSAP Standard
+  "No Charge" License, headers kept), `scripts/sp.py` (scaffold and offline
+  build) and an optional Playwright QA script, plus references for design,
+  scene patterns, kit API, snapping, testing, and a worked example.
+
 ### Changed
 
 - Backlog **v2.6.0**: The procedure stays harness-agnostic. Herdr commands
