@@ -30,6 +30,9 @@ named persona — do not call it Quinn or any other bot name.
    `evidence`). Include every acceptance criterion and actual validation.
    A pass needs nonempty evidence and passing results in both lists.
    Later verdicts on the same head supersede earlier ones.
+   For scheduled review delivery, copy canonical AC into an issue body/comment
+   list under `## Acceptance criteria` if they currently exist only in a plan
+   file. Receipt criteria must match that list's text; the runner checks coverage.
 5. Labels:
    - **Pass** — leave `phase:qa`. Clear `doing` → `status:open`. **Do not
      merge.** The PM merges (`references/pm.md`).
