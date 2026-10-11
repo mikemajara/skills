@@ -15,6 +15,11 @@
 
 ### Changed
 
+- Backlog **v2.7.0**: Autonomous PM runs park blocked issues instead of
+  stopping the whole session. The PM clears the blocked lane, continues with
+  the next eligible issue, and retries parked work only after a later wake
+  with a new unblock signal.
+
 - Backlog **v2.6.0**: The procedure stays harness-agnostic. Herdr commands
   live in `references/herdr.md` and are opened only when `HERDR_ENV=1`.
   cmux is no longer a harness. The default Herdr agent is Cursor; another

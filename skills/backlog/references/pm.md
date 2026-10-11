@@ -56,7 +56,7 @@ Read `.backlog/pm-state.md` at the start of every wake. Missing file → **ping*
 | Mode | Policy |
 | ---- | ------ |
 | **ping** (default) | Say what happened and what you propose. Spawn a worker only when the human already directed that issue/phase. After merge: cleanup, then **ask** before a new issue. |
-| **autonomous** | Until `until` (ISO-8601) or human stop: act when the next step is clear. Ambiguous / blocked / no work: write it on the issue, ping **once**, stop spending on that lane. |
+| **autonomous** | Until `until` (ISO-8601) or human stop: act when the next step is clear. Park blocked work, clear the lane, and continue with the next eligible issue. Ambiguous or empty board: write the result, ping **once**, and stop when no eligible work remains. |
 
 **Arm:** human names a window (“keep going two hours”) → write `mode:
 autonomous` and `until`. They do not have to name an agent; the harness
@@ -91,7 +91,7 @@ Walk **in order**. Do not start (5) while (1)–(4) have work.
 1. **Close loops** — `status:doing`; open PRs waiting QA or merge; `phase:qa`
    with a reviewable change; leftover branch / worktree after merge (role
    windows stay; hard-clear sessions when a harness has them).
-2. **Unblock** — `status:blocked` with a path now; else tell the human and leave blocked.
+2. **Unblock** — `status:blocked` with a path now; otherwise leave it parked and continue triage. A blocked issue does not stop autonomous work on other eligible issues.
 3. **Advance** — open issues whose next phase action is obvious.
 4. **Hygiene** — dedupe, label drift, orphan branches/workspaces, extra
    windows beyond the role set when a harness has them.
@@ -141,7 +141,7 @@ on the issue → do not advance; tell the human. Do not poll while you wait.
 | Implement done **and** a PR exists | **PR created** is the QA trigger — one QA worker total | same |
 | QA **pass** (done-bar on the issue) + linked mergeable PR | Propose merge | **Merge** (guardrails below) |
 | Done-bar not met | Drift-correct; no next spawn; no merge | same |
-| Needs a human | `status:blocked` + question on the issue; notify | same |
+| Needs a human | `status:blocked` + question on the issue; notify | Park as `status:blocked`, clear `status:doing` and `lane`, then continue with the next eligible issue |
 
 ### C — GitHub
 
@@ -189,6 +189,24 @@ checks. Do not force-push.
 
 Ping mode: propose the merge; perform it only when the human already directed
 this issue (go / merge / continue on this lane).
+
+## Blocked work in autonomous mode
+
+Blocked work is parked, not a session-wide stop.
+
+1. The worker records the blocker and the exact human or dependency question
+   on the issue, sets `status:blocked`, and clears `status:doing`.
+2. The PM clears `lane` after confirming the issue outcome. It does not retry
+   that issue during the same autonomous wake, even if the time window remains.
+3. The PM walks the eligible-work stack again and may claim one `status:open`
+   issue whose next phase is clear. The one-lane rule still applies: the
+   parked issue is not a second active lane.
+4. Retry a parked issue only on a later wake with a new unblock signal: a
+   human answer or explicit retry, a changed dependency, or a materially new
+   issue/PR outcome. Re-audit labels and the blocker before claiming it.
+5. If no eligible issue remains, report the parked blocker(s) and stop for
+   that wake. Do not repeatedly notify or spend quota retrying the same
+   blocker.
 
 ## Ownership
 

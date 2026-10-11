@@ -140,6 +140,9 @@ QA does not merge.
 
 ## After the wait
 
-Keep `lane` set to that issue. On explicit **stop**, exit worker processes
-and leave the role windows. Do not kill a healthy worker only because the
-time window expired. Extra panes beyond the four role windows: close them.
+Keep `lane` set while the role is active. If the worker records a blocker and
+sets `status:blocked`, clear `status:doing` and `lane` before the PM walks the
+eligible-work stack again; autonomous mode may start the next eligible issue.
+On explicit **stop**, exit worker processes and leave the role windows. Do not
+kill a healthy worker only because the time window expired. Extra panes beyond
+the four role windows: close them.
