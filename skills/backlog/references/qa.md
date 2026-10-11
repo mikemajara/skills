@@ -12,12 +12,24 @@ named persona — do not call it Quinn or any other bot name.
 
 1. Claim `status:doing`.
 2. Read the issue (canonical plan, including the QA checklist) and the linked change.
-3. Execute that checklist. Do not invent checks and do not drop checks.
+3. Execute that checklist. Do not drop checks. Add relevant regression checks
+   when the diff or observed behavior reveals a gap; explain the evidence.
    Judge from the issue, the diff, and CI. Do not run `agent-browser` or any
    other browser automation unless the human explicitly enabled browser QA
    for this work. Implementation extras that are not in the plan are either
    out of scope (fail) or a plan hole (back to refine).
-4. Write the **verdict on the issue** (not only the PR).
+4. Write the **verdict on the issue** (not only the PR), naming the PR URL,
+   exact tested head SHA, commands/scenarios actually run and their results.
+   Use a plain line `QA verdict: pass`, `QA verdict: implement-again`, or
+   `QA verdict: refine-again` so the scheduled runner can recognize the verdict.
+   A changed PR head invalidates the pass; run QA on the new head.
+   For scheduled review delivery, include a JSON code block with a
+   `backlog_qa` object: `verdict`, `pr_url`, `head_sha`,
+   `acceptance_results` (each has the literal `criterion`, `result`, and
+   `evidence`), and `validations` (each has `command`, `result`, and
+   `evidence`). Include every acceptance criterion and actual validation.
+   A pass needs nonempty evidence and passing results in both lists.
+   Later verdicts on the same head supersede earlier ones.
 5. Labels:
    - **Pass** — leave `phase:qa`. Clear `doing` → `status:open`. **Do not
      merge.** The PM merges (`references/pm.md`).
@@ -32,6 +44,7 @@ A comment that says “PASS” is not a pass. All of the following must hold:
 
 | Required | If missing |
 | -------- | ---------- |
+| Tested head SHA matches the current linked PR head; validation evidence recorded | Not a current pass |
 | Verdict on the **issue**: `pass`, `implement-again`, or `refine-again` | Not a pass |
 | **Every** AC listed as `pass`, `fail`, or `not-reached` | Not a pass |
 | No in-scope AC is `fail` | `implement-again` |

@@ -37,6 +37,7 @@ If this chat is already the PM, collision / “what happened in parallel” is
 ## v1 constraints
 
 - **One lane.** At most one `status:doing` issue this PM is progressing.
+  Parked blockers and verified PRs awaiting human review do not occupy it.
 - **Finish in-flight first.** Claimed work, open PRs waiting QA or merge,
   `phase:qa` with a reviewable change, and post-merge cleanup beat any
   waiting feature — including `priority:high`.
@@ -78,11 +79,31 @@ harness: herdr | empty
 mode: ping | autonomous
 until: <ISO-8601 or empty>
 lane: <issue number or empty>
+delivery: review | merge
+dispatch_command: <runner command or empty>
 ```
 
 `harness: herdr` only after `HERDR_ENV=1`. Treat `cmux` and `subagent` as
 empty. Layout fields (`pane_*`, `agent_*`, `agent_kind`) belong to
 `references/herdr.md` and are written only from that file.
+
+**Delivery:** use `review` when the human requests verified PRs without merging.
+In review mode, after QA passes for the PR's current head SHA, record the PR,
+SHA and evidence on the issue; leave `phase:qa` + `status:open`, clear `lane`,
+and continue triage. Do not close the issue, merge, or delete its branch.
+Exclude that verified head from in-flight work on later wakes; a changed head
+needs fresh QA. Other issues must not depend on an unmerged PR. Switch to
+`merge` only when the human authorizes it. Existing sessions without a delivery
+field retain their prior merge policy.
+
+**Dispatch budget:** if the scheduled runner supplies `dispatch_command`, use
+it for every worker start. It checks fresh quota and the absolute deadline.
+A budget denial ends dispatch for this run; keep the phase available for the
+next run. Do not bypass it by starting an agent directly. A healthy worker
+may finish after dispatch closes. Infrastructure errors are not product
+blockers: inspect outcomes before retrying, retry only when the previous
+worker is confirmed absent, and stop after one retry. Persist a handoff when
+the worker's state is uncertain rather than risking a second active worker.
 
 ## Eligible work stack
 
@@ -139,7 +160,7 @@ on the issue → do not advance; tell the human. Do not poll while you wait.
 | --------- | ---- | ---------- |
 | Phase done, next phase exists | Propose next worker | Spawn it |
 | Implement done **and** a PR exists | **PR created** is the QA trigger — one QA worker total | same |
-| QA **pass** (done-bar on the issue) + linked mergeable PR | Propose merge | **Merge** (guardrails below) |
+| QA **pass** (done-bar on the issue) + linked mergeable PR | Propose merge, or hand off in review mode | Merge when delivery permits; in review mode hand off, release lane, continue |
 | Done-bar not met | Drift-correct; no next spawn; no merge | same |
 | Needs a human | `status:blocked` + question on the issue; notify | Park as `status:blocked`, clear `status:doing` and `lane`, then continue with the next eligible issue |
 
@@ -163,8 +184,8 @@ Ping: propose and wait.
 
 ## Merge (PM)
 
-Workers do not merge. The **PM** merges when QA has passed, so the lane does
-not stall.
+Workers do not merge. The **PM** merges when QA has passed and delivery permits
+merging. In `delivery: review`, use the handoff above instead.
 
 **Pass** means the bar in `references/qa.md` — verdict **on the issue**, every
 AC cited, repro AC `pass` for a fix, QA session ≠ implementer. A PR comment

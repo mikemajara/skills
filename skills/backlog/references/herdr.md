@@ -13,7 +13,7 @@ and hears that it finished.
 | ------ | ------- |
 | Agent kind | `cursor` (`--kind`). The human may name another Herdr kind when arming autonomous mode. Store it as `agent_kind`. Empty means `cursor`. |
 | Research, refine | Planner-class model (Grok 4.6 or GPT-sol class). This role writes the QA checklist. |
-| Implement, QA | Cheaper model (Composer 2.5 or Luna). QA executes the checklist. It does not invent checks. |
+| Implement, QA | Cheaper model (Composer 2.5 or Luna). QA executes the checklist and adds evidence-driven regression checks. |
 | Browser QA | Off. Run `agent-browser` or any other browser only when the human explicitly enabled it for this work. |
 
 One lane. One window per role, reused. Parallel lanes are unsupported. The
@@ -76,7 +76,10 @@ are stable, lowercase `[a-z][a-z0-9_-]{0,31}`.
 
    Wide pane → `right`; tall/narrow → `down`. Record `.result.pane.pane_id`
    as `pane_*`. Rename it to the role title.
-4. Start the agent, then block until Herdr reports the turn finished:
+4. When `dispatch_command` is provided in PM state, write the mandate to a
+   local file and invoke that command with `--phase`, `--pane`, and
+   `--mandate-file`. It owns quota admission, model selection, start, and wait.
+   Do not also run the commands below. Otherwise start the agent, then wait:
 
    ```bash
    herdr agent start <agent_name> --kind <agent_kind> --pane <pane_id> -- \
@@ -114,7 +117,11 @@ Cursor allow/deny defaults may come from
 hard reset, and dropping published history stay **stop** even if the CLI
 would run them.
 
-When `agent_kind` is not `cursor`, do not pass those Cursor flags. Start
+When `agent_kind` is `codex`, use `--no-daemon --approve-for-me -C "$PWD" -m
+<phase model>` for unattended workspace-scoped execution with automatic
+approval review. Do not bypass the sandbox. A supplied runner owns these flags.
+
+When `agent_kind` is neither `cursor` nor `codex`, do not pass those flags. Start
 that kind and name the phase model in the mandate if the agent has no
 `--model` flag.
 

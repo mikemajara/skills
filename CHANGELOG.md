@@ -15,6 +15,11 @@
 
 ### Changed
 
+- Backlog **v2.7.1**: Review delivery releases the single lane after a PR is
+  verified without merging. QA records the tested head SHA and evidence;
+  changed heads need fresh QA. Scheduled runs use the supplied dispatch
+  command for quota/deadline admission and bounded startup recovery.
+
 - Backlog **v2.7.0**: Autonomous PM runs park blocked issues instead of
   stopping the whole session. The PM clears the blocked lane, continues with
   the next eligible issue, and retries parked work only after a later wake

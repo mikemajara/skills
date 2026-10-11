@@ -15,7 +15,7 @@ description: |
 
 # Backlog
 
-Skill version **2.6.0**. Label schema **3**.
+Skill version **2.7.1**. Label schema **3**.
 
 Issues are the source of truth (GitHub by default). Create the smallest artifact
 that reduces ambiguity. Labels must track the work: audit artifacts and relabel
