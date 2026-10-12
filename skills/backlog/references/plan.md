@@ -4,9 +4,15 @@ A plan is the product spec for **one issue**. It is what used to be called a PRD
 
 ## Done when
 
-A competent implementer would not invent **product behavior** or a **direction-locking** stack choice. In scope and out of scope are explicit. Acceptance criteria are testable. Open questions are listed or there are none.
+A competent implementer would not invent **product behavior** or a **direction-locking** stack choice. In scope and out of scope are explicit. Acceptance criteria are testable. Unresolved product decisions block readiness. Implementation choices remain with the implementer when they do not change the product contract.
 
 The issue also has a **QA checklist**: concrete checks a cheaper reviewer can mark `pass`, `fail`, or `not-reached` without deciding what “good” means. One check per acceptance criterion, plus any hardening check that must be re-verified. Do not require a browser unless the human has explicitly enabled browser QA. Skip with `qa checklist skipped: trivial` for a nit.
+
+Name inputs or fixtures, expected observable results, the affected surface,
+and prerequisites (seed data, authentication, tools) for each check. Use
+`verification.md` when the project lacks a working recipe. Scheduled delivery
+requires AC and a QA checklist in the canonical issue body, including a short
+check for a nit; comment copies and plan files do not replace that authority.
 
 Also on the issue (skip only with a note, typical for `type:nit`):
 

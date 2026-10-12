@@ -2,6 +2,9 @@
 
 Product research: gather facts so a plan can be written without guessing. This is not refine and not implementation.
 
+Scheduled adapter runs use `scheduled-proof.md`: PM owns the claim and labels;
+publish the structured proposed outcome instead of applying the transitions below.
+
 ## When
 
 Issue is `phase:research`, or `phase:refine` but facts are still thin (repro, current behavior, constraints unclear). Skip when the issue already has enough signal to shape a plan.

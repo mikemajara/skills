@@ -4,6 +4,9 @@ Judge a change against the **product plan** on the issue (`references/plan.md`).
 Not a restatement of how to open a PR. The QA worker is the **role**, not a
 named persona — do not call it Quinn or any other bot name.
 
+Scheduled adapter runs use `scheduled-proof.md`: PM owns the claim and labels;
+publish the structured proposed outcome instead of applying the transitions below.
+
 ## When
 
 `phase:qa` — a reviewable change exists that claims this issue.
@@ -12,6 +15,9 @@ named persona — do not call it Quinn or any other bot name.
 
 1. Claim `status:doing`.
 2. Read the issue (canonical plan, including the QA checklist) and the linked change.
+   Use the project verification recipe (`verification.md`). Confirm the tested
+   instance/build, seeds and authentication before driving it. Capture actions
+   and observable results; a build or typecheck alone does not prove a behavior.
 3. Execute that checklist. Do not drop checks. Add relevant regression checks
    when the diff or observed behavior reveals a gap; explain the evidence.
    Judge from the issue, the diff, and CI. Do not run `agent-browser` or any
@@ -23,19 +29,14 @@ named persona — do not call it Quinn or any other bot name.
    Use a plain line `QA verdict: pass`, `QA verdict: implement-again`, or
    `QA verdict: refine-again` so the scheduled runner can recognize the verdict.
    A changed PR head invalidates the pass; run QA on the new head.
-   For scheduled review delivery, include a JSON code block with a
-   `backlog_qa` object: `verdict`, `pr_url`, `head_sha`,
-   `acceptance_results` (each has the literal `criterion`, `result`, and
-   `evidence`), and `validations` (each has `command`, `result`, and
-   `evidence`). Include every acceptance criterion and actual validation.
-   A pass needs nonempty evidence and passing results in both lists.
-   Later verdicts on the same head supersede earlier ones.
-   For scheduled review delivery, copy canonical AC into an issue body/comment
-   list under `## Acceptance criteria` if they currently exist only in a plan
-   file. Receipt criteria must match that list's text; the runner checks coverage.
+   Scheduled review delivery uses `scheduled-proof.md` instead of a prose-only
+   receipt. AC and checklist must be in the issue body before QA starts. The
+   recorder binds actual outputs to head/base, issue-body digest and the registered
+   session. Diagnostic failures may be retained with an explanation; they cannot
+   satisfy an AC or required check. Later verdicts supersede earlier passes.
 5. Labels:
    - **Pass** — leave `phase:qa`. Clear `doing` → `status:open`. **Do not
-     merge.** The PM merges (`references/pm.md`).
+     merge.** Review delivery leaves merging to the human (`references/pm.md`).
    - **Bug in the change** — `phase:qa` → `phase:implement`,
      `status:doing` → `status:open`.
    - **Plan was wrong / product hole** — `phase:qa` → `phase:refine`,
@@ -62,6 +63,15 @@ when the QA worker cannot reach it.
 Self-QA by the implementer (PR comment, local smoke without the repro) does
 not satisfy this bar.
 
+If validation setup fails, inspect the concrete prerequisite, clean up only
+what this run created, and retry one scoped repair. A missing issue-specific
+seed/auth/control surface is a validation blocker with a resume condition.
+Do not weaken the scenario or hide a failed command. Shared runtime identity
+or process uncertainty is an infrastructure handoff to the PM, not a product
+decision. Evidence survives cleanup.
+
 ## Done when
 
 That written verdict exists, with AC cited, and labels match it.
+For scheduled workers, publish the proposed verdict; PM completes the label
+transition only after adapter validation.

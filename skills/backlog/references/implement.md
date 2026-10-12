@@ -9,6 +9,10 @@ direction-locking choice that contradicts the plan → `phase:refine` or
 same turn** (labels must not lag the PR). **Do not merge** — the PM merges
 after QA (`references/pm.md`).
 
+Scheduled adapter runs use `scheduled-proof.md`: PM owns the claim and labels;
+publish the structured proposed outcome instead of applying the transitions below.
+Review delivery leaves merging to the human.
+
 ## PR and issue hygiene
 
 Overlapping implement work is a common failure mode: several draft PRs for the
@@ -39,3 +43,14 @@ These are tracker hygiene — same spirit as issue dedupe — not harness-specif
 A reviewable change claims the issue and labels move to `phase:qa`, **or** the
 work is blocked/refined with the reason on the issue, **and** any PRs/issues this
 change superseded are closed with pointers.
+
+Before handoff, run the relevant project checks and exercise the changed
+behavior through its real entry point. For a fix, capture failing-before and
+passing-after evidence when the reproduction is practical; explain a missing
+baseline instead of inventing one. For a refactor, pin current behavior before
+moving structure and verify it is preserved. Prefer an existing focused check
+over building broad test infrastructure for a small change (`verification.md`).
+
+Scheduled workers follow `scheduled-proof.md`: execute self-checks through
+the recorder, publish a proposed outcome, and let the PM apply the transition
+after validation. An open PR alone does not establish readiness for QA.

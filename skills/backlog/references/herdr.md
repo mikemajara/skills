@@ -62,7 +62,7 @@ it.
 ## Dispatch
 
 Requires `HERDR_ENV=1`. Keep focus on the PM pane (`--no-focus`). Agent names
-are stable, lowercase `[a-z][a-z0-9_-]{0,31}`.
+are unique among live sessions, lowercase `[a-z][a-z0-9_-]{0,31}`.
 
 1. Reuse this role’s recorded pane. Do not split again for that role.
 2. Hard-clear: prior agent exited; `herdr pane release-agent` if needed so
@@ -77,8 +77,9 @@ are stable, lowercase `[a-z][a-z0-9_-]{0,31}`.
    Wide pane → `right`; tall/narrow → `down`. Record `.result.pane.pane_id`
    as `pane_*`. Rename it to the role title.
 4. When `dispatch_command` is provided in PM state, write the mandate to a
-   local file and invoke that command with `--phase`, `--pane`, and
-   `--mandate-file`. It owns quota admission, model selection, start, and wait.
+   local `.backlog/autonomous-<phase>-mandate.md` file and invoke that command with `--phase`, `--pane`, and
+   `--mandate-file`, plus `--issue <number>`. It owns quota admission, model
+   selection, startup acknowledgement, identity registration, start, and wait.
    Do not also run the commands below. Otherwise start the agent, then wait:
 
    ```bash
@@ -135,6 +136,8 @@ Give the worker this, and nothing that asks it to be the PM:
 3. Capture the durable result **on the issue**.
 4. Advance `phase:*` when that phase’s done-bar is met, or `status:blocked`
    with the question. Clear `doing` when the phase reference says so.
+   With a supplied dispatch adapter, use `scheduled-proof.md` instead: propose
+   the transition on the issue and let the PM change labels after validation.
 5. Do not start a different issue. Stay inside this checkout. In-repo edits
    and deletes are normal.
 6. Stop (do not sit on a permission dialog) for work outside this project,
@@ -144,6 +147,18 @@ Give the worker this, and nothing that asks it to be the PM:
 
 PR ↔ issue: a PR names the issue (`Fixes #N`). Implementers do not merge.
 QA does not merge.
+
+After adapter dispatch, record its returned `agent` and `pane` in the role fields
+before any reuse/stop. Never reconstruct the run-specific name. Hard-clear only
+the recorded, confirmed same session before reusing its pane.
+
+Scheduled Codex sessions disable native multi-agent spawning. All model workers
+must go through the admission adapter; do not start another CLI manually. Run
+and worker names are unique, while role panes may be reused after confirmed exit.
+Use the runner's `--stop-run <run-id>` for scheduled cancellation; stopping the
+systemd supervisor alone does not account for the Herdr processes. The stop
+command retains the reconciliation barrier until claims and late results are
+audited. Manual Herdr workflows retain the normal stop instructions below.
 
 ## After the wait
 

@@ -15,7 +15,7 @@ description: |
 
 # Backlog
 
-Skill version **2.7.1**. Label schema **3**.
+Skill version **2.8.0**. Label schema **3**.
 
 Issues are the source of truth (GitHub by default). Create the smallest artifact
 that reduces ambiguity. Labels must track the work: audit artifacts and relabel
@@ -54,6 +54,10 @@ They asked *this* chat to capture, triage, research, refine, implement, or QA.
 6. **Finish** — durable result on the issue; advance `phase:*` or `status:blocked`; restore `status:open` unless blocked. Clear `doing`.
 
 Do not change `phase:*` unless that phase actually finished.
+
+Scheduled runs with a `dispatch_command` use `references/scheduled-proof.md`.
+Workers propose transitions; the PM applies labels only after the adapter
+validates the outcome. This replaces the solo label-update steps for those runs.
 
 ## Artifacts
 
@@ -115,6 +119,8 @@ Read only what the current action needs (one level from this file):
 | `phase:refine` | `references/refine.md` |
 | `phase:implement` | `references/implement.md` |
 | `phase:qa` | `references/qa.md` |
+| Scheduled phase/evidence contract | `references/scheduled-proof.md` |
+| Establish behavioral verification for a project | `references/verification.md` |
 | Labels look wrong | `references/drift.md` |
 | Tracker is GitHub (`gh`, scripts) | `references/github.md` |
 | Catch-up / collision recap (read-only) | `references/catch-up.md` |
