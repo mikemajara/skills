@@ -2,6 +2,11 @@
 
 Get the issue to the bar in `references/plan.md`. Refine **writes the product plan**, including a rough **touch** map and any **direction-locking** library/stack choice. It does not sequence implementation or generate the implementer’s code.
 
+Scheduled adapter runs use `scheduled-proof.md`: PM owns the claim and labels;
+publish the structured proposed outcome instead of applying the transitions below.
+Even a nit needs one canonical issue-body AC and executable QA checklist check;
+the solo trivial-check skip below does not apply to scheduled dispatch.
+
 ## When
 
 `phase:refine`, or research just finished. Skip a long plan file for nits and obvious fixes if the issue body already meets `plan.md`.

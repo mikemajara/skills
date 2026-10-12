@@ -1,5 +1,14 @@
 # Changelog
 
+## 2.8.0 — Scheduled outcome proof
+
+- Scheduled workers propose phase transitions for adapter validation before PM label updates.
+- Bind QA to the canonical issue body, PR head/base, registered sessions and captured command artifacts.
+- Define proportionate behavioral verification, bounded environment recovery and selected pinned pstack verification sources.
+- Document run-specific identities, native-spawn restrictions and cancellation/reconciliation.
+- Require committed-tree proof, supersede passes with structured negative QA,
+  and park issue-local delivery holds without stopping the queue.
+
 ## Unreleased
 
 ### Added

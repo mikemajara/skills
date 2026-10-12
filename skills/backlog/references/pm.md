@@ -233,10 +233,32 @@ Blocked work is parked, not a session-wide stop.
 
 | Decision | Who |
 | -------- | --- |
-| Advance `phase:*` when that phase is done | Worker |
+| Advance `phase:*` when that phase is done | Worker in solo mode; PM after adapter validation in scheduled mode |
 | Claim, mode, cancel, pick next issue, start/stop workers | PM (human via A) |
-| Merge the linked PR after QA pass | PM |
+| Merge the linked PR after QA pass | Human for review delivery; PM only with explicit merge authority |
 | Product holes | Back to refine or blocked — not implement |
+
+## Scheduled transitions
+
+Read `scheduled-proof.md` when `dispatch_command` is supplied. The dispatch
+adapter validates durable worker outcomes before returning `settled`. Apply
+labels from that returned outcome, not from a worker's summary or idle state.
+Research ready → refine; refine ready → implement; implementation with recorded
+self-checks and a linked PR → QA. QA pass → review handoff; QA rework → its named
+implement/refine destination. A product/validation/dependency blocker retains its phase,
+sets blocked, clears doing/lane, and leaves other eligible issues available.
+CI waits/conflicts/review requests are delivery holds, not reasons to stop the
+whole queue. Retain behavioral receipts; on a later unblock signal recheck
+delivery without another model QA when head/base/body remain unchanged.
+Verified review handoff requires exactly `phase:qa/status:open`, no doing claim.
+Cancelled-run proof requires fresh verification after human reconciliation.
+
+The issue body is the scheduled specification authority. Edit/promote it before
+dispatch; a changed body or PR head/base requires new verification. Never use a
+QA comment to redefine the AC. Existing prose-only passes need fresh registered
+QA before being called verified under this contract. Runtime tooling cannot
+judge whether a scenario is sufficient; the separate verifier must inspect the
+diff, test behavior and explain coverage.
 
 ## Do not
 
