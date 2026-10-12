@@ -37,7 +37,8 @@ real customer data must not enter commands or captured artifacts. Use fixtures.
 The command runs with the worker's permissions; this is not a new sandbox.
 Commit the product/test changes before capture. Tracked/index changes or
 untracked product inputs are rejected before, during and after a check. Keep
-mandates/receipts under `.backlog/autonomous-*.md|json|lock`; generated evidence
+mandates/receipts under `.backlog/autonomous-*.md|json|lock`; the required
+`.backlog/pm-state.md` is also runtime scratch. Generated evidence
 files must be explicitly named with `--artifact`, then removed from the checkout
 before handoff if untracked. Ignored dependencies/build outputs and external
 seeded environments still depend on the project verification recipe; the
@@ -76,6 +77,10 @@ cannot substitute for required proof. For rework, use verdict `implement-again`
 or `refine-again`, list every AC as pass/fail/not-reached, and explain the gap.
 Structured negative QA verdicts also supersede older passes, even without the
 plain verdict line. A later prose-only pass cannot resurrect an older receipt.
+Event order inside a comment matters. Accepted QA stores comment IDs and body
+digests; editing/removing its verdict history or reposting an old receipt is
+not fresh verification. After a negative verdict, use a fresh QA worker/session
+with new captured checks, not a repeated pass from the rejected worker.
 
 PM records verified PRs with `issue`, `pr_url`, `head_sha`, `run_id`, `worker_id`
 and a short evidence summary. A changed head/base/body or later negative verdict
