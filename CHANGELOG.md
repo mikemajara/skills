@@ -4,6 +4,11 @@
 
 ### Added
 
+- `cite-sources`: always-on, connector-agnostic rule to link every mentioned
+  object (email thread, Notion page, Doc, Sheet, Drive file, Todoist task,
+  GitHub PR/issue) inline to its own URL, with URL patterns and examples.
+  Reference it from `AGENTS.md` or always-loaded memory.
+
 - `scroll-presentation`: build scroll-driven story pages (Apple-style) as one
   offline, mobile-first HTML file with a reduced-motion fallback. Ships a scene
   kit on GSAP ScrollTrigger (`assets/kit.js`, `kit.css`: pinning, snap-to-step,
