@@ -18,6 +18,7 @@ npx skills add mikemajara/skills --skill sdlc-first-principles
 npx skills add mikemajara/skills --skill conversation
 npx skills add mikemajara/skills --skill brainstorm
 npx skills add mikemajara/skills --skill google-docs
+npx skills add mikemajara/skills --skill collaboration
 npx skills add mikemajara/skills --skill nightly-learn
 npx skills add mikemajara/skills --skill tldr-session
 npx skills add mikemajara/skills --skill publish
@@ -35,6 +36,7 @@ See `CHANGELOG.md` for release notes and migrations.
 | [`conversation`](skills/conversation/) | Pressure-test a mostly formed idea (gaps, contradictions, edges). |
 | [`brainstorm`](skills/brainstorm/) | Generate new angles and option catalogs. |
 | [`google-docs`](skills/google-docs/) | Connector-agnostic Google Docs create / format / edit / review rules. |
+| [`collaboration`](skills/collaboration/) | Work in shared artifacts and comment threads, calibrate editing scope, and sign agent comments. |
 | [`nightly-learn`](skills/nightly-learn/) | Promote sticky how-to from an agent’s own memory into skills (HITL for shared). |
 | [`tldr-session`](skills/tldr-session/) | Four-part recap of the current conversation (start, status, done, pending). |
 | [`publish`](skills/publish/) | Review and reshape work announcements, long-form writing, and social posts before publication. |

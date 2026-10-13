@@ -12,8 +12,10 @@ session.
 
 ## Defaults
 
-- Prefer **Markdown** as the draft format for reports and long text. Convert
-  into the Doc (or paste structured content) once the substance is settled.
+- For a standalone draft, prefer **Markdown** for reports and long text, then
+  convert it into the Doc once the substance is settled. When collaborating
+  in an existing Doc, use `collaboration` and work in that Doc and its threads
+  instead of drafting a parallel version in chat.
 - One Doc = one coherent artifact. Prefer a clear title over a generic
   "Untitled document".
 - Do not invent templates unless the user asks for one.
@@ -50,8 +52,11 @@ Keep formatting light. Do not decorate for its own sake.
   the main body.
 - **Suggestions** — proposed wording/structure changes for the owner to accept
   or reject.
-- Resolve or reply only when that is part of the ask; do not clear others'
-  threads unasked.
+- Reply within the requested review or collaboration scope; do not clear
+  others' threads unasked.
+- Sign every agent-authored comment and reply with a truthful agent identity
+  (for example, `— fx (AI assistant)`), even if native attribution shows the
+  user's account. For ongoing collaboration, follow `collaboration`.
 
 ## Review
 
@@ -59,4 +64,6 @@ When asked to review a Doc:
 
 1. Read the current Doc (not a stale local copy).
 2. Check structure, clarity, and whether it matches the brief.
-3. Leave comments or suggestions; summarize the top issues in chat.
+3. Leave comments or suggestions. For standalone review, summarize the top
+   issues in chat. In collaboration, keep the discussion in the threads and
+   give a brief status with links and decisions needing input.

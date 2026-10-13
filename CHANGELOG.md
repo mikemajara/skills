@@ -33,6 +33,10 @@
 
 ### Added
 
+- `collaboration`: artifact-first collaboration across documents, sheets, and
+  pages, with session-specific editing scope, capability checks, and signed
+  agent comments and replies. Google Docs, conversation, brainstorm, and publish
+  defaults now account for collaboration in the artifact.
 - `publish`: editorial review and restructuring for work announcements,
   long-form writing, and social posts, with destination-specific references.
 - `voice`: explicit-only personal voice profile with separate work and personal

@@ -26,7 +26,9 @@ the table — including unconventional ones.
 - Build on their reactions. Drop paths they reject; double down on what
   lands.
 - Keep the exchange conversational. Do not dump a six-section analysis
-  unless they ask for a structured writeup.
+  unless they ask for a structured writeup. When collaborating in a shared
+  artifact, use `collaboration` to explore in its comment threads; do not
+  replace the main content with unsettled ideas.
 - A short reaction or a handful of named options is enough. Expand when
   they pick a thread.
 

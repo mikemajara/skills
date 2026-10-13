@@ -54,7 +54,12 @@ materially change the piece. Do not invent context.
 
 ## Output
 
-If reviewing an existing draft, return:
+When collaborating in a shared artifact, use `collaboration`: put diagnoses in
+its comment threads and revisions in the artifact or native suggestions at the
+agreed intervention level. Keep chat to a brief update rather than a duplicate
+rewrite. Editorial judgment does not authorize a broader edit than requested.
+
+Otherwise, if reviewing an existing draft, return:
 
 ### What to fix
 
