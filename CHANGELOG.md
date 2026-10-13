@@ -2,7 +2,33 @@
 
 ## Unreleased
 
+### Added
+
+- `cite-sources`: always-on, connector-agnostic rule to link every mentioned
+  object (email thread, Notion page, Doc, Sheet, Drive file, Todoist task,
+  GitHub PR/issue) inline to its own URL, with URL patterns and examples.
+  Reference it from `AGENTS.md` or always-loaded memory.
+
+- `scroll-presentation`: build scroll-driven story pages (Apple-style) as one
+  offline, mobile-first HTML file with a reduced-motion fallback. Ships a scene
+  kit on GSAP ScrollTrigger (`assets/kit.js`, `kit.css`: pinning, snap-to-step,
+  step dots, live counters, `morph`, touch-safe drag), a starter
+  `assets/template.html`, vendored GSAP + ScrollTrigger 3.15.0 (GSAP Standard
+  "No Charge" License, headers kept), `scripts/sp.py` (scaffold and offline
+  build) and an optional Playwright QA script, plus references for design,
+  scene patterns, kit API, snapping, testing, and a worked example.
+
 ### Changed
+
+- Backlog **v2.7.1**: Review delivery releases the single lane after a PR is
+  verified without merging. QA records the tested head SHA and evidence;
+  changed heads need fresh QA. Scheduled runs use the supplied dispatch
+  command for quota/deadline admission and bounded startup recovery.
+
+- Backlog **v2.7.0**: Autonomous PM runs park blocked issues instead of
+  stopping the whole session. The PM clears the blocked lane, continues with
+  the next eligible issue, and retries parked work only after a later wake
+  with a new unblock signal.
 
 - Backlog **v2.6.0**: The procedure stays harness-agnostic. Herdr commands
   live in `references/herdr.md` and are opened only when `HERDR_ENV=1`.

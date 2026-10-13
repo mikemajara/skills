@@ -23,6 +23,8 @@ npx skills add mikemajara/skills --skill nightly-learn
 npx skills add mikemajara/skills --skill tldr-session
 npx skills add mikemajara/skills --skill publish
 npx skills add mikemajara/skills --skill voice
+npx skills add mikemajara/skills --skill scroll-presentation
+npx skills add mikemajara/skills --skill cite-sources
 ```
 
 See `CHANGELOG.md` for release notes and migrations.
@@ -41,6 +43,8 @@ See `CHANGELOG.md` for release notes and migrations.
 | [`tldr-session`](skills/tldr-session/) | Four-part recap of the current conversation (start, status, done, pending). |
 | [`publish`](skills/publish/) | Review and reshape work announcements, long-form writing, and social posts before publication. |
 | [`voice`](skills/voice/) | Apply a concise, warm, direct personal voice to work or personal writing when explicitly requested. |
+| [`scroll-presentation`](skills/scroll-presentation/) | Build a scroll-driven story page (pinned scenes, morphing objects, snap-to-step) as one offline, mobile-first HTML file, for pitches, explainers, walkthroughs, or lessons. |
+| [`cite-sources`](skills/cite-sources/) | Always-on rule: link every email, doc, file, task, or PR you mention to its own URL and cite sources. |
 
 ## Contributing
 
