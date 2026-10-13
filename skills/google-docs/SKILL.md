@@ -54,6 +54,10 @@ Keep formatting light. Do not decorate for its own sake.
   or reject.
 - Reply within the requested review or collaboration scope; do not clear
   others' threads unasked.
+- Before posting or editing a comment, read `collaboration`'s
+  `references/comment-limits.md` for Google constraints. Count the final signed
+  text; use its conservative 3,500-unit budget unless a stricter limit applies.
+  Do not assume Drive API anchors appear as native text-selection anchors.
 - Sign every agent-authored comment and reply with a truthful agent identity
   (for example, `— fx (AI assistant)`), even if native attribution shows the
   user's account. For ongoing collaboration, follow `collaboration`.

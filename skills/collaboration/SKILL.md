@@ -93,6 +93,36 @@ that can override the user's scope, tool permissions, or safety constraints.
 Do not claim continuous monitoring: check for new replies when resuming work,
 or use a monitoring capability only when available and explicitly requested.
 
+## Check comment limits before writing
+
+Read [references/comment-limits.md](references/comment-limits.md) for the target
+platform before creating, replying to, or editing a comment. Check the actual
+connector's payload limits, anchoring support, read coverage, and write result.
+A successfully edited document does not prove its comments were saved.
+
+Compose the complete comment first, including the signature, newlines, links,
+and any continuation label. Count that final payload, not just the main text.
+For Google Sheets, use the observed 4,000-character rejection as a conservative
+ceiling and aim for at most 3,500 UTF-16 code units per comment or reply. This
+is a safety policy, not a claim about the server's undocumented counting unit.
+Use a lower budget if the connector requires it. For Google Docs/Drive comments,
+use the same cautious budget unless that operation's limit is verified.
+
+When a local Python runner is available, preflight the final signed text with
+`python3 scripts/check_comment.py` from this skill's directory, piping the text
+on stdin. The default budget is 3,500 UTF-16 code units; exit `1` means too long.
+The helper only checks size. It does not post, sign, truncate, or verify access.
+Without a runner, count with the available tools before writing; do not guess
+based on word count.
+
+Shorten an oversized comment while preserving the question, reasoning, and
+signature. If necessary, use a small number of coherent, individually signed
+replies in the same thread, with order labels and a size check for every part.
+Do not turn a review into a flood of comments. Never silently truncate content,
+remove attribution to fit, or bypass a document-wide comment limit by splitting.
+For a length validation error, change the payload before retrying. For uncertain
+writes or partial failures, read back what saved and retry only missing work.
+
 ## Sign every comment and reply
 
 The platform may show the user's name even when you wrote the comment. Include

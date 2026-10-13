@@ -20,6 +20,15 @@
 
 ### Changed
 
+- `collaboration`: preflight final signed comments against size budgets; add
+  researched Sheets, Drive, and Notion constraints, distinguishing the observed
+  Sheets 4,000-character rejection from documented API limits. Add an offline
+  size checker and deterministic Unicode/signature boundary tests.
+- `google-docs`: apply the shared comment-limit checks and Drive anchoring caveat.
+- Repository delivery: after each push to `main`, install all skills from the
+  checkout into `~/.agents/skills/` using the universal target only, and verify
+  installed files match. No agent-specific or unrelated global updates.
+
 - Backlog **v2.7.1**: Review delivery releases the single lane after a PR is
   verified without merging. QA records the tested head SHA and evidence;
   changed heads need fresh QA. Scheduled runs use the supplied dispatch
