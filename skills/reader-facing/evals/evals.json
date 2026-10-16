@@ -1,0 +1,26 @@
+{
+  "skill_name": "reader-facing",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Fill a questionnaire row. Requirement: payment-card retention policy. Response options: In place, Partially supported, Not applicable. Fact: the service does not store payment-card data. Return the Response and Comments fields; Comments should explain the response.",
+      "expected_output": "Response is Not applicable. Comments explain that the service does not store payment-card data without repeating the classification.",
+      "files": [],
+      "expectations": ["Response is Not applicable.", "Comments preserve the fact that the service does not store payment-card data.", "Comments do not repeat the response classification or narrate the act of choosing it."]
+    },
+    {
+      "id": 2,
+      "prompt": "Write a short internal onboarding guide using these facts: an administrator invites the new member, the member accepts the invitation, then enables two-factor authentication. Focus on onboarding; leave billing and contract negotiations out. Make the guide ready to paste into our document.",
+      "expected_output": "A guide containing the supplied steps, without announcing its exclusions or narrating the drafting assignment.",
+      "files": [],
+      "expectations": ["The guide includes invitation, acceptance, and two-factor authentication in order.", "The guide does not mention billing or contract negotiations.", "The guide contains no assistant preamble, drafting rationale, or generic this-document-outlines introduction."]
+    },
+    {
+      "id": 3,
+      "prompt": "Draft a customer-facing explanation of file recovery. Deleted files can be restored for 30 days; after that they are permanently removed. Recovery requires an administrator. Keep implementation details out. Include an explicit limitation so readers do not assume recovery is always possible. Return only the draft.",
+      "expected_output": "Preserves the 30-day limit, permanent removal afterward, and administrator requirement without announcing excluded implementation details.",
+      "files": [],
+      "expectations": ["The draft explicitly preserves the 30-day recovery limit and permanent removal afterward.", "The draft says recovery requires an administrator.", "The draft does not announce excluded implementation details or explain the drafting process."]
+    }
+  ]
+}
