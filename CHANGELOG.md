@@ -20,6 +20,13 @@
 
 ### Changed
 
+- Rename `reader-facing` to `unmeta` and focus it on separating authoring
+  conversations from authored work. Ask the user whenever a remark's role is
+  unclear; keep the question outside the artifact. Add conversational evaluation
+  cases for omission instructions, ambiguity, explicit disclosures, and revisions.
+  Migration: install `unmeta` and retire the old `reader-facing` installation;
+  existing sessions may need to refresh their skill list or start a new session.
+
 - `collaboration`: preflight final signed comments against size budgets; add
   researched Sheets, Drive, and Notion constraints, distinguishing the observed
   Sheets 4,000-character rejection from documented API limits. Add an offline

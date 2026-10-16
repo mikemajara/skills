@@ -1,0 +1,61 @@
+{
+  "skill_name": "unmeta",
+  "evals": [
+    {
+      "id": 1,
+      "name": "separate-form-fields",
+      "prompt": "Fill a questionnaire row. Requirement: payment-card retention policy. Response options: In place, Partially supported, Not applicable. Fact: the service does not store payment-card data. Return the Response and Comments fields; Comments should explain the response.",
+      "expected_output": "Response is Not applicable. Comments explain that the service does not store payment-card data without repeating the classification.",
+      "files": [],
+      "expectations": ["Response is Not applicable.", "Comments preserve the fact that the service does not store payment-card data.", "Comments do not repeat the response classification or narrate the act of choosing it."]
+    },
+    {
+      "id": 2,
+      "name": "silent-scope-constraint",
+      "prompt": "Write a short internal onboarding guide using these facts: an administrator invites the new member, the member accepts the invitation, then enables two-factor authentication. Focus on onboarding; leave billing and contract negotiations out. Make the guide ready to paste into our document.",
+      "expected_output": "A guide containing the supplied steps, without announcing its exclusions or narrating the drafting assignment.",
+      "files": [],
+      "expectations": ["The guide includes invitation, acceptance, and two-factor authentication in order, without inventing completion conditions.", "The guide does not mention billing or contract negotiations.", "The guide contains no assistant preamble, drafting rationale, or generic this-document-outlines introduction."]
+    },
+    {
+      "id": 3,
+      "name": "preserve-real-limitations",
+      "prompt": "Draft a customer-facing explanation of file recovery. Deleted files can be restored for 30 days; after that they are permanently removed. Recovery requires an administrator. Keep implementation details out. Include an explicit limitation so readers do not assume recovery is always possible. Return only the draft.",
+      "expected_output": "Preserves the 30-day limit, permanent removal afterward, and administrator requirement without announcing excluded implementation details.",
+      "files": [],
+      "expectations": ["The draft explicitly preserves the 30-day recovery limit and permanent removal afterward.", "The draft says recovery requires an administrator, not merely that administrators can perform recovery.", "The draft does not announce excluded implementation details or explain the drafting process."]
+    },
+    {
+      "id": 4,
+      "name": "clarification-is-not-answer-content",
+      "prompt": "Continue this authoring conversation. User: Help answer this questionnaire item: How do you prepare new staff to handle support requests? Facts: new staff review the support handbook and shadow an experienced colleague before handling requests independently. Agent: Should I name a course in this answer? User: No named course for that reply. Go ahead and fill the answer. Return the text you would put in the questionnaire.",
+      "expected_output": "Writes the handbook and shadowing answer, without a course name, omission announcement, or invented claim about whether a course outline is attached or available.",
+      "files": [],
+      "expectations": ["The answer preserves handbook review and shadowing an experienced colleague before independent request handling.", "The answer does not mention courses, outlines, attachments, or the decision to omit a name.", "The response contains the substantive questionnaire answer rather than unnecessary clarification or editorial commentary."]
+    },
+    {
+      "id": 5,
+      "name": "ambiguous-follow-up-ask-first",
+      "prompt": "Continue this authoring conversation. User: Draft our answer to the questionnaire item 'Describe your staff training and supporting materials.' Facts: new staff review a handbook and shadow a colleague. Agent: I can describe those activities. User: We don't have a course outline. Finish the answer; just the final text please. No further context establishes whether the last remark is background for drafting or information to disclose to the questionnaire reader. Respond as you would in the live conversation.",
+      "expected_output": "Asks whether the lack of a course outline should appear in the answer or is background for the agent. Holds the affected answer rather than guessing, despite the final-text-only request.",
+      "files": [],
+      "expectations": ["The assistant asks a targeted clarification distinguishing background for the agent from disclosure to the questionnaire reader.", "The assistant does not deliver or claim to fill the questionnaire answer before receiving clarification.", "The clarification is addressed to the user outside the questionnaire content, not embedded in a draft or response field."]
+    },
+    {
+      "id": 6,
+      "name": "explicit-disclosure-is-content",
+      "prompt": "Continue this authoring conversation. User: Draft the staff-training answer. Facts: new staff review a handbook and shadow a colleague. Agent: Do you want the questionnaire reader told that no course outline is available? User: Yes. Explicitly tell them no course outline is available, then describe the handbook and shadowing. Return only the questionnaire answer.",
+      "expected_output": "Explicitly discloses that no course outline is available and describes the two training activities, without referencing the authoring exchange.",
+      "files": [],
+      "expectations": ["The answer explicitly states that no course outline is available.", "The answer preserves handbook review and colleague shadowing without inventing training evidence.", "The answer neither narrates the clarification exchange nor asks again about the already settled disclosure."]
+    },
+    {
+      "id": 7,
+      "name": "revision-guidance-stays-out-of-email",
+      "prompt": "Continue this authoring conversation. User: Draft a customer email proposing a workshop on 12 November. Agent draft: We can hold the workshop on 12 November. We can also discuss pricing. User: Don't bring pricing into this email, and make the date a proposal, not a commitment. Return only the revised email.",
+      "expected_output": "Proposes 12 November tentatively and omits pricing without announcing the omissions or the user's drafting instructions.",
+      "files": [],
+      "expectations": ["The email proposes 12 November for a workshop without presenting it as a confirmed commitment.", "The email does not mention pricing, including as an exclusion.", "The email contains no as-requested acknowledgment or explanation of the editing decisions."]
+    }
+  ]
+}
