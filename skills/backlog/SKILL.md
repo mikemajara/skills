@@ -1,21 +1,37 @@
 ---
 name: backlog
 description: |
-  Catch me up on this repo or project: where work left off, what is in
-  flight, open issues and PRs, worktrees, leftover branches, collision
-  with other agents. GitHub Issues backlog: capture, triage, research,
-  refine, implement, qa, initialize `.backlog/`, promote memory into
-  AGENTS.md. Use when the user says catch me up; or asks you to be the
-  manager, product manager, or orchestrator for the backlog cycle (you
-  only allocate: start the next role when a spawn harness is available,
-  otherwise ask the human; never do the phase in this chat, never nest a
-  subagent as the worker); or what to do next on an issue. Read references
-  only for the current action.
+  DEPRECATED. Do not start new backlog work. Migrate to mikemajara/mstack:
+  project files `.backlog/` → `.mstack/`, slash `/backlog` → `/mstack`.
+  Then follow mstack (mstack-workflow / mstack-orchestrator / mstack-tracker).
+  Use when you find this skill, `.backlog/`, `/backlog`, catch me up, GitHub
+  Issues backlog, or PM/orchestrator on the old cycle — so you migrate first.
+  Remaining procedure below is frozen legacy until migration completes.
 ---
 
 # Backlog
 
-Skill version **2.7.1**. Label schema **3**.
+Skill version **2.8.0**. Label schema **3**. **Deprecated.**
+
+## Deprecated — migrate to mstack
+
+This skill is frozen. Successor: **[mikemajara/mstack](https://github.com/mikemajara/mstack)**.
+
+When you load this skill, find `.backlog/`, or the user says `/backlog`:
+
+1. **Do not** capture, refine, implement, QA, or orchestrate with this skill.
+2. Install and follow **mstack** (`mstack-workflow`, `mstack-orchestrator`,
+   `mstack-tracker` as that repo describes).
+3. Move project files **`.backlog/` → `.mstack/`** (memory, inbox, plans →
+   the layout mstack uses). Keep human-written memory; do not drop entries.
+4. Prefer **`/mstack`** over **`/backlog`**. Stop injecting backlog agent
+   hints into `AGENTS.md`.
+5. Tell the user this install is deprecated and that work continues in mstack.
+
+Do not invent a hybrid. After migration, do not keep using these references.
+
+The sections below are **legacy** for repos that have not migrated yet. They
+are not the current delivery workflow.
 
 Issues are the source of truth (GitHub by default). Create the smallest artifact
 that reduces ambiguity. Labels must track the work: audit artifacts and relabel

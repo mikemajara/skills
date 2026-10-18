@@ -1,10 +1,10 @@
 # backlog
 
-Capture work and move GitHub issues through research → refine → implement → qa.
-Read-only catch-up after time away (leftover work and local collision).
+**Deprecated.** Use [mikemajara/mstack](https://github.com/mikemajara/mstack)
+instead. Migrate `.backlog/` → `.mstack/` and `/backlog` → `/mstack`.
 
 ```bash
-npx skills add mikemajara/skills --skill backlog
+npx skills add mikemajara/mstack
 ```
 
-Agents follow `SKILL.md` and `references/` for the current action.
+Do not install this skill for new work. Frozen legacy lives in `SKILL.md`.

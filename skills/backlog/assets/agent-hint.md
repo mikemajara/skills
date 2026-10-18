@@ -1,14 +1,16 @@
 <!-- backlog-skill:agent-hint:start -->
-## Backlog
+## Backlog (deprecated)
 
-Before starting work in this repository, read `.backlog/memory.md` for recent
-decisions, facts, choices, blockers, conventions, and gotchas, and `AGENTS.md`
-for project context (stack, architecture, commands, policies). Check
-`.backlog/inbox.md` and open GitHub Issues for related or in-progress work.
-Prefer the `backlog` skill when capturing, promoting, refining, QA, merging,
-consolidating long-term memory, or acting as PM. Do not put merge or phase
-workflow in `AGENTS.md`.
-Backlog skill v2.4.
+The `backlog` skill is deprecated. Use **mstack**
+([mikemajara/mstack](https://github.com/mikemajara/mstack)): move `.backlog/`
+to `.mstack/` and prefer `/mstack` over `/backlog`. Do not start new work
+with this skill.
+
+Until that migration finishes, read `.backlog/memory.md` (or `.mstack/memory.md`)
+for recent decisions, facts, choices, blockers, conventions, and gotchas, and
+`AGENTS.md` for project context. Do not put merge or phase workflow in
+`AGENTS.md`.
+Backlog skill v2.8 (deprecated).
 
 ## Git
 

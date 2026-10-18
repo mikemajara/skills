@@ -5,7 +5,7 @@
 This repository publishes installable skills.
 
 ```bash
-npx skills add mikemajara/skills --skill backlog
+npx skills add mikemajara/skills --skill backlog   # deprecated; use mikemajara/mstack
 npx skills add mikemajara/skills --skill sdlc-first-principles
 npx skills add mikemajara/skills --skill conversation
 npx skills add mikemajara/skills --skill brainstorm
@@ -49,7 +49,9 @@ Default structure created by the skill:
 
 ## Design Decisions
 
-- Skill name must remain `backlog`.
+- Skill folder name remains `backlog`. The skill is **deprecated** (v2.8.0);
+  successor is `mikemajara/mstack` (`.backlog/` → `.mstack/`, `/backlog` →
+  `/mstack`). Do not expand this skill.
 - Prefer a thin `SKILL.md` plus `references/`; keep scripts optional, small, and
   dependency-free.
 - Encode judgment, not ceremony.

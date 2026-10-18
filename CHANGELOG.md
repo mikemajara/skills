@@ -20,6 +20,12 @@
 
 ### Changed
 
+- Backlog **v2.8.0**: **Deprecated.** Successor is
+  [mikemajara/mstack](https://github.com/mikemajara/mstack). Agents that find
+  this skill, `.backlog/`, or `/backlog` should migrate: `.backlog/` →
+  `.mstack/`, `/backlog` → `/mstack`, then follow mstack. Do not start new
+  work on this skill. Remaining procedure is frozen legacy.
+
 - Rename `reader-facing` to `unmeta` and focus it on separating authoring
   conversations from authored work. Ask the user whenever a remark's role is
   unclear; keep the question outside the artifact. Add conversational evaluation

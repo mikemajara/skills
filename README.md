@@ -13,7 +13,7 @@ npx skills add mikemajara/skills --skill <name>
 Examples:
 
 ```bash
-npx skills add mikemajara/skills --skill backlog
+npx skills add mikemajara/skills --skill backlog   # deprecated; use mikemajara/mstack
 npx skills add mikemajara/skills --skill sdlc-first-principles
 npx skills add mikemajara/skills --skill conversation
 npx skills add mikemajara/skills --skill brainstorm
@@ -34,7 +34,7 @@ See `CHANGELOG.md` for release notes and migrations.
 
 | Skill | What it is |
 | ----- | ---------- |
-| [`backlog`](skills/backlog/) | Capture work and move GitHub issues through research → refine → implement → qa. Read-only catch-up after time away. |
+| [`backlog`](skills/backlog/) | **Deprecated.** Migrate to [mikemajara/mstack](https://github.com/mikemajara/mstack) (`.backlog/` → `.mstack/`, `/backlog` → `/mstack`). |
 | [`sdlc-first-principles`](skills/sdlc-first-principles/) | Apply a five-step first-principles process lens to SDLC work. |
 | [`conversation`](skills/conversation/) | Pressure-test a mostly formed idea (gaps, contradictions, edges). |
 | [`brainstorm`](skills/brainstorm/) | Generate new angles and option catalogs. |
