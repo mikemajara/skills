@@ -1,12 +1,34 @@
-<!-- backlog-skill:agent-hint:start -->
-## Backlog
+# Updating skills in this repository
 
-Before starting work in this repository, read `.backlog/memory.md` for recent
-decisions, facts, choices, blockers, conventions, and gotchas, and `AGENTS.md`
-for lasting project guidance. Check `.backlog/inbox.md` and open GitHub Issues
-for related or in-progress work. Prefer the `backlog` skill when capturing,
-promoting, refining, consolidating long-term memory, or acting as PM.
-Backlog skill v2.
+This repository (`github.com/mikemajara/skills`) is the source of truth for
+its installable skills, even when a change is requested from another working
+directory. Locate this checkout (or clone the repository if absent), read this
+file, and run repo commands from its root before editing. Do not edit an
+installed copy under `~/.agents/skills/` as the source. Confirm the requested
+skill actually lives under `skills/<name>/`; if it belongs to another
+repository, find that source instead of creating a duplicate here.
+
+## Editing
+
+- Work on `main` by default. Check the worktree before editing and preserve
+  unrelated changes; coordinate if another agent is editing the same skill.
+- Read the target `skills/<name>/SKILL.md` and the relevant references, scripts,
+  assets, and tests before changing behavior. Keep `SKILL.md` thin and
+  harness-agnostic; put depth in on-demand `references/` and use small,
+  dependency-light scripts only where they help. Preserve the skill's name and
+  `skills/<name>/SKILL.md` layout when updating it.
+- Change the source skill rather than patching an installed copy. For skills
+  not present here (for example, a locally installed mail-review skill), locate
+  their owning repository and follow its instructions.
+- Run focused checks for the touched skill (tests, scripts, or a realistic
+  example), and inspect the diff for unrelated changes. Update `README.md` when
+  adding or removing a skill; record meaningful behavior changes or migrations
+  in `CHANGELOG.md` without rewriting historical entries.
+- Avoid copying private source material into published skills. Extract reusable
+  behavior and write fresh, synthetic examples. In particular, keep `publish`
+  and `voice` free of real employers, customers, partners, coworkers, products,
+  addresses, domains, links, identifiers, or recognizable combinations of
+  private facts.
 
 ## Git
 
@@ -17,7 +39,6 @@ Before you do it, check whether the action is **irreversible** (force-push,
 hard reset, dropping published history, deleting a remote branch the team
 uses, production-only side effects, leaking secrets). If it is, stop and
 ask. If it is not, commit and push without waiting to be asked.
-<!-- backlog-skill:agent-hint:end -->
 
 ## Post-push installation
 
@@ -34,15 +55,8 @@ Do not update unrelated global skills or modify the shell configuration.
 If the shell's `npx` wrapper fails, use a clean shell or the installed executable.
 
 Verify that every tracked file under `skills/` matches its installed counterpart,
-including references, scripts, and assets. Report push and installation outcomes
-separately; a successful push with a failed install is not complete local delivery.
-Do not install uncommitted edits as though they were the published version.
-
-## Skill content safety
-
-`publish` and `voice` may be improved from private workplace material. Extract
-the reusable behavior, then write instructions and examples from scratch. Do
-not copy or lightly redact source material. Do not include real employers,
-customers, partners, coworkers, products, email addresses, domains, links,
-identifiers, or recognizable combinations of private facts. Use neutral roles
-and synthetic placeholders when an example is necessary.
+including references, scripts, and assets. When retiring a skill, check for a
+stale installed copy too; adding the remaining skills does not uninstall it.
+Report push and installation outcomes separately; a successful push with a
+failed install is not complete local delivery. Do not install uncommitted edits
+as though they were the published version.

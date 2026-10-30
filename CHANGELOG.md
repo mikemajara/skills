@@ -2,6 +2,13 @@
 
 ## Unreleased
 
+### Removed
+
+- Retire the `backlog` skill and its planning docs; use the owning project's
+  current work-tracking workflow instead. Remove stale backlog instructions
+  and document how to update this repository's skills from other workspaces in
+  `AGENTS.md`.
+
 ### Added
 
 - `cite-sources`: always-on, connector-agnostic rule to link every mentioned

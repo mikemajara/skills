@@ -153,8 +153,8 @@ else's comment. Keep signatures out of the document body unless requested.
   requested. Neither expands the agreed editing scope. In collaboration, put
   their review notes and revisions in the artifact rather than defaulting to a
   copy-paste rewrite in chat.
-- `backlog` owns issue workflows. Do not create tasks, promote comments to
-  issues, or start an orchestration cycle unless requested.
+- Do not create tasks, promote comments to issues, or start an orchestration
+  cycle unless requested; use the project's work-tracking workflow if needed.
 
 Respect explicit user constraints over these defaults. End a turn with a short
 chat update: what changed, where discussion needs their input, and any blocker.
