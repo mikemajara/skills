@@ -4,10 +4,10 @@
 
 ### Removed
 
-- Retire the `backlog` skill and its planning docs; use the owning project's
-  current work-tracking workflow instead. Remove stale backlog instructions
-  and document how to update this repository's skills from other workspaces in
-  `AGENTS.md`.
+- Retire the `backlog` skill and its planning docs in favor of
+  [mikemajara/mstack](https://github.com/mikemajara/mstack). Remove stale
+  backlog instructions and document how to update this repository's skills
+  from other workspaces in `AGENTS.md`.
 
 ### Added
 
