@@ -28,6 +28,10 @@ skill from `AGENTS.md` or always-loaded memory, e.g.:
    thread ID)". Do not leave it silently unlinked and do not fake one.
 6. Use a short, human link label (subject, title, task name, `#123`), not the
    raw ID.
+7. Sign what you leave behind. Any comment or reply you post through the
+   user's accounts (Docs, Notion, GitHub, task apps) ends with your agent
+   signature, e.g. `— Ellis (Miguel's agent)`, so readers can tell which agent
+   wrote it even when the account shows the user's name.
 
 ## URL patterns
 

@@ -27,6 +27,9 @@
 
 ### Changed
 
+- `cite-sources`: add rule 7, sign every comment or reply posted through the
+  user's accounts with the agent's signature.
+
 - Rename `reader-facing` to `unmeta` and focus it on separating authoring
   conversations from authored work. Ask the user whenever a remark's role is
   unclear; keep the question outside the artifact. Add conversational evaluation
