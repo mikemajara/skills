@@ -1,0 +1,18 @@
+id = "shepherd-navigation"
+name = "Shepherd Navigation"
+version = "0.1.0"
+min_herdr_version = "0.9.5"
+description = "Opt-in, session-bound shepherd:// pane and workspace navigation"
+platforms = ["linux", "macos"]
+
+[[actions]]
+id = "focus"
+title = "Focus verified Shepherd destination"
+contexts = ["workspace"]
+command = ["python3", "navigation.py", "handle"]
+
+[[link_handlers]]
+id = "destination"
+title = "Focus Shepherd destination"
+pattern = '^shepherd://[a-f0-9]{64}/(pane/[A-Za-z0-9][A-Za-z0-9_:-]{0,127}/[a-f0-9]{64}|workspace/[A-Za-z0-9][A-Za-z0-9_:-]{0,127})$'
+action = "focus"

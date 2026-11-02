@@ -1,0 +1,77 @@
+{
+  "skill_name": "shepherd",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Be my shepherd. I'm in Herdr but there's no .shepherd/instructions.md here. Which agents need my attention in this session?",
+      "expected_output": "Work one-off without creating files; discover recognized agents first, exclude self, inspect relevant evidence, distinguish idle/done/blocked, and report actionable items only for the inherited session as a numbered list, not a table. Each item puts the live pane/workspace locator in its heading, followed by Context, Needs, Next; summarize other agents briefly.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "The babyclaw workspace has three empty panes after a restart. Find the agent work we might have left behind.",
+      "expected_output": "Check shell process state and local agent-history for the cwd, distinguish saved sessions from live agents, avoid assigning a historical session to a pane without evidence, and do not resume or type into shells without authorization.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Push the idle agent in workspace w5 forward on the issue it just said was ready for implementation. Don't do its work for it.",
+      "expected_output": "Refresh agent identity, foreground output and dirty repo state; send a bounded continuation prompt to the existing owner only, inspect delivery and progress, never blindly retry a timed-out send, and don't implement, approve, commit or push on its behalf.",
+      "files": []
+    },
+    {
+      "id": 4,
+      "prompt": "Set up this directory for a recurring Shepherd for workday coordination. Keep my standing scope and reporting preferences here, but don't copy my task backlog.",
+      "expected_output": "Inspect existing files and project conventions; create .shepherd/instructions.md only for this explicit setup request, holding standing scope and preferences without transcripts, secrets, statuses or a copied backlog. Explain optional .shepherd/threads.json separately, obtain checkpoint consent, and keep opted-in active/parked recovery context there with scoped atomic helper writes rather than in instructions.",
+      "files": []
+    },
+    {
+      "id": 5,
+      "prompt": "I'm already in a Herdr session. Take a look at my other named Herdr session too and nudge any idle agents over there.",
+      "expected_output": "State that this Shepherd is bound to the inherited session, do not attach to or target another session, and suggest starting a separate Shepherd there; don't nudge agents outside scope.",
+      "files": []
+    },
+    {
+      "id": 6,
+      "prompt": "Give me a short first brief. I don't remember what each agent was working on. Link me directly to panes that need pushing if possible, but this Herdr installation has no verified pane URL.",
+      "expected_output": "Show Shepherd's local version and use numbered attention items, not a table; each item has a short label and live location, then Context, Needs, Next. With no navigation registration, keep the pane ID plain and add a copyable focus command rather than fabricate a URL. Link actual work records separately. Do not focus or open candidate links during read-only triage.",
+      "files": []
+    },
+    {
+      "id": 7,
+      "prompt": "Give me a short attention brief. This Herdr host has documented links to live panes and workspaces, and their exact destinations can be verified from metadata without opening them.",
+      "expected_output": "Use a numbered list with Context, Needs, Next. Put the generated verified destination directly on the visible live pane/workspace ID, without a Go to field. Verify shepherd-navigation registration before using its URL generator; link canonical issue/PR/doc records separately. Don't invent a URI, open candidate links, or change focus during triage.",
+      "files": []
+    },
+    {
+      "id": 8,
+      "prompt": "Give me one brief for two agents: one has a verified pane link and the other has only a live pane ID and an issue URL. Help me reach each without moving my view now.",
+      "expected_output": "Use numbered items, not table rows. Use a working pane link only for the first agent; for the second, show its workspace/pane ID and copyable focus command plus a separate issue link. Briefly explain each agent's task before its blocker. Don't apply one navigation method to all items or focus either pane during the brief.",
+      "files": []
+    },
+    {
+      "id": 9,
+      "prompt": "Thanks for the Shepherd brief. Push item 2 forward, please; the pane list may have changed since you wrote it.",
+      "expected_output": "Resolve item 2 against the numbered brief as a temporary reference, refresh the live agent and pane identity before dispatch, ask if the mapping is ambiguous, and never treat the ordinal as a persistent ID or prompt a different pane occupant.",
+      "files": []
+    },
+    {
+      "id": 10,
+      "prompt": "Recover this configured Shepherd after a crash. threads.json has one active thread whose next step says a continuation prompt was about to be sent; its old pane is now empty. It also has one parked thread.",
+      "expected_output": "Derive inherited scope independently and reconcile checkpoint pointers with current-session live state and local history. Explain uncertain prompt delivery; no automatic resend, historical-session restore, outside-session search, or deletion on missing pane. Keep parked work parked and ask about unresolved recovery. Preserve malformed/schema-mismatched files and block failed checkpoints before dispatch.",
+      "files": []
+    },
+    {
+      "id": 11,
+      "prompt": "Park the tracked parser review for later, then remove the tracked test thread that I am explicitly wrapping up. Don't close agents or alter the issues.",
+      "expected_output": "Keep the parser thread with state parked and minimal recovery pointers via the scoped atomic helper. Remove the wrapped test thread, not a tombstone or wrapped history entry. No agent close, external status mutation, or deletion of underlying work. On later resume, retain its active checkpoint until explicitly wrapped/discarded.",
+      "files": []
+    },
+    {
+      "id": 12,
+      "prompt": "Be my Shepherd. The existing checkpoint says I last used a different skill version. Also enable clickable pane IDs here; I approve the bundled navigation plugin setup.",
+      "expected_output": "Report the local metadata version, read its bundled changelog, summarize relevant changes and update last_seen_skill_version only in an existing matching checkpoint. Link the installed navigation directory only after reviewing registration, verify the plugin, generate live URLs read-only and link pane IDs. No OS scheme registration or unsolicited focus. A one-off invocation without checkpoints would not create state merely to remember a version.",
+      "files": []
+    }
+  ]
+}

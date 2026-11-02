@@ -2,6 +2,14 @@
 
 ## Unreleased
 
+### Changed
+
+- Rename `chief-of-staff` to `shepherd` and publish its initial independent
+  version, 0.1.0. See the [Shepherd changelog](skills/shepherd/CHANGELOG.md) for
+  behavior, bundled navigation/checkpoint helpers, compatibility and migration.
+  The [per-skill versioning follow-up](docs/skill-versioning-follow-up.md)
+  records the remaining rollout; historical root entries are preserved.
+
 ### Removed
 
 - Retire the `backlog` skill and its planning docs in favor of

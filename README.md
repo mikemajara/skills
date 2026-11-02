@@ -27,13 +27,16 @@ npx skills add mikemajara/skills --skill scroll-presentation
 npx skills add mikemajara/skills --skill cite-sources
 ```
 
-See `CHANGELOG.md` for release notes and migrations.
+Shepherd has its own [version and changelog](skills/shepherd/CHANGELOG.md).
+The root `CHANGELOG.md` retains repository history and older migrations; see
+[the versioning follow-up](docs/skill-versioning-follow-up.md) for the pending
+per-skill rollout.
 
 ## Skills
 
 | Skill | What it is |
 | ----- | ---------- |
-| [`chief-of-staff`](skills/chief-of-staff/) | Discover open workspaces, panes, and agents; prioritize attention and coordinate authorized work. |
+| [`shepherd`](skills/shepherd/) | Coordinate existing agents in the current Herdr session; numbered briefs, opt-in pane links, and active/parked recovery checkpoints. |
 | [`sdlc-first-principles`](skills/sdlc-first-principles/) | Apply a five-step first-principles process lens to SDLC work. |
 | [`conversation`](skills/conversation/) | Pressure-test a mostly formed idea (gaps, contradictions, edges). |
 | [`brainstorm`](skills/brainstorm/) | Generate new angles and option catalogs. |
