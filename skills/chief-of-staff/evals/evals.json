@@ -1,0 +1,23 @@
+{
+  "skill_name": "chief-of-staff",
+  "evals": [
+    {
+      "id": 1,
+      "prompt": "Be my chief of staff in Herdr. What needs my attention across my open panes?",
+      "expected_output": "Discover workspace/pane/agent state without mutating it; read selected evidence, distinguish recognized agents and shells, exclude self, and recommend a next step without treating done as delivered.",
+      "files": []
+    },
+    {
+      "id": 2,
+      "prompt": "Set up a chief in the top workspace, but leave my focus where it is.",
+      "expected_output": "Check for an existing chief first. If needed create without focus, start the chosen/current supported kind, supply skill and actual scope, verify readiness. Report unsupported top placement honestly.",
+      "files": []
+    },
+    {
+      "id": 3,
+      "prompt": "Ask the idle reviewer to review the search changes, and tell me when it is done.",
+      "expected_output": "Refresh target identity and foreground context, dispatch only the authorized review with bounded wait, inspect result, and distinguish reported findings from verified delivery. Do not approve dialogs or blindly resend a timed-out prompt.",
+      "files": []
+    }
+  ]
+}

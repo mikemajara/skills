@@ -11,6 +11,10 @@
 
 ### Added
 
+- `chief-of-staff`: discover open workspaces, panes, and agents; produce an
+  evidence-based attention brief and coordinate authorized next steps. Includes
+  a Herdr adapter and optional dedicated chief workspace setup.
+
 - `cite-sources`: always-on, connector-agnostic rule to link every mentioned
   object (email thread, Notion page, Doc, Sheet, Drive file, Todoist task,
   GitHub PR/issue) inline to its own URL, with URL patterns and examples.

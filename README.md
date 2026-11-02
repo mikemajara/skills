@@ -33,6 +33,7 @@ See `CHANGELOG.md` for release notes and migrations.
 
 | Skill | What it is |
 | ----- | ---------- |
+| [`chief-of-staff`](skills/chief-of-staff/) | Discover open workspaces, panes, and agents; prioritize attention and coordinate authorized work. |
 | [`sdlc-first-principles`](skills/sdlc-first-principles/) | Apply a five-step first-principles process lens to SDLC work. |
 | [`conversation`](skills/conversation/) | Pressure-test a mostly formed idea (gaps, contradictions, edges). |
 | [`brainstorm`](skills/brainstorm/) | Generate new angles and option catalogs. |
