@@ -1,7 +1,7 @@
 ---
 name: shepherd
 metadata:
-  version: "0.1.0"
+  version: "0.1.1"
 description: >
   Help a human shepherd work across coding agents in the current Herdr session:
   find live agents and lost-session clues, get an attention brief, send an
@@ -33,12 +33,24 @@ new agent, workspace, scheduler, or team.
 
 ## Startup, optional setup, and recovery
 
-On activation, show `Shepherd v0.1.0` once, then inspect this herd. If an existing
+On activation, show `Shepherd v0.1.1` once, then inspect this herd. If an existing
 checkpoint's last-seen version differs, read [the skill changelog](CHANGELOG.md),
 briefly explain the relevant changes, and record the reviewed version with the
 checkpoint helper. Do not fetch updates or create setup just to remember a
 version. Without a checkpoint, report the current version without claiming it
 changed since the last use.
+
+Once inside Herdr, check navigation availability during startup: read
+[navigation setup](references/navigation.md), inspect `herdr plugin list` and the
+registered `shepherd-navigation` action before generating links. If missing,
+disabled, or registered to another copy, explain the gap and offer once:
+"Clickable pane links need the bundled Herdr handler. Enable it on this machine?"
+Keep the first brief usable with plain IDs while awaiting a decision. With current
+approval or explicit standing setup authorization, link/enable the installed
+bundle, verify registration and its path, then generate links read-only. Do not
+silently replace a different plugin copy, register an OS URL scheme, focus a pane,
+or keep asking after refusal. If setup is blocked, report the exact blocker and
+fallback rather than claim links work.
 
 Look for `.shepherd/instructions.md` and `.shepherd/threads.json` in the current
 working directory. Missing files do not block one-off use: give the first brief
@@ -72,9 +84,14 @@ priorities conflict with evidence, show the discrepancy and ask.
 ## Discover agents first
 
 1. Discover recognized agents and their workspaces, then inspect relevant
-   agents' recent output to identify owners, commitments, decisions, and
-   actionable next steps. Exclude your own pane. Titles and idle/done states
-   are leads, not proof of task status or completion.
+   agents' output to identify the actual subject, goal, owners, commitments,
+   decisions, and actionable next steps. Exclude your own pane. Titles and
+   idle/done states are leads, not proof of task status or completion. Recent
+   output may only describe testing or handoff; read enough earlier context or
+   the exact local/canonical work record to explain what the work changes. Use
+   the appropriate access workflow for that record. An issue number or passing
+   test count alone is not context. If the subject cannot be established, label
+   it unknown rather than invent an explanation or send the human to a link.
 2. Consult the pane inventory as a recovery pass. Shells and unrecognized panes
    are not agents; they can indicate work left behind after a restart. For a
    relevant empty pane, inspect its foreground process and use local session
@@ -119,16 +136,29 @@ change canonical task status merely because it looks stale.
 Use a numbered list, never a table, so the human can say "push item 2" without
 remembering a pane ID. Keep each actionable item short and in this order:
 
-1. **<short work label>** — <workspace name> · [<live pane ID>](<verified pane URL>) · <observed state>
-   - **Context:** One sentence on what the agent was trying to accomplish.
-   - **Needs:** The specific blocker, decision, or next step.
-   - **Next:** The suggested continue, park, or wrap-up action.
+1. **<short subject-level work label, not just an issue number>** — <workspace name> · [<live pane ID>](<verified pane URL>) · <observed state>
+   - **Context:** What problem or user workflow this work addresses and what the
+     agent is changing, in one or two plain-language sentences.
+   - **Status:** What has actually happened so far; distinguish owner-reported
+     results from checks Shepherd independently verified.
+   - **Needs:** The specific remaining blocker, decision, or verification.
+   - **Next:** The suggested continue, park, or wrap-up action and its owner.
+
+Self-containedness check: could someone who has forgotten this thread explain
+what it is about without opening its issue link or pane? If not, inspect more
+context and rewrite. "Issue #14 is implemented; 206 tests pass" is a status,
+not a description of the work. Put such evidence in Status, not Context. Avoid
+unexplained project shorthand, vague "bounded QA," or a list of checks without
+saying what behavior needs checking. If the behavior or QA scope is unknown,
+say so rather than invent it; the next step can be to clarify it with the owner.
+Keep the whole item concise; do not add details merely to fill fields.
 
 Put the navigation link on the pane ID itself; no separate "Go to" field. For
 workspace-only recovery locations, link the workspace ID instead. Read
 [navigation setup](references/navigation.md) before enabling links: use the bundled
 handler and read-only generator, and only emit URLs when its registration is
-verified. Link setup is optional and requires approval, not a startup side effect.
+verified. Check availability at startup and offer missing setup; installation or
+enabling still requires approval, not silent mutation.
 If unavailable, keep the ID plain and add a copyable focus command on the Next
 line when helpful. Never fabricate a URL. Use a real issue/PR/document link on the
 work label when available; it does not replace the pane link. For empty shells with only historical clues, label

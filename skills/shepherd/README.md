@@ -1,7 +1,7 @@
 # Shepherd
 
 A human-directed coordination skill for agents already running in the current
-Herdr session. Version **0.1.0** — [changes and limits](CHANGELOG.md).
+Herdr session. Version **0.1.1** — [changes and limits](CHANGELOG.md).
 
 ```sh
 npx skills add mikemajara/skills --skill shepherd -g --agent universal -y

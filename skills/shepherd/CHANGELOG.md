@@ -3,6 +3,17 @@
 Versions apply to this skill and its bundled helpers, not the other skills in
 this repository. Data-format versions are separate from skill versions.
 
+## 0.1.1 — 2026-11-02
+
+- Check navigation registration at startup; offer consent-based setup or repair
+  of the installed bundle instead of silently omitting clickable pane IDs.
+- Make briefs self-contained: describe the actual problem and change in Context,
+  put progress/test evidence in a separate Status line, and inspect earlier
+  evidence when the latest output only contains issue numbers or QA handoff.
+- Add regression scenarios for subject-level context and missing navigation setup.
+- The bundled navigation plugin remains at 0.1.0; this patch changes the skill's
+  reporting and setup workflow, not its handler code or checkpoint schema.
+
 ## 0.1.0 — 2026-11-02
 
 Initial versioned Shepherd release, replacing `chief-of-staff`.

@@ -6,21 +6,44 @@ The bundled [plugin manifest](../navigation/herdr-plugin.toml) registers a real
 Ctrl-click with `ui.mouse_capture` enabled invokes a fixed argv action. No OS
 scheme registration, background service, startup hook, or automatic setup.
 
-## Explicit setup
+## Startup check and consent-based setup
 
 Requires Herdr 0.9.5+, Python 3.9+ on `PATH`, and a local Unix socket (macOS/Linux).
-Review the [handler](../navigation/navigation.py), then explicitly link it:
+Check availability on activation after establishing inherited Herdr access:
 
 ```sh
-herdr plugin link /absolute/path/to/skills/shepherd/navigation
+herdr plugin list
 herdr plugin action list --plugin shepherd-navigation
 ```
 
-Link the **navigation directory**, not the skill directory. Path-only linking
-defaults to enabled; omit enable flags to avoid the installed CLI's path-parsing
-bug. This is user-level plugin registration, available across Herdr sessions;
-links themselves remain session-bound. Do not install/link it merely to produce
-an attention brief.
+Check that registration is enabled, points to this installed bundle's navigation
+directory, and exposes its expected `focus` action/handler. If listing does not
+show the path/handler, inspect the registered plugin manifest locally using the
+location returned by Herdr; never infer readiness from the skill being installed.
+A missing/disabled/different registration is not a working navigation setup.
+Offer once to enable the bundled handler, explaining that user-level plugin
+registration changes and it becomes available across Herdr sessions. Refusal or
+no answer leaves a useful plain-ID brief; do not repeatedly prompt in this run.
+Explicit standing permission to maintain this setup can authorize the action.
+
+With approval, review the [handler](../navigation/navigation.py) and link the
+**installed navigation directory**, not the skill directory or an unpublished
+source checkout:
+
+```sh
+herdr plugin link /absolute/path/to/installed/shepherd/navigation
+herdr plugin action list --plugin shepherd-navigation
+herdr plugin list
+```
+
+For a disabled registration already pointing to the same installed bundle, use
+`herdr plugin enable shepherd-navigation` after confirming installed CLI help.
+Do not overwrite or unlink another copy without explaining and obtaining approval
+for that replacement. Path-only linking defaults to enabled; omit enable flags
+to avoid the installed CLI's path-parsing bug. Recheck the enabled state, root,
+manifest and action before generating links; do not claim registration or click
+support on a failed/partial setup. Report permission/prerequisite blockers plainly.
+Neither linking nor verifying setup requires focus or an OS protocol registration.
 To remove registration: `herdr plugin unlink shepherd-navigation`.
 
 Enable `ui.mouse_capture` in Herdr settings. Without capture, the outer terminal

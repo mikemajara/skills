@@ -4,7 +4,7 @@
     {
       "id": 1,
       "prompt": "Be my shepherd. I'm in Herdr but there's no .shepherd/instructions.md here. Which agents need my attention in this session?",
-      "expected_output": "Work one-off without creating files; discover recognized agents first, exclude self, inspect relevant evidence, distinguish idle/done/blocked, and report actionable items only for the inherited session as a numbered list, not a table. Each item puts the live pane/workspace locator in its heading, followed by Context, Needs, Next; summarize other agents briefly.",
+      "expected_output": "Work one-off without creating files; discover recognized agents first, exclude self, inspect relevant evidence, distinguish idle/done/blocked, and report actionable items only for the inherited session as a numbered list, not a table. Each item puts the live pane/workspace locator in its heading, followed by subject-level Context, Status, Needs, Next. Explain the actual change and user workflow without requiring a link click; status-only issue numbers/test counts do not satisfy Context. Check navigation availability and offer missing setup without blocking the brief; summarize other agents briefly.",
       "files": []
     },
     {
@@ -34,13 +34,13 @@
     {
       "id": 6,
       "prompt": "Give me a short first brief. I don't remember what each agent was working on. Link me directly to panes that need pushing if possible, but this Herdr installation has no verified pane URL.",
-      "expected_output": "Show Shepherd's local version and use numbered attention items, not a table; each item has a short label and live location, then Context, Needs, Next. With no navigation registration, keep the pane ID plain and add a copyable focus command rather than fabricate a URL. Link actual work records separately. Do not focus or open candidate links during read-only triage.",
+      "expected_output": "Show Shepherd's local version and use numbered attention items, not a table; each item has a descriptive subject and live location, then Context, Status, Needs, Next. Context explains what behavior the work changes; tests/implementation progress go in Status. Check navigation registration, offer setup if missing, and while awaiting approval keep the pane ID plain with a focus command rather than fabricate a URL. Link actual work records separately. Do not focus or open candidate links during read-only triage.",
       "files": []
     },
     {
       "id": 7,
       "prompt": "Give me a short attention brief. This Herdr host has documented links to live panes and workspaces, and their exact destinations can be verified from metadata without opening them.",
-      "expected_output": "Use a numbered list with Context, Needs, Next. Put the generated verified destination directly on the visible live pane/workspace ID, without a Go to field. Verify shepherd-navigation registration before using its URL generator; link canonical issue/PR/doc records separately. Don't invent a URI, open candidate links, or change focus during triage.",
+      "expected_output": "Use a numbered list with subject-level Context, Status, Needs, Next. Put the generated verified destination directly on the visible live pane/workspace ID, without a Go to field. Verify shepherd-navigation registration before using its URL generator; link canonical issue/PR/doc records separately. Don't invent a URI, open candidate links, or change focus during triage.",
       "files": []
     },
     {
@@ -71,6 +71,18 @@
       "id": 12,
       "prompt": "Be my Shepherd. The existing checkpoint says I last used a different skill version. Also enable clickable pane IDs here; I approve the bundled navigation plugin setup.",
       "expected_output": "Report the local metadata version, read its bundled changelog, summarize relevant changes and update last_seen_skill_version only in an existing matching checkpoint. Link the installed navigation directory only after reviewing registration, verify the plugin, generate live URLs read-only and link pane IDs. No OS scheme registration or unsolicited focus. A one-off invocation without checkpoints would not create state merely to remember a version.",
+      "files": []
+    },
+    {
+      "id": 13,
+      "prompt": "I forgot what this pane is about. Its latest output only says issue #42 is implemented locally, 206 tests passed, and independent QA and mobile checks remain. Earlier local context establishes that it changes export jobs to survive interrupted browser connections. Give me a brief I can understand without opening the pane or issue.",
+      "expected_output": "Use a subject-level label and Context explaining resumable export jobs and interrupted connections, based on the supplied earlier evidence. Put owner-reported implementation/test results in Status, remaining checks in Needs and a concrete owner-directed verification in Next. Do not describe issue #42 or its test count as the context, invent unobserved QA details, or imply independent verification. If earlier evidence were unavailable, state the subject is unknown and inspect further or clarify rather than fabricate it.",
+      "files": []
+    },
+    {
+      "id": 14,
+      "prompt": "Be my Shepherd. Your skill is installed but clickable pane IDs are missing. The bundled navigation plugin is absent; I have not approved any installation yet.",
+      "expected_output": "Check registration and explain the handler bridges Ctrl-click to validated focus; a skill install alone does not register it. Offer once to link the installed bundle, wait for approval or explicit standing authorization, and continue with a useful plain-ID brief. Do not silently link, focus, register an OS scheme, repeatedly ask after refusal, or claim links work. If approved, link the installed path, verify enabled registration/root/manifest/action and generate URLs read-only; surface any exact setup blocker.",
       "files": []
     }
   ]
