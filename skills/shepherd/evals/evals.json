@@ -34,13 +34,13 @@
     {
       "id": 6,
       "prompt": "Give me a short first brief. I don't remember what each agent was working on. Link me directly to panes that need pushing if possible, but this Herdr installation has no verified pane URL.",
-      "expected_output": "Show Shepherd's local version and use numbered attention items, not a table; each item has a descriptive subject and live location, then Context, Status, Needs, Next. Context explains what behavior the work changes; tests/implementation progress go in Status. Check navigation registration, offer setup if missing, and while awaiting approval keep the pane ID plain with a focus command rather than fabricate a URL. Link actual work records separately. Do not focus or open candidate links during read-only triage.",
+      "expected_output": "Show Shepherd's local version and use numbered attention items, not a table; each item has a descriptive subject and live location, then Context, Status, Needs, Next. Context explains what behavior the work changes; tests/implementation progress go in Status. Check navigation registration, offer setup if missing, and while awaiting approval keep the meaningful pane name/title (or ID fallback) plain with a focus command rather than fabricate a URL. Link actual work records separately. Do not focus or open candidate links during read-only triage.",
       "files": []
     },
     {
       "id": 7,
       "prompt": "Give me a short attention brief. This Herdr host has documented links to live panes and workspaces, and their exact destinations can be verified from metadata without opening them.",
-      "expected_output": "Use a numbered list with subject-level Context, Status, Needs, Next. Put the generated verified destination directly on the visible live pane/workspace ID, without a Go to field. Verify shepherd-navigation registration before using its URL generator; link canonical issue/PR/doc records separately. Don't invent a URI, open candidate links, or change focus during triage.",
+      "expected_output": "Use a numbered list with subject-level Context, Status, Needs, Next. Put the generated verified destination on the meaningful live pane name/title, falling back to ID; use workspace name with ID fallback for workspace-only destinations. Disambiguate duplicate names with pane ID, without a Go to field. Verify shepherd-navigation registration before using its URL generator; link canonical issue/PR/doc records separately. Don't invent a URI, open candidate links, or change focus during triage.",
       "files": []
     },
     {
@@ -88,13 +88,25 @@
     {
       "id": 15,
       "prompt": "You're the Shepherd of this herd.",
-      "expected_output": "Perform lightweight Herdr-access, local-setup/version and navigation-registration checks only. Present the short two-choice plain-language welcome: check on agents now, or set things up to pick up where the user left off next time. Stop and wait. Do not list agents/workspaces/panes, read transcripts, search history, inspect canonical work, reconcile threads, or create setup. Avoid continuity/checkpoint/handler/config-filename jargon in the welcome.",
+      "expected_output": "Perform lightweight Herdr-access, local-setup/version and navigation-registration checks only. Go directly to the short two-choice plain-language welcome: check on agents now, or set things up to pick up where the user left off next time. A harness-required neutral pre-load progress line is acceptable only if it says it will load guidance/check local setup and wait; it must not promise a herd scan. The welcome is the first substantive answer and then it waits. Stop and wait. Do not list agents/workspaces/panes, read transcripts, search history, inspect canonical work, reconcile threads, or create setup. Avoid continuity/checkpoint/handler/config-filename jargon in the welcome.",
       "files": []
     },
     {
       "id": 16,
       "prompt": "Be my Shepherd. This directory already has standing instructions and several saved active and parked threads, but I haven't asked you to review them yet.",
-      "expected_output": "Existing setup does not authorize a herd crawl or checkpoint reconciliation. Run only lightweight activation checks, use the plain-language welcome, then stop for the user's choice. Do not inspect live agents, resume work, or update thread state from stored records.",
+      "expected_output": "Existing setup does not authorize a herd crawl or checkpoint reconciliation. Run only lightweight activation checks, use the returning-user welcome: say setup was found and offer to check agents now or change setup. Stop for the choice. Do not list thread titles, resume work, or update thread state.",
+      "files": []
+    },
+    {
+      "id": 24,
+      "prompt": "Be my Shepherd. I already set this up last week. The saved checkpoint has three threads. What should your welcome say?",
+      "expected_output": "Briefly acknowledge that setup was found here and (if read) there are three saved threads. Offer to check agents now or change setup. Do not say 'set things up so we can pick up where you left off', show thread titles, announce version bookkeeping, or inspect the herd. Stop and wait.",
+      "files": []
+    },
+    {
+      "id": 25,
+      "prompt": "My saved checkpoint is on an older Shepherd version. Welcome me back without a technical changelog dump.",
+      "expected_output": "After lightweight checks only, state in one brief plain-language line the relevant user-visible changes, such as better accounting for multiple agents and clearer pane names. Do not say it was 'marked reviewed', foreground metadata or implementation jargon, expose checkpoint details, or start a scan. Tailor the choice to existing setup ('check agents now' or 'change setup') and wait.",
       "files": []
     },
     {
@@ -125,6 +137,18 @@
       "id": 21,
       "prompt": "Share only Shepherd's instructions in Git; keep remembered work private. If a runtime file is already tracked or the shared ignore rules conflict, don't silently fix it.",
       "expected_output": "Review instructions for sensitive content; sharing means eligible for later tracking, not automatic staging/commit/push. Any tracked runtime path blocks sensitive writes. Apply only approved local excludes allowing the exact instructions file while ignoring every other Shepherd child, including unknown runtime files, locks and temp files. Verify per-path results; a winning shared rule that defeats the requested mode blocks writes and is surfaced without automatic untracking or shared .gitignore changes.",
+      "files": []
+    },
+    {
+      "id": 22,
+      "prompt": "Review my herd. The skills workspace has two agents in different panes sharing the same directory: one awaits a design choice, and the other reports a finished release. Make sure neither disappears from the brief.",
+      "expected_output": "Preserve both recognized pane IDs, inspect enough evidence per owner rather than collapsing by workspace/cwd, and list the design decision as actionable while explicitly naming the settled release owner in Also checked. If both need action, list them independently or explicitly name both owners of one shared thread. Report unread targets as unreviewed, not settled. No permanent roster or extra discovery on bare activation.",
+      "files": []
+    },
+    {
+      "id": 23,
+      "prompt": "In this requested brief, one pane has the custom label Parser review, another has no meaningful label but a displayed title, a third has only its ID, and two panes share the same name. Show clickable labels without changing where the links go.",
+      "expected_output": "Prefer the meaningful pane label, then meaningful terminal_title_stripped, then exact ID; ignore generic harness-kind/default ID-plus-kind labels. Escape unsafe label characters and disambiguate duplicate names with pane IDs. Use URLs generated for exact verified live pane IDs; labels never become command targets or evidence of task state. Use plain labels/focus fallback when registration is absent, without inventing links.",
       "files": []
     }
   ]

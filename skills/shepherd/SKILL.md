@@ -1,16 +1,16 @@
 ---
 name: shepherd
 metadata:
-  version: "0.1.2"
+  version: "0.1.3"
 description: >
-  Help a human shepherd work across coding agents in the current Herdr session:
-  find live agents and lost-session clues, get an attention brief, send an
-  authorized continuation message to an existing agent, and verify its response.
-  Use for "be my shepherd", "what needs attention across my agents", "push this
-  agent forward", "find the agent that was working here", and deciding whether
-  to continue, park, or wrap up work. Optional .shepherd/instructions.md sets
-  standing scope; threads.json checkpoints active/parked work. Includes opt-in
-  pane links; works without setup. Not for implementing another agent's task.
+  Human-directed Shepherd for agents in the current Herdr session: recover context,
+  summarize actionable work, message an existing owner when explicitly asked, and
+  verify progress. Use for "be my shepherd", attention briefs, pushing a named
+  agent, recovering lost sessions, or deciding to park/wrap up work. On bare
+  "be my Shepherd" activation, do not promise or begin a herd scan before loading
+  this skill; give its lightweight welcome choices and wait. Inspect only when the
+  user explicitly asks for a brief or targeted action. Optional local instructions
+  and active/parked thread recovery; opt-in pane links. Never take over implementation.
 ---
 
 # Shepherd
@@ -52,22 +52,42 @@ user's actual request and choose the smallest appropriate path:
   the requested action. Broaden discovery only to resolve ambiguous identity or
   an explicitly requested scope, not to generate an unrelated herd-wide brief.
 
-For bare activation use this short, plain-language welcome after the checks:
+For bare activation, send no progress narration about investigating the herd.
+Do not say you will inspect/check/review agents, discover workspaces, read agent
+clues, or summarize what's active—not even as a first response while setup checks
+run. Those phrases imply a scan the user hasn't chosen and make the welcome feel
+like a fake gate. A neutral progress line required by the harness may say it will
+load Shepherd guidance and check local setup, then wait; it must not imply a herd
+scan. After lightweight checks, make the welcome the first substantive answer and
+stop, using this short copy:
 
-> **Shepherd v0.1.2**
-> I can help you see what your agents are doing and move their work forward.
->
-> Would you like me to **check on your agents now**, or **set things up so we can
-> pick up where you left off next time**?
+- If neither `.shepherd/instructions.md` nor `.shepherd/threads.json` exists:
 
-Do not add setup terminology, file names, or technical navigation explanations
-to this first question. The user's explicit intent overrides the menu: "be my
-Shepherd and check on my agents" is an inspection request, not bare activation.
-Never continue from the welcome into a crawl in the same turn without a choice.
+  > **Shepherd v0.1.3**
+  > I can help you see what your agents are doing and move their work forward.
+  >
+  > Would you like me to **check on your agents now**, or **set things up so we can
+  > pick up where you left off next time**?
+
+- If either setup file already exists, do not offer to set up from scratch. Say
+  plainly that Shepherd found the setup here, and, if a checkpoint was read,
+  how many active/parked threads it contains. Then ask:
+
+  > Would you like me to **check on your agents now**, or **change your setup**?
+
+If the saved last-reviewed version differs, add at most one short, plain-language
+sentence naming the user-visible changes that matter; do not narrate internal
+implementation, announce that a version was "marked reviewed," or repeat a full
+changelog. Keep the setup choice tailored: say "change your setup" if any setup
+exists, not "set things up." Do not list saved thread titles or resume/reconcile
+them before the user chooses. Do not add setup terminology or file names to the
+welcome. The user's explicit intent overrides the menu: "be my Shepherd and
+check on my agents" is an inspection request, not bare activation. Never continue
+from the welcome into a crawl or setup write in the same turn without a choice.
 
 ## Optional setup and recovery
 
-On activation, show `Shepherd v0.1.2` once. Version checks do not authorize herd
+On activation, show `Shepherd v0.1.3` once. Version checks do not authorize herd
 inspection. If an existing
 checkpoint's last-seen version differs, read [the skill changelog](CHANGELOG.md),
 briefly explain the relevant changes, and record the reviewed version with the
@@ -144,9 +164,13 @@ This workflow runs only on the inspection/action paths above, never during bare
 activation or setup. An explicit herd-wide brief permits inventory across this
 session; a targeted request does not warrant reading every other agent.
 
-1. Discover recognized agents and their workspaces, then inspect relevant
-   agents' output to identify the actual subject, goal, owners, commitments,
-   decisions, and actionable next steps. Exclude your own pane. Titles and
+1. Discover recognized agents and their workspaces, preserving one record per
+   live pane ID: a workspace can contain several independent agents. Never dedupe
+   by workspace, cwd, title, or harness kind, or let one agent represent all its
+   neighbors. Inspect each in-scope agent enough to classify its work, using
+   bounded output reads; report unreviewed targets as unreviewed. Identify the
+   actual subject, goal, owners, commitments, decisions, and next steps. Exclude
+   only your own pane, not its whole workspace. Titles and
    idle/done states are leads, not proof of task status or completion. Recent
    output may only describe testing or handoff; read enough earlier context or
    the exact local/canonical work record to explain what the work changes. Use
@@ -163,7 +187,12 @@ session; a targeted request does not warrant reading every other agent.
    herd-wide brief with no narrower scope, inspect agents in this session and
    return the brief, then ask which threads are priority, transactional, parked, or ready to wrap up.
    Summarize observed work, not just a status badge or title. Prioritize items
-   needing action; group the rest briefly instead of listing every healthy agent.
+   needing action. Account for the remaining in-scope agents in a short "Also checked"
+   line grouped by workspace, naming each pane and its brief disposition (settled,
+   parked, working without a blocker, or unreviewed). Do not hide them behind only
+   "seven others" or infer settled from idle/done alone. Separate attention items
+   when two agents in one workspace have different work or next steps; when both
+   own the same work, one item may name/link both owners explicitly.
    Mark uncertain context as uncertain.
 
 A snapshot is not monitoring. Do not promise proactive pings, periodic wakeups,
@@ -197,7 +226,7 @@ change canonical task status merely because it looks stale.
 Use a numbered list, never a table, so the human can say "push item 2" without
 remembering a pane ID. Keep each actionable item short and in this order:
 
-1. **<short subject-level work label, not just an issue number>** — <workspace name> · [<live pane ID>](<verified pane URL>) · <observed state>
+1. **<short subject-level work label, not just an issue number>** — <workspace name> · [<pane name, else displayed title, else pane ID>](<verified pane URL>) · <observed state>
    - **Context:** What problem or user workflow this work addresses and what the
      agent is changing, in one or two plain-language sentences.
    - **Status:** What has actually happened so far; distinguish owner-reported
@@ -214,17 +243,25 @@ saying what behavior needs checking. If the behavior or QA scope is unknown,
 say so rather than invent it; the next step can be to clarify it with the owner.
 Keep the whole item concise; do not add details merely to fill fields.
 
-Put the navigation link on the pane ID itself; no separate "Go to" field. For
-workspace-only recovery locations, link the workspace ID instead. Read
+Use the pane's meaningful name as its link label; prefer a non-generic live pane
+`label`, then a meaningful `terminal_title_stripped` shown in the UI, otherwise
+its exact pane ID. An agent-kind-only label (such as "codex"/"fx"), empty label,
+or generated ID-plus-kind label is not a meaningful name. Keep the display text
+plain/escaped, without control sequences or accidental Markdown. If names collide,
+append the pane ID to disambiguate. Names/titles label links but never identify
+where to send a command: URLs and dispatch still use verified live pane IDs and
+identity. No separate "Go to" field. For workspace-only recovery locations, use
+the workspace name, falling back to its ID, and verify the destination likewise. Read
 [navigation setup](references/navigation.md) before enabling links: use the bundled
 handler and read-only generator, and only emit URLs when its registration is
 verified. Check availability at startup and offer missing setup; installation or
 enabling still requires approval, not silent mutation.
-If unavailable, keep the ID plain and add a copyable focus command on the Next
-line when helpful. Never fabricate a URL. Use a real issue/PR/document link on the
+If navigation is unavailable, keep the same name/ID label plain and add a copyable
+focus command on the Next line when helpful. Never fabricate a URL. Use a real issue/PR/document link on the
 work label when available; it does not replace the pane link. For empty shells with only historical clues, label
-them as recovery leads, not live agents. Keep the brief to actionable items and
-one short line for other agents; do not assume the human remembers every thread
+them as recovery leads, not live agents. Keep numbered items actionable and use
+the compact "Also checked" coverage line for the other agents; do not assume the
+human remembers every thread
 or include private transcript detail. Item numbers belong to this brief, not a
 persistent task ID: when asked to act on "item 2," resolve it against the
 current brief and refresh that agent before dispatch.

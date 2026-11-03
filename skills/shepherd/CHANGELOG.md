@@ -3,6 +3,24 @@
 Versions apply to this skill and its bundled helpers, not the other skills in
 this repository. Data-format versions are separate from skill versions.
 
+## 0.1.3 — 2026-11-03
+
+- Bare activation distinguishes first-time setup from an existing setup: returning
+  users can check agents or change setup instead of being offered setup again.
+  The welcome is the first substantive answer; a harness-required neutral progress
+  line may precede it, but must not promise an unrequested herd scan. Version-change
+  notes remain brief and user-facing, without exposing saved thread details.
+- Account for every in-scope recognized agent by pane, including multiple owners
+  in the same workspace/cwd. Keep numbered items actionable, and name settled,
+  parked or unreviewed owners in a compact Also checked line rather than hiding
+  them behind a count.
+- Prefer a meaningful pane name, then displayed title, as navigation label; fall
+  back to pane ID. Disambiguate duplicates with IDs; target identity and link
+  validation remain ID-based and unchanged.
+- Live two-directory smoke test: configured and unconfigured panes each chose the
+  correct welcome; the follow-up presented existing choices together or a native
+  multi-question setup form. No herd brief or setup write was requested.
+
 ## 0.1.2 — 2026-11-03
 
 - Bare role activation runs only lightweight access/local-setup/navigation checks,

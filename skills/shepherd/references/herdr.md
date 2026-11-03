@@ -27,7 +27,12 @@ herdr pane list
 ```
 
 Parse the JSON envelopes and join `result.agents`, `result.workspaces`, and
-`result.panes` using `workspace_id`, `tab_id`, and `pane_id`. Discover tabs with
+`result.panes` using `workspace_id`, `tab_id`, and `pane_id`. Preserve every
+recognized pane as an independent owner; never collapse by workspace/cwd or pick
+only one representative agent. For a requested herd-wide brief, reconcile each
+in-scope agent into an attention item or named "Also checked" disposition, or
+explicitly mark it unreviewed. This does not expand bare activation or targeted
+requests into a full inventory. Discover tabs with
 `herdr tab list --workspace <workspace-id>` when needed. The caller's injected
 `HERDR_PANE_ID` identifies Shepherd's own pane; prefer `--current` for commands
 that support it. Never depend on UI focus for a target.
@@ -38,7 +43,8 @@ processes: use these as recovery clues, not as agents. Read observed
 pane label. Supported states include idle, working, blocked, done, and unknown;
 retain their uncertainty.
 
-For a selected recognized agent, use its unique live name or discovered pane ID:
+For a selected recognized agent, resolve its discovered live pane ID and use that
+as `<target>` below. Never substitute its display label/title, even if unique:
 
 ```sh
 herdr agent get <target>
@@ -61,8 +67,11 @@ Shepherd inside that Herdr session. IDs are scoped to the inherited session.
 
 ## Make locations navigable
 
-When an attention item needs action, include its live workspace name/ID and
-agent pane ID from the inventory. [Herdr's CLI reference](https://herdr.dev/tui/docs/cli-reference/)
+When an attention item needs action, keep its live workspace and pane identity
+from the inventory. Display a meaningful custom pane `label`, then a meaningful
+UI `terminal_title_stripped`, falling back to pane ID; skip generic agent-kind
+or generated ID labels, and append pane ID for duplicate names. Label text is
+presentation only: link generation and commands still target exact verified IDs. [Herdr's CLI reference](https://herdr.dev/tui/docs/cli-reference/)
 documents `herdr agent focus <target>` and `herdr workspace focus <workspace_id>`.
 The Stream Deck integration uses `herdr agent focus <pane-id>` on keypress,
 then raises the host terminal; that proves programmatic navigation, not a
@@ -75,7 +84,7 @@ matching terminal URL invokes a plugin action with the clicked URL in its
 context. Shepherd ships that bridge: see [navigation setup](navigation.md) for
 the bundled `shepherd-navigation` plugin and read-only URL generator. With explicit
 setup approval, link its installed directory, then use generated URLs verbatim
-on the visible pane IDs. Check the actual plugin registration before emitting
+on the pane's name/title label (or ID fallback). Check registration before emitting
 links; registration alone does not prove renderer/click support. No OS URL
 scheme or service is needed. Do not install/link it as a routine brief side
 effect, open candidate links to validate triage, or substitute repository/issue

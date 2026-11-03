@@ -75,9 +75,13 @@ are read-only; neither invokes focus, sends input, or creates plugin registratio
 The script resolves its root through `__file__`, not the caller's cwd or
 `HERDR_PLUGIN_ROOT`.
 
-Use the returned URL verbatim as the link target on the pane ID itself:
-`[w1:p2](<returned-pane-url>)`. Keep the workspace name/ID visible; for a
-workspace-only destination, link its ID instead. Generate a fresh link when the
+Use the returned URL verbatim, but prefer a meaningful live pane name for its
+visible label: `[Parser review](<returned-pane-url>)`. Choose a non-generic pane
+`label`, then a meaningful `terminal_title_stripped`, then the exact pane ID.
+Do not use an agent-kind-only or generated ID-plus-kind label as a name. Escape
+Markdown/control characters, and append pane ID for duplicate names. Keep the
+workspace name visible; workspace-only destinations use its name with ID fallback.
+Labels never enter the URL or replace verified IDs for link generation/commands. Generate a fresh link when the
 destination or session changes. If setup or identity validation is unavailable,
 show a copyable focus command instead; never invent a URI or use an issue URL as
 a pane destination. See the [Herdr adapter](herdr.md) for triage boundaries.
