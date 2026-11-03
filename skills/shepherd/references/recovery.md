@@ -5,7 +5,13 @@ configuration: name, remit, exclusions, priorities, reporting preferences. Optio
 `.shepherd/threads.json` is a small recovery checkpoint for opted-in work in that
 remit, not a task database, dispatch queue, transcript archive, or source of live
 agent truth. Either file can exist without the other. Read standing instructions
-when present; do not create either file during ordinary discovery.
+when present; do not create either file during ordinary discovery. Bare role
+activation may detect local setup but must not reconcile it with agent inventories
+or history. Follow the skill's welcome-and-wait path first. Setup is a separate
+path: use [the batched setup questions](setup.md), explain the minimal saved
+context and Git privacy choice, then confirm before writing. Do not begin an agent crawl
+during setup or automatically after finishing it; offer to check agents next and
+wait for the user's request.
 
 When checkpoint setup already exists, use its `last_seen_skill_version` field
 (runtime `threads.last_seen_skill_version`, where `threads` is the loaded checkpoint)
@@ -18,9 +24,17 @@ review the current skill as needed and keep that observation in the current sess
 
 Before enabling checkpoints, explain what will be stored and get explicit setup
 approval for the chosen local directory. Check project instructions, Git state,
-and sharing/backup settings. Keep the directory local and out of commits unless
-the human deliberately chooses otherwise; the helper does not edit ignore rules.
-Setup never creates or edits standing instructions.
+and sharing/backup settings. Apply [the setup privacy gate](setup.md#privacy-gate-before-saving)
+before initial setup and before later sensitive writes: precheck tracked paths,
+preserve/append approved local exclusion rules, then verify effectiveness.
+Default to everything local; only reviewed standing instructions may be made
+trackable. `threads.json`, locks, temporary files and all other runtime content
+stay local in either mode. Tracked runtime data or failed ignore checks block
+writes; never silently untrack data or mutate shared `.gitignore`. The checkpoint
+helper does not enforce Git privacy or edit ignore rules; Shepherd must perform
+this gate before using it. Sharing instructions is not consent to stage/commit/push.
+The checkpoint helper never creates or edits standing instructions; Shepherd
+may create that separate file during explicitly approved setup.
 
 Save only active or deliberately parked threads the human has included in this
 Shepherd's remit. Use short context, the next useful step, canonical work links,
@@ -188,12 +202,18 @@ read back rather than assuming it failed. This is not a distributed store.
 
 ## Recovery and dispatch boundary
 
+Use this workflow only for requested recovery, inspection, or action. Bare
+activation and setup stop at the skill's routing boundary; saved records never
+implicitly authorize live discovery. Match discovery to the request, not the full
+saved remit: a single-agent action inspects only its relevant thread/owner.
+
 1. Read standing instructions if present and derive the current inherited
    scope with `navigation.py scope`, not from saved state. Read the matching
    checkpoint without creating setup; use `threads.last_seen_skill_version` for
    version review only when that checkpoint exists.
-2. Rediscover live agents and panes in this session; use canonical records and
-   local recovery clues only within the opted-in remit. A missing pane is not
+2. Rediscover only the live owners/locations relevant to the requested scope
+   inside this session. Use canonical records and local recovery clues only for
+   that scope within the opted-in remit; do not crawl unrelated agents. A missing pane is not
    proof the thread is finished. Matching cwd/title/native ID is a lead, not
    proof of a current owner. Mark unresolved associations as uncertain.
 3. Before an authorized dispatch, checkpoint a short **intent** and expected next

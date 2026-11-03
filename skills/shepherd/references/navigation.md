@@ -21,10 +21,17 @@ directory, and exposes its expected `focus` action/handler. If listing does not
 show the path/handler, inspect the registered plugin manifest locally using the
 location returned by Herdr; never infer readiness from the skill being installed.
 A missing/disabled/different registration is not a working navigation setup.
-Offer once to enable the bundled handler, explaining that user-level plugin
-registration changes and it becomes available across Herdr sessions. Refusal or
-no answer leaves a useful plain-ID brief; do not repeatedly prompt in this run.
-Explicit standing permission to maintain this setup can authorize the action.
+For bare role activation, note readiness only; ask the skill's two-choice welcome
+and wait. Do not generate a brief or add a technical setup questionnaire. Include
+click-to-jump in [the setup questionnaire](setup.md) with the other unanswered
+independent choices, not in another turn when already answered. After an explicitly
+requested brief, offer once in plain language if still unanswered:
+"Would you like to click an agent's name in my summaries to jump straight to it?"
+Before installation, explain that this enables the feature on this machine across
+Herdr sessions. Refusal/no answer keeps any requested brief usable with plain IDs;
+do not repeatedly prompt. Explicit standing setup permission can authorize this
+registration, but never an unrelated inspection of all agents. Completing link
+setup does not authorize a herd-wide brief; ask and wait before starting one.
 
 With approval, review the [handler](../navigation/navigation.py) and link the
 **installed navigation directory**, not the skill directory or an unpublished
@@ -100,10 +107,12 @@ scopes, regardless of pane, cwd, or socket inode. The literal inherited path is
 hashed without resolving aliases.
 
 Path reuse can associate old checkpoints with an unrelated replacement session.
-Always reconcile saved checkpoint entries against fresh live inventory and
-terminal/session identity after restart; scope equality never authorizes automatic
-actions, proves occupant continuity, or makes old click links valid. Reconcile
-only; do not dispatch, resume, or focus from checkpoints automatically.
+Before using saved entries for an explicitly requested inspection or action,
+reconcile the relevant targets with fresh live identity, especially after restart.
+This does not authorize inventory or reconciliation during bare activation or
+setup. Scope equality never authorizes automatic action, proves occupant
+continuity, or makes old click links valid. Do not dispatch, resume, or focus from
+checkpoints automatically.
 
 ## Validation and limits
 

@@ -22,7 +22,7 @@
     {
       "id": 4,
       "prompt": "Set up this directory for a recurring Shepherd for workday coordination. Keep my standing scope and reporting preferences here, but don't copy my task backlog.",
-      "expected_output": "Inspect existing files and project conventions; create .shepherd/instructions.md only for this explicit setup request, holding standing scope and preferences without transcripts, secrets, statuses or a copied backlog. Explain optional .shepherd/threads.json separately, obtain checkpoint consent, and keep opted-in active/parked recovery context there with scoped atomic helper writes rather than in instructions.",
+      "expected_output": "Inspect existing files and project conventions; create .shepherd/instructions.md only for this explicit setup request, holding standing scope and preferences without transcripts, secrets, statuses or a copied backlog. Explain remembering work in plain language, confirm the directory/remit and saved data, then use scoped atomic helper writes rather than storing status in instructions. Do not crawl agents during setup or launch a summary after it; offer to check agents next and wait.",
       "files": []
     },
     {
@@ -70,7 +70,7 @@
     {
       "id": 12,
       "prompt": "Be my Shepherd. The existing checkpoint says I last used a different skill version. Also enable clickable pane IDs here; I approve the bundled navigation plugin setup.",
-      "expected_output": "Report the local metadata version, read its bundled changelog, summarize relevant changes and update last_seen_skill_version only in an existing matching checkpoint. Link the installed navigation directory only after reviewing registration, verify the plugin, generate live URLs read-only and link pane IDs. No OS scheme registration or unsolicited focus. A one-off invocation without checkpoints would not create state merely to remember a version.",
+      "expected_output": "Report the local metadata version, read its bundled changelog, summarize relevant changes and update last_seen_skill_version only in an existing matching checkpoint. With approved navigation setup, review and link the installed navigation directory and verify registration only. Do not inventory agents or generate live pane links without a requested brief or target; offer to check agents and wait. No OS scheme registration or unsolicited focus. A one-off invocation without checkpoints would not create state merely to remember a version.",
       "files": []
     },
     {
@@ -81,8 +81,50 @@
     },
     {
       "id": 14,
-      "prompt": "Be my Shepherd. Your skill is installed but clickable pane IDs are missing. The bundled navigation plugin is absent; I have not approved any installation yet.",
-      "expected_output": "Check registration and explain the handler bridges Ctrl-click to validated focus; a skill install alone does not register it. Offer once to link the installed bundle, wait for approval or explicit standing authorization, and continue with a useful plain-ID brief. Do not silently link, focus, register an OS scheme, repeatedly ask after refusal, or claim links work. If approved, link the installed path, verify enabled registration/root/manifest/action and generate URLs read-only; surface any exact setup blocker.",
+      "prompt": "Help me enable clickable agent names in Shepherd. Your skill is installed but the navigation plugin is absent; explain and ask before installing. I have not asked for a brief or picked a target agent.",
+      "expected_output": "Check registration and explain the handler bridges Ctrl-click to validated focus; a skill install alone does not register it. Explain the click-to-jump option plainly and offer once to enable it, waiting for approval or explicit standing authorization. This navigation setup request does not authorize a herd-wide brief; do not crawl unrelated agents. Do not silently link, focus, register an OS scheme, repeatedly ask after refusal, or claim links work. If approved, link the installed path and verify enabled registration/root/manifest/action only; surface any exact setup blocker. Wait for a requested brief or target before generating live URLs.",
+      "files": []
+    },
+    {
+      "id": 15,
+      "prompt": "You're the Shepherd of this herd.",
+      "expected_output": "Perform lightweight Herdr-access, local-setup/version and navigation-registration checks only. Present the short two-choice plain-language welcome: check on agents now, or set things up to pick up where the user left off next time. Stop and wait. Do not list agents/workspaces/panes, read transcripts, search history, inspect canonical work, reconcile threads, or create setup. Avoid continuity/checkpoint/handler/config-filename jargon in the welcome.",
+      "files": []
+    },
+    {
+      "id": 16,
+      "prompt": "Be my Shepherd. This directory already has standing instructions and several saved active and parked threads, but I haven't asked you to review them yet.",
+      "expected_output": "Existing setup does not authorize a herd crawl or checkpoint reconciliation. Run only lightweight activation checks, use the plain-language welcome, then stop for the user's choice. Do not inspect live agents, resume work, or update thread state from stored records.",
+      "files": []
+    },
+    {
+      "id": 17,
+      "prompt": "I choose the setup option. Help me set things up so I can pick up work next time. Once we're done, wait for me before checking agents.",
+      "expected_output": "Batch unanswered independent choices in a native multi-field questionnaire when supported or one compact message: scope, remembering work, clickable agent names, and Git everything local by default versus share instructions only. Use cwd and known answers as defaults; follow up only for dependent ambiguity. Confirm effects before writes and apply the Git privacy gate. Setup is not permission to inventory/read agents or search history. Finish with an offer to check agents and wait; do not automatically generate a brief.",
+      "files": []
+    },
+    {
+      "id": 18,
+      "prompt": "Be my Shepherd and check on my agents now.",
+      "expected_output": "Recognize the explicit inspection request and skip the welcome menu. Inspect this herd and return a concise numbered brief with subject-level Context, Status, Needs, Next. Missing optional setup does not block the brief; offer setup once after it without silent installation.",
+      "files": []
+    },
+    {
+      "id": 19,
+      "prompt": "Yes, set this directory up. I don't want a turn for every question. Use a questionnaire if you can, and ask me everything independent together.",
+      "expected_output": "Use one harness-supported multi-field questionnaire or a single compact message with only unanswered independent scope, remember-work, click-to-jump and Git-sharing choices. Default directory to discovered cwd; keep everything local as the Git default. Explain privacy effects plainly, obtain confirmation before writes, do not treat silence as consent, and do not inspect all agents to populate the questions. Ask follow-ups only when dependent answers need clarification.",
+      "files": []
+    },
+    {
+      "id": 20,
+      "prompt": "Keep my Shepherd setup local in this nested project directory. Do not change the shared .gitignore or commit anything.",
+      "expected_output": "Resolve the repo prefix and Git info/exclude path rather than assuming .git is a directory. Check indexed paths first; any tracked Shepherd file blocks local mode before sensitive writes. With confirmation, append preserved local-only rules anchored to the nested project and verify each planned/runtime path is ignored. Do not stage, commit, push, force-add, automatically untrack, or claim ignores remove old history. Outside Git, explain no ignore guarantee and do not init a repository.",
+      "files": []
+    },
+    {
+      "id": 21,
+      "prompt": "Share only Shepherd's instructions in Git; keep remembered work private. If a runtime file is already tracked or the shared ignore rules conflict, don't silently fix it.",
+      "expected_output": "Review instructions for sensitive content; sharing means eligible for later tracking, not automatic staging/commit/push. Any tracked runtime path blocks sensitive writes. Apply only approved local excludes allowing the exact instructions file while ignoring every other Shepherd child, including unknown runtime files, locks and temp files. Verify per-path results; a winning shared rule that defeats the requested mode blocks writes and is surfaced without automatic untracking or shared .gitignore changes.",
       "files": []
     }
   ]

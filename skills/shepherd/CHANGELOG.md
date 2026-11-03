@@ -3,6 +3,22 @@
 Versions apply to this skill and its bundled helpers, not the other skills in
 this repository. Data-format versions are separate from skill versions.
 
+## 0.1.2 — 2026-11-03
+
+- Bare role activation runs only lightweight access/local-setup/navigation checks,
+  presents two plain-language choices, then stops; it does not crawl the herd.
+- Explicit briefs bypass the welcome; specific-agent requests stay targeted.
+- Setup batches independent unanswered choices into a supported questionnaire or
+  one compact message, with discoverable defaults and follow-ups only for dependent
+  ambiguity. No jargon-heavy welcome or automatic summary after setup.
+- Add Git privacy choices: everything local by default, or share reviewed standing
+  instructions only. Runtime files always stay local. Resolve Git's `info/exclude`,
+  preserve existing rules, check already-tracked files and validate ignores before
+  sensitive writes. No automatic untracking, staging, commit, push or shared-ignore edits.
+- Add temporary-repository regression tests for root/nested paths, both privacy
+  modes, tracked-file conflicts and ineffective ignores. The navigation plugin and
+  checkpoint schema remain unchanged.
+
 ## 0.1.1 — 2026-11-02
 
 - Check navigation registration at startup; offer consent-based setup or repair

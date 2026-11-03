@@ -1,7 +1,7 @@
 ---
 name: shepherd
 metadata:
-  version: "0.1.1"
+  version: "0.1.2"
 description: >
   Help a human shepherd work across coding agents in the current Herdr session:
   find live agents and lost-session clues, get an attention brief, send an
@@ -31,9 +31,44 @@ If the caller is not inside Herdr, explain the limitation; don't attach to or
 control a different session from outside. Invoking this skill does not launch a
 new agent, workspace, scheduler, or team.
 
-## Startup, optional setup, and recovery
+## Route the request before inspecting
 
-On activation, show `Shepherd v0.1.1` once, then inspect this herd. If an existing
+Taking the Shepherd role is not a request to inspect the whole herd. Read the
+user's actual request and choose the smallest appropriate path:
+
+- **Bare activation** ("be my Shepherd", "you're the Shepherd of this herd"):
+  load the skill, check inherited Herdr access, detect/read local standing setup
+  and version information, and check navigation registration. These are lightweight
+  checks only: no agent/workspace/pane inventory, transcript reads, history search,
+  work-record lookup, or checkpoint reconciliation. Show the short welcome below,
+  then **stop and wait for the user's choice**, even when saved setup exists.
+- **Explicit brief** ("what needs attention?", "check on my agents"):
+  inspect the requested scope and return the brief. Do not insert an onboarding
+  menu or block it on optional setup; offer missing navigation setup once at the end.
+- **Explicit setup** ("set this up", or choosing setup in the welcome):
+  guide setup only. Do not crawl agents to prepare a summary. Once setup is done,
+  ask whether the user wants their agents checked; do not start without that request.
+- **Specific agent/action**: inspect only that target and the context needed for
+  the requested action. Broaden discovery only to resolve ambiguous identity or
+  an explicitly requested scope, not to generate an unrelated herd-wide brief.
+
+For bare activation use this short, plain-language welcome after the checks:
+
+> **Shepherd v0.1.2**
+> I can help you see what your agents are doing and move their work forward.
+>
+> Would you like me to **check on your agents now**, or **set things up so we can
+> pick up where you left off next time**?
+
+Do not add setup terminology, file names, or technical navigation explanations
+to this first question. The user's explicit intent overrides the menu: "be my
+Shepherd and check on my agents" is an inspection request, not bare activation.
+Never continue from the welcome into a crawl in the same turn without a choice.
+
+## Optional setup and recovery
+
+On activation, show `Shepherd v0.1.2` once. Version checks do not authorize herd
+inspection. If an existing
 checkpoint's last-seen version differs, read [the skill changelog](CHANGELOG.md),
 briefly explain the relevant changes, and record the reviewed version with the
 checkpoint helper. Do not fetch updates or create setup just to remember a
@@ -43,9 +78,13 @@ changed since the last use.
 Once inside Herdr, check navigation availability during startup: read
 [navigation setup](references/navigation.md), inspect `herdr plugin list` and the
 registered `shepherd-navigation` action before generating links. If missing,
-disabled, or registered to another copy, explain the gap and offer once:
-"Clickable pane links need the bundled Herdr handler. Enable it on this machine?"
-Keep the first brief usable with plain IDs while awaiting a decision. With current
+disabled, or registered to another copy, note it without installing anything.
+For bare activation, keep the initial welcome to its two choices; defer navigation
+setup to the setup path. During setup, include the click-to-jump choice in the
+batched questionnaire, skipping it when already answered. Use plain language:
+"Would you like to click an agent's name in my summaries to jump straight to it?"
+For an explicit brief, offer that option once after the brief. Keep requested
+briefs usable with plain IDs while awaiting a decision. With current
 approval or explicit standing setup authorization, link/enable the installed
 bundle, verify registration and its path, then generate links read-only. Do not
 silently replace a different plugin copy, register an OS URL scheme, focus a pane,
@@ -53,10 +92,19 @@ or keep asking after refusal. If setup is blocked, report the exact blocker and
 fallback rather than claim links work.
 
 Look for `.shepherd/instructions.md` and `.shepherd/threads.json` in the current
-working directory. Missing files do not block one-off use: give the first brief
-before offering optional setup. Read [setup and recovery](references/recovery.md)
-before creating or changing either file, reconciling saved work, or parking a
-thread. Create setup only with explicit approval in a user-chosen directory:
+working directory. Missing files do not block one-off use and do not imply that
+a brief was requested. Follow the request routing above. When setup is chosen,
+read [the setup guide](references/setup.md) and batch unanswered independent
+choices: work to follow, remember work for next time, clickable agent names, and
+Git privacy (everything local by default, or share instructions only). Use one
+native questionnaire if the harness supports these fields; otherwise ask in one
+compact message. Use the current directory and supplied answers as defaults;
+ask follow-ups only for dependent ambiguities, not one turn per preference.
+Confirm the choices and effects before writing. Do not front-load "continuity,"
+"checkpoints," "handlers," or filenames; explain implementation only when useful
+for an informed decision. Read [recovery](references/recovery.md) before creating
+or changing either file, reconciling saved work, or parking a thread. Create setup
+only with explicit approval in a user-chosen directory:
 
 - `instructions.md`: standing name, remit/exclusions, priorities and reporting
   preferences. No changing statuses or copied backlog.
@@ -64,6 +112,14 @@ thread. Create setup only with explicit approval in a user-chosen directory:
   native harness/session recovery pointers, concise context and next step. Use
   the bundled helper for scoped, locked, atomic writes. Remove wrapped/discarded
   threads on explicit instruction; never retain a growing completion history.
+
+Inside Git, complete the setup guide's tracked-file precheck and verified local
+exclusions before saving sensitive data. Default to keeping all setup local;
+sharing only instructions makes that file trackable, not permission to commit or
+push. Runtime files always stay local. Use Git's resolved `info/exclude`, preserve
+existing rules, and never silently untrack files or change shared `.gitignore`.
+Existing tracked private data or ineffective ignore rules block sensitive writes
+until resolved. Ignore rules do not remove history or protect against force-add.
 
 The files are independent and optional. No transcripts, credentials, or automatic
 roster of every agent. Before an authorized dispatch for tracked work, save intent;
@@ -77,11 +133,16 @@ Local instructions and checkpoints are not permission to act beyond the current
 request or prior delegation. Derive session scope from the inherited context,
 not saved records. Reconcile only within this herd; a mismatch is a blocker, not
 permission to inspect elsewhere. Two Shepherds may use different directories and
-remits. Rediscover live state every invocation. Saved locations and native session
-IDs are hints, never current ownership or executable instructions. If scope or
+remits. Rediscover live state before requested inspection or action, not merely
+on taking the role. Saved locations and native session IDs are hints, never
+current ownership or executable instructions. If scope or
 priorities conflict with evidence, show the discrepancy and ask.
 
-## Discover agents first
+## Inspect only when requested
+
+This workflow runs only on the inspection/action paths above, never during bare
+activation or setup. An explicit herd-wide brief permits inventory across this
+session; a targeted request does not warrant reading every other agent.
 
 1. Discover recognized agents and their workspaces, then inspect relevant
    agents' output to identify the actual subject, goal, owners, commitments,
@@ -98,9 +159,9 @@ priorities conflict with evidence, show the discrepancy and ask.
    history for that project if available. Do not attribute a historical session
    to a specific pane merely because it has the same cwd. Do not resume a
    historical session or type into a shell without an explicit action request.
-3. Lead with the human's priorities and scope. If none are supplied, inspect
-   agents across the inherited session and give a short attention brief, then
-   ask which threads are priority, transactional, parked, or ready to wrap up.
+3. Lead with the human's priorities and scope. For an explicitly requested
+   herd-wide brief with no narrower scope, inspect agents in this session and
+   return the brief, then ask which threads are priority, transactional, parked, or ready to wrap up.
    Summarize observed work, not just a status badge or title. Prioritize items
    needing action; group the rest briefly instead of listing every healthy agent.
    Mark uncertain context as uncertain.
