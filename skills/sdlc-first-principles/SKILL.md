@@ -1,5 +1,7 @@
 ---
 name: sdlc-first-principles
+metadata:
+  version: "0.1.0"
 description: |
   Apply Elon Musk's five-step first-principles process improvement algorithm to
   software delivery. Use when reviewing, designing, or improving SDLC workflows,

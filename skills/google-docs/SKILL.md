@@ -1,5 +1,7 @@
 ---
 name: google-docs
+metadata:
+  version: "0.1.0"
 description: >-
   Use when creating, editing, formatting, reviewing, commenting on, or
   suggesting changes in Google Docs. Connector-agnostic: works with whatever

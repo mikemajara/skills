@@ -1,5 +1,7 @@
 ---
 name: nightly-learn
+metadata:
+  version: "0.1.0"
 description: >-
   Use when running a periodic (e.g. nightly) pass to turn sticky how-to facts
   out of agent memory into skills — or when unsure whether something belongs

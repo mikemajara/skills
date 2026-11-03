@@ -1,5 +1,7 @@
 ---
 name: voice
+metadata:
+  version: "0.1.0"
 description: >
   Write or rewrite a specific message, announcement, article, or social post in
   this personal voice: concise, warm, direct, structured, and plainspoken. Use

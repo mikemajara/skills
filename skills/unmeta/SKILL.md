@@ -1,5 +1,7 @@
 ---
 name: unmeta
+metadata:
+  version: "0.1.0"
 description: >-
   Separate the authoring conversation from the authored work. Use whenever
   drafting, editing, or filling documents, drafts, emails, questionnaire answers,

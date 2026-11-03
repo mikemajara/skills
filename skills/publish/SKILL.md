@@ -1,5 +1,7 @@
 ---
 name: publish
+metadata:
+  version: "0.1.0"
 description: >
   Review, draft, or rewrite material intended for publication at work or under
   a personal byline: internal announcements, long-form articles, and social

@@ -1,5 +1,7 @@
 ---
 name: brainstorm
+metadata:
+  version: "0.1.0"
 description: >
   Generate creative ideas with the user: new angles, unconventional options,
   and directions they have not considered. Use when the user wants to

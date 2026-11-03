@@ -1,5 +1,7 @@
 ---
 name: collaboration
+metadata:
+  version: "0.1.0"
 description: >-
   Collaborate with the user in a shared document, spreadsheet, or page: Google
   Docs, Google Sheets, Notion, or another editable artifact with comments. Use

@@ -1,5 +1,7 @@
 ---
 name: conversation
+metadata:
+  version: "0.1.0"
 description: >
   Explore a topic with the user through natural, incremental dialogue, or
   stress-test a mostly formed idea for gaps, contradictions, missing constraints,

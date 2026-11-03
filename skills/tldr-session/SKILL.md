@@ -1,5 +1,7 @@
 ---
 name: tldr-session
+metadata:
+  version: "0.1.0"
 description: >
   Produce a concise session TL;DR in four parts: how it started, how it is
   going, what was achieved, and what is pending. Use when the user runs

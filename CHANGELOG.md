@@ -4,6 +4,12 @@
 
 ### Changed
 
+- Give the 12 remaining skills independent 0.1.0 versions and individual
+  changelogs. Their initial entries summarize relevant historical notes below;
+  previous entries remain here as repository history. See
+  [per-skill release information](docs/skill-versioning-follow-up.md) for the
+  ongoing convention.
+
 - Rename `chief-of-staff` to `shepherd` and publish its initial independent
   version, 0.1.0. See the [Shepherd changelog](skills/shepherd/CHANGELOG.md) for
   behavior, bundled navigation/checkpoint helpers, compatibility and migration.

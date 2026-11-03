@@ -27,10 +27,11 @@ npx skills add mikemajara/skills --skill scroll-presentation
 npx skills add mikemajara/skills --skill cite-sources
 ```
 
-Shepherd has its own [version and changelog](skills/shepherd/CHANGELOG.md).
-The root `CHANGELOG.md` retains repository history and older migrations; see
-[the versioning follow-up](docs/skill-versioning-follow-up.md) for the pending
-per-skill rollout.
+Each skill has its own version in `SKILL.md` and a `CHANGELOG.md` alongside it
+(for example, [Shepherd's changelog](skills/shepherd/CHANGELOG.md)). The root
+[CHANGELOG.md](CHANGELOG.md) retains repository history and older migrations;
+see [per-skill release information](docs/skill-versioning-follow-up.md) for
+how future changes are recorded.
 
 ## Skills
 

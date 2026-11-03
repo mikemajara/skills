@@ -1,5 +1,7 @@
 ---
 name: scroll-presentation
+metadata:
+  version: "0.1.0"
 description: Build a scroll-driven story page in the style of an Apple product page, where sections pin, objects morph from one form to the next, and every step snaps to a finished frame. The result is one offline HTML file that works on phones first. Use it to explain a concept, product, idea, process, or curiosity to any audience, for example a customer pitch, a product explainer, an internal walkthrough, or a class. Also use it when someone asks for a "scrollytelling" or "scroll story" page, or for a deck rebuilt as a scrolling page. Don't use it for slide decks (.pptx) or long text documents.
 ---
 

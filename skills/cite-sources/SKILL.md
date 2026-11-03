@@ -1,5 +1,7 @@
 ---
 name: cite-sources
+metadata:
+  version: "0.1.0"
 description: >-
   Use whenever you report on, summarize, quote, or reference a specific email,
   thread, doc, sheet, page, file, PDF, task, issue, or PR. Link every object
