@@ -3,6 +3,16 @@
 Versions apply to this skill and its bundled helpers, not the other skills in
 this repository. Data-format versions are separate from skill versions.
 
+## 0.2.0 — 2026-11-04
+
+- Herd-wide briefs now use one continuously numbered roster: attention items
+  first, then one-line FYI items for every other recognized live agent. Each item
+  shows the live pane ID for navigation and follow-up by number.
+- Current pane and conversation evidence take precedence over saved recovery
+  state. A previously parked follow-up is not described as a parked live agent
+  after new work; missing panes are recovery leads, not live roster entries.
+- Add regression scenarios for a crowded herd and a stale parked checkpoint.
+
 ## 0.1.3 — 2026-11-03
 
 - Bare activation distinguishes first-time setup from an existing setup: returning

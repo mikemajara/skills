@@ -4,7 +4,7 @@
     {
       "id": 1,
       "prompt": "Be my shepherd. I'm in Herdr but there's no .shepherd/instructions.md here. Which agents need my attention in this session?",
-      "expected_output": "Work one-off without creating files; discover recognized agents first, exclude self, inspect relevant evidence, distinguish idle/done/blocked, and report actionable items only for the inherited session as a numbered list, not a table. Each item puts the live pane/workspace locator in its heading, followed by subject-level Context, Status, Needs, Next. Explain the actual change and user workflow without requiring a link click; status-only issue numbers/test counts do not satisfy Context. Check navigation availability and offer missing setup without blocking the brief; summarize other agents briefly.",
+      "expected_output": "Work one-off without creating files; discover recognized agents first, exclude self, inspect relevant evidence, distinguish idle/done/blocked, and report actionable items only for the inherited session as a numbered list, not a table. Each item puts the live pane/workspace locator in its heading, followed by subject-level Context, Status, Needs, Next. Explain the actual change and user workflow without requiring a link click; status-only issue numbers/test counts do not satisfy Context. Check navigation availability and offer missing setup without blocking the brief; include all other recognized live agents as individually numbered, one-line [FYI] items in the same continuously numbered list after [Needs attention] items, each with a live pane ID.",
       "files": []
     },
     {
@@ -142,13 +142,25 @@
     {
       "id": 22,
       "prompt": "Review my herd. The skills workspace has two agents in different panes sharing the same directory: one awaits a design choice, and the other reports a finished release. Make sure neither disappears from the brief.",
-      "expected_output": "Preserve both recognized pane IDs, inspect enough evidence per owner rather than collapsing by workspace/cwd, and list the design decision as actionable while explicitly naming the settled release owner in Also checked. If both need action, list them independently or explicitly name both owners of one shared thread. Report unread targets as unreviewed, not settled. No permanent roster or extra discovery on bare activation.",
+      "expected_output": "Preserve both recognized pane IDs, inspect enough evidence per owner rather than collapsing by workspace/cwd, and list the design decision as a numbered [Needs attention] item and the settled release owner as a separate numbered [FYI] item, with consecutive numbering and both pane IDs visible. If both need action, give each its own numbered item. Report unread targets as unreviewed, not settled. No permanent roster or extra discovery on bare activation.",
       "files": []
     },
     {
       "id": 23,
       "prompt": "In this requested brief, one pane has the custom label Parser review, another has no meaningful label but a displayed title, a third has only its ID, and two panes share the same name. Show clickable labels without changing where the links go.",
-      "expected_output": "Prefer the meaningful pane label, then meaningful terminal_title_stripped, then exact ID; ignore generic harness-kind/default ID-plus-kind labels. Escape unsafe label characters and disambiguate duplicate names with pane IDs. Use URLs generated for exact verified live pane IDs; labels never become command targets or evidence of task state. Use plain labels/focus fallback when registration is absent, without inventing links.",
+      "expected_output": "Prefer the meaningful pane label, then meaningful terminal_title_stripped, then exact ID; ignore generic harness-kind/default ID-plus-kind labels. Escape unsafe label characters and disambiguate duplicate names with pane IDs. Show the exact live pane ID on every numbered item, even linked names. Use URLs generated for exact verified live pane IDs; labels never become command targets or evidence of task state. Use plain labels/focus fallback when registration is absent, without inventing links.",
+      "files": []
+    },
+    {
+      "id": 26,
+      "prompt": "Check all 13 agents in my Herdr session. Four need a decision or verification; the rest don't. Give me a brief I can use to jump to or clean up any of them by item number.",
+      "expected_output": "Exclude the Shepherd's own pane and show every other recognized live agent as its own item in one continuously numbered list. Put substantive [Needs attention] items first, then one-line [FYI] items, all with visible pane IDs and verified links if available. Do not restart numbering, bury the rest in an Also checked paragraph, treat FYI as permission to close panes, or include unrecognized shells as agents.",
+      "files": []
+    },
+    {
+      "id": 27,
+      "prompt": "My saved threads.json says the parser follow-up is parked, but I sent that agent a new request in its still-open pane. It replied and is now done. How should it appear in my herd brief? Another saved active thread's pane has vanished.",
+      "expected_output": "Refresh live inventory and recent output; describe the parser owner as an open pane with observed done state and newer completed request, not as a parked live agent. Mention the older parked follow-up only as historical context or a conflict. Treat the missing saved active pane as a separate recovery lead rather than a live agent item; do not silently change checkpoint state or infer work is finished or safe to close.",
       "files": []
     }
   ]

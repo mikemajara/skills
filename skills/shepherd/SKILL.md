@@ -1,7 +1,7 @@
 ---
 name: shepherd
 metadata:
-  version: "0.1.3"
+  version: "0.2.0"
 description: >
   Human-directed Shepherd for agents in the current Herdr session: recover context,
   summarize actionable work, message an existing owner when explicitly asked, and
@@ -63,7 +63,7 @@ stop, using this short copy:
 
 - If neither `.shepherd/instructions.md` nor `.shepherd/threads.json` exists:
 
-  > **Shepherd v0.1.3**
+  > **Shepherd v0.2.0**
   > I can help you see what your agents are doing and move their work forward.
   >
   > Would you like me to **check on your agents now**, or **set things up so we can
@@ -87,7 +87,7 @@ from the welcome into a crawl or setup write in the same turn without a choice.
 
 ## Optional setup and recovery
 
-On activation, show `Shepherd v0.1.3` once. Version checks do not authorize herd
+On activation, show `Shepherd v0.2.0` once. Version checks do not authorize herd
 inspection. If an existing
 checkpoint's last-seen version differs, read [the skill changelog](CHANGELOG.md),
 briefly explain the relevant changes, and record the reviewed version with the
@@ -154,9 +154,17 @@ request or prior delegation. Derive session scope from the inherited context,
 not saved records. Reconcile only within this herd; a mismatch is a blocker, not
 permission to inspect elsewhere. Two Shepherds may use different directories and
 remits. Rediscover live state before requested inspection or action, not merely
-on taking the role. Saved locations and native session IDs are hints, never
-current ownership or executable instructions. If scope or
-priorities conflict with evidence, show the discrepancy and ask.
+on taking the role. Saved locations, states, and native session IDs are recovery hints, never
+current ownership, live work status, or executable instructions. For a requested
+brief, use the fresh agent inventory and recent owner conversation to describe
+what is open and what has happened since the checkpoint. An open pane is not
+necessarily working: report its observed idle/working/done state separately from
+whether a follow-up was previously parked. If a saved `parked` thread has since
+received a new request, do not call its live agent parked; explain the mismatch
+and use the newer evidence for the brief. A saved `active` thread with no live
+owner remains a recovery lead, not a live agent. Do not silently rewrite the
+checkpoint from a snapshot. If scope or priorities conflict with evidence, show
+the discrepancy and ask.
 
 ## Inspect only when requested
 
@@ -185,15 +193,20 @@ session; a targeted request does not warrant reading every other agent.
    historical session or type into a shell without an explicit action request.
 3. Lead with the human's priorities and scope. For an explicitly requested
    herd-wide brief with no narrower scope, inspect agents in this session and
-   return the brief, then ask which threads are priority, transactional, parked, or ready to wrap up.
-   Summarize observed work, not just a status badge or title. Prioritize items
-   needing action. Account for the remaining in-scope agents in a short "Also checked"
-   line grouped by workspace, naming each pane and its brief disposition (settled,
-   parked, working without a blocker, or unreviewed). Do not hide them behind only
-   "seven others" or infer settled from idle/done alone. Separate attention items
-   when two agents in one workspace have different work or next steps; when both
-   own the same work, one item may name/link both owners explicitly.
-   Mark uncertain context as uncertain.
+   return one continuously numbered list of all other recognized live agent
+   panes, then ask which threads are priority, transactional, parked, or ready
+   to wrap up. Sort by need for human attention: decisions and blockers first,
+   then outstanding verification or unanswered requests, then FYI items with
+   no immediate action. Use a short `[Needs attention]` or `[FYI]` tag on each
+   item, not separate lists that restart numbering. Give attention items enough
+   context to act; keep each FYI item to one useful line describing its actual
+   work, observed state and disposition. Do not bury agents in a collective
+   "Also checked" paragraph or infer settled from idle/done alone. A "wait for
+   owner" item without a present decision or check is usually FYI, not urgent.
+   Preserve one numbered item per live pane even when two agents share a
+   workspace, cwd, or workstream; name both owners in their respective items.
+   Mark unread targets unreviewed and uncertain context as uncertain. List
+   relevant missing-pane recovery leads separately, clearly not as live agents.
 
 A snapshot is not monitoring. Do not promise proactive pings, periodic wakeups,
 or continuous observation without a separately authorized and verified runner.
@@ -223,16 +236,27 @@ change canonical task status merely because it looks stale.
 
 ## Attention brief format
 
-Use a numbered list, never a table, so the human can say "push item 2" without
-remembering a pane ID. Keep each actionable item short and in this order:
+Use one numbered list, never a table or two separately numbered sections, so
+"item 8" identifies one pane in this brief. Show every live agent except your
+own, ordered by attention needed. Keep a copyable live pane ID visible on **every**
+item even when its pane name is linked; don't mistake a workspace ID for a pane ID.
+Keep each `[Needs attention]` item short and in this order:
 
-1. **<short subject-level work label, not just an issue number>** — <workspace name> · [<pane name, else displayed title, else pane ID>](<verified pane URL>) · <observed state>
+1. [Needs attention] **<short subject-level work label, not just an issue number>** — <workspace name> · [<pane name, else displayed title, else pane ID>](<verified pane URL>) (`<live pane ID>`) · <observed state>
    - **Context:** What problem or user workflow this work addresses and what the
      agent is changing, in one or two plain-language sentences.
    - **Status:** What has actually happened so far; distinguish owner-reported
      results from checks Shepherd independently verified.
    - **Needs:** The specific remaining blocker, decision, or verification.
    - **Next:** The suggested continue, park, or wrap-up action and its owner.
+
+Follow with one-line `[FYI]` items in the **same** list and continuing the
+numbers. Each names and (when verified) links the live pane, shows its pane ID
+and observed state, and says what it was doing and why no action is needed now.
+Do not call an agent parked merely because a saved follow-up was parked; if
+current output conflicts, briefly flag it. An FYI item can still be useful for
+navigation or cleanup; it is not a recommendation to close its pane. For
+example: `8. [FYI] Parser review — sample-app · Parser checks (w3:p4) · done; completed a new review after the older saved follow-up was parked.`
 
 Self-containedness check: could someone who has forgotten this thread explain
 what it is about without opening its issue link or pane? If not, inspect more
@@ -256,15 +280,15 @@ the workspace name, falling back to its ID, and verify the destination likewise.
 handler and read-only generator, and only emit URLs when its registration is
 verified. Check availability at startup and offer missing setup; installation or
 enabling still requires approval, not silent mutation.
-If navigation is unavailable, keep the same name/ID label plain and add a copyable
-focus command on the Next line when helpful. Never fabricate a URL. Use a real issue/PR/document link on the
-work label when available; it does not replace the pane link. For empty shells with only historical clues, label
-them as recovery leads, not live agents. Keep numbered items actionable and use
-the compact "Also checked" coverage line for the other agents; do not assume the
-human remembers every thread
-or include private transcript detail. Item numbers belong to this brief, not a
-persistent task ID: when asked to act on "item 2," resolve it against the
-current brief and refresh that agent before dispatch.
+If navigation is unavailable, keep the same name/ID label plain and add a
+copyable focus command when helpful (on the Next line for attention items; for
+FYI items the visible pane ID may suffice). Never fabricate a URL. Use a real
+issue/PR/document link on the work label when available; it does not replace
+the pane link. For empty shells with only historical clues, label them as
+recovery leads, not live agents. Do not include private transcript detail. Item
+numbers belong to this brief, not a persistent task ID: when asked to act on
+"item 8," resolve it against the current brief and refresh that agent before
+dispatch.
 
 For now Shepherd is human-directed: no cron, autonomous nudging, or automatic
 team creation. A future team launcher or scheduling harness is a separate
