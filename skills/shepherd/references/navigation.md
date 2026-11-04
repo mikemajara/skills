@@ -21,8 +21,10 @@ directory, and exposes its expected `focus` action/handler. If listing does not
 show the path/handler, inspect the registered plugin manifest locally using the
 location returned by Herdr; never infer readiness from the skill being installed.
 A missing/disabled/different registration is not a working navigation setup.
-For bare role activation, note readiness only; ask the skill's two-choice welcome
-and wait. Do not generate a brief or add a technical setup questionnaire. Include
+For `ask`-mode bare activation, note readiness only; show the skill's two-choice
+welcome and wait. With `default_mode: check`, continue to the read-only brief
+without waiting for navigation setup; fall back to plain IDs. Do not add a
+technical setup questionnaire. Include
 click-to-jump in [the setup questionnaire](setup.md) with the other unanswered
 independent choices, not in another turn when already answered. After an explicitly
 requested brief, offer once in plain language if still unanswered:
@@ -31,7 +33,9 @@ Before installation, explain that this enables the feature on this machine acros
 Herdr sessions. Refusal/no answer keeps any requested brief usable with plain IDs;
 do not repeatedly prompt. Explicit standing setup permission can authorize this
 registration, but never an unrelated inspection of all agents. Completing link
-setup does not authorize a herd-wide brief; ask and wait before starting one.
+setup alone does not authorize a herd-wide brief; ask and wait unless an explicit
+inspection request or resolved `check` activation already authorizes it. A
+configuration-only request still stops after setup, even when saving `check`.
 
 With approval, review the [handler](../navigation/navigation.py) and link the
 **installed navigation directory**, not the skill directory or an unpublished
@@ -113,8 +117,9 @@ hashed without resolving aliases.
 Path reuse can associate old checkpoints with an unrelated replacement session.
 Before using saved entries for an explicitly requested inspection or action,
 reconcile the relevant targets with fresh live identity, especially after restart.
-This does not authorize inventory or reconciliation during bare activation or
-setup. Scope equality never authorizes automatic action, proves occupant
+This does not itself authorize inventory or reconciliation during bare activation
+or setup; activation inspection requires a resolved `check` mode or explicit
+request. Scope equality never authorizes automatic action, proves occupant
 continuity, or makes old click links valid. Do not dispatch, resume, or focus from
 checkpoints automatically.
 

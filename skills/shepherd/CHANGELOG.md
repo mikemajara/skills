@@ -3,6 +3,18 @@
 Versions apply to this skill and its bundled helpers, not the other skills in
 this repository. Data-format versions are separate from skill versions.
 
+## Unreleased
+
+- Add optional `default_mode: check` in local standing instructions, or an explicit
+  per-run mode in a runner invocation, to go straight to a read-only attention
+  brief on activation without repeating the welcome question. `ask` remains the
+  fallback for absent, invalid, or conflicting settings; current requests override
+  saved defaults. Existing setups need no migration unless opting into `check`.
+- Include the mode in batched setup and document recurring/unattended checks.
+  Saving the preference does not inspect agents, create a schedule or checkpoint,
+  authorize dispatch, or change task status. Add routing regression scenarios.
+- Navigation plugin and checkpoint schema are unchanged.
+
 ## 0.2.0 — 2026-11-04
 
 - Herd-wide briefs now use one continuously numbered roster: attention items

@@ -1,17 +1,20 @@
 # Local recovery checkpoints
 
 Shepherd works without setup. Optional `.shepherd/instructions.md` holds standing
-configuration: name, remit, exclusions, priorities, reporting preferences. Optional
-`.shepherd/threads.json` is a small recovery checkpoint for opted-in work in that
-remit, not a task database, dispatch queue, transcript archive, or source of live
-agent truth. Either file can exist without the other. Read standing instructions
-when present; do not create either file during ordinary discovery. Bare role
-activation may detect local setup but must not reconcile it with agent inventories
-or history. Follow the skill's welcome-and-wait path first. Setup is a separate
-path: use [the batched setup questions](setup.md), explain the minimal saved
-context and Git privacy choice, then confirm before writing. Do not begin an agent crawl
-during setup or automatically after finishing it; offer to check agents next and
-wait for the user's request.
+configuration: name, `default_mode`, remit, exclusions, priorities, reporting
+preferences. Optional `.shepherd/threads.json` is a small recovery checkpoint for
+opted-in work in that remit, not a task database, dispatch queue, transcript archive,
+or source of live agent truth. Either file can exist without the other. Read
+standing instructions when present; do not create either file during ordinary
+discovery. Bare role activation follows the skill's resolved mode: `ask` stops at
+the welcome without live reconciliation; `check` authorizes a read-only brief in
+the configured remit, using fresh evidence rather than saved status. Checkpoint
+presence alone never authorizes inspection. Setup is a separate path: use
+[the batched setup questions and default-mode setting](setup.md), explain the
+minimal saved context and Git privacy choice, then confirm before writing. Do not
+begin an agent crawl during setup or automatically after finishing it; offer to
+check agents next and wait for the user's request. Saving `check` applies on the
+next activation, not as a side effect of editing configuration.
 
 When checkpoint setup already exists, use its `last_seen_skill_version` field
 (runtime `threads.last_seen_skill_version`, where `threads` is the loaded checkpoint)
@@ -202,10 +205,13 @@ read back rather than assuming it failed. This is not a distributed store.
 
 ## Recovery and dispatch boundary
 
-Use this workflow only for requested recovery, inspection, or action. Bare
-activation and setup stop at the skill's routing boundary; saved records never
-implicitly authorize live discovery. Match discovery to the request, not the full
-saved remit: a single-agent action inspects only its relevant thread/owner.
+Use this workflow only for requested recovery, inspection, or action, or a
+read-only activation brief authorized by `default_mode: check`. `ask`-mode bare
+activation and setup stop at the skill's routing boundary; saved checkpoint
+records never implicitly authorize live discovery. Match discovery to the request
+or configured inspection scope: a single-agent action inspects only its relevant
+thread/owner, even when `check` is saved. The mode authorizes no dispatch, replay,
+restoration, or automatic checkpoint status changes.
 
 1. Read standing instructions if present and derive the current inherited
    scope with `navigation.py scope`, not from saved state. Read the matching

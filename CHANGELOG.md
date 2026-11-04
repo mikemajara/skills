@@ -4,6 +4,10 @@
 
 ### Changed
 
+- `shepherd`: add a configurable activation mode for direct read-only checks on
+  recurring runs, retaining ask-first behavior when unset and explicit-request
+  overrides. See the [Shepherd changelog](skills/shepherd/CHANGELOG.md).
+
 - Give the 12 remaining skills independent 0.1.0 versions and individual
   changelogs. Their initial entries summarize relevant historical notes below;
   previous entries remain here as repository history. See

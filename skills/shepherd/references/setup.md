@@ -1,8 +1,42 @@
 # Optional setup
 
 Use this path only after the user chooses setup or explicitly requests it.
-Bare activation ends at the welcome choice in [SKILL.md](../SKILL.md).
-Setup never inventories agents, reads transcripts, or produces an automatic brief.
+Bare activation follows the resolved default mode in [SKILL.md](../SKILL.md):
+`ask` welcomes and waits; `check` produces a read-only brief without that question.
+Setup itself never inventories agents, reads transcripts, or produces an automatic
+brief, even when the user chooses `check` for future activations.
+
+## Default mode
+
+Store the setting as a plain line in `.shepherd/instructions.md` in the chosen
+setup directory, alongside scope and reporting preferences:
+
+```yaml
+default_mode: check
+```
+
+- `check`: activation checks the configured agents' work directly and returns the
+  attention brief. This is standing consent for read-only inspection within that
+  remit and the inherited Herdr session, not messages, task changes, or nudges.
+- `ask`: activation offers the welcome choices and waits. Missing settings use
+  `ask`, preserving first-time and existing setups until the user opts in.
+
+Invalid or conflicting values fall back to `ask` with a short explanation, without
+rewriting configuration. Explicit instructions for the current run override the
+saved mode, including "setup only", "don't inspect", or a narrower agent target.
+A runner may supply `default_mode: check` explicitly in its invocation instead
+of saving it; this is a per-run instruction, not a new CLI flag or environment
+variable. A schedule by itself does not imply permission to inspect. In unattended
+`check` runs, return the brief and any blockers; do not wait on a welcome or optional
+setup question. Missing inherited Herdr access still blocks inspection.
+
+For recurring checks, offer `check` so the user need not approve the same read-only
+review each time. Save it only after setup approval and the privacy gate below;
+keep unrelated standing instructions intact. Changing this setting alone does not
+create a checkpoint, schedule a runner, or start a check in the same turn. It takes
+effect on the next activation unless the user also asks to check now. Choosing
+`ask` restores the welcome on future activations. Never write or infer a mode just
+because a checkpoint exists.
 
 ## Ask once, together
 
@@ -13,6 +47,8 @@ Do not ask for a directory or preference already supplied. Use one native
 questionnaire if it supports multiple fields; otherwise send one compact message:
 
 > Set this up in `<current directory>` (or tell me another directory):
+> - On activation: **check agents directly**, or **ask first**? For recurring
+>   checks, checking directly skips the repeated welcome question; it stays read-only.
 > - Follow **all agents in this session**, or **a selected group**?
 > - Remember selected work for next time: **yes / no**? This saves short context,
 >   next steps and recovery pointers, not transcripts or an automatic agent roster.

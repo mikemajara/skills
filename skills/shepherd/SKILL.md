@@ -6,11 +6,11 @@ description: >
   Human-directed Shepherd for agents in the current Herdr session: recover context,
   summarize actionable work, message an existing owner when explicitly asked, and
   verify progress. Use for "be my shepherd", attention briefs, pushing a named
-  agent, recovering lost sessions, or deciding to park/wrap up work. On bare
-  "be my Shepherd" activation, do not promise or begin a herd scan before loading
-  this skill; give its lightweight welcome choices and wait. Inspect only when the
-  user explicitly asks for a brief or targeted action. Optional local instructions
-  and active/parked thread recovery; opt-in pane links. Never take over implementation.
+  agent, recovering lost sessions, or deciding to park/wrap up work. Load this
+  skill and local setup before choosing an activation path: default_mode: check
+  goes directly to a read-only brief; ask (the fallback) welcomes and waits.
+  Explicit requests override the default. Optional local instructions and
+  active/parked thread recovery; opt-in pane links. Never take over implementation.
 ---
 
 # Shepherd
@@ -33,15 +33,35 @@ new agent, workspace, scheduler, or team.
 
 ## Route the request before inspecting
 
-Taking the Shepherd role is not a request to inspect the whole herd. Read the
-user's actual request and choose the smallest appropriate path:
+Read the user's actual request and local standing setup before choosing the
+smallest appropriate path. A saved default is standing permission for read-only
+inspection, not dispatch or implementation.
+
+### Default mode
+
+Read `default_mode` from `.shepherd/instructions.md` in the current working
+directory (see [setup](references/setup.md#default-mode)). Supported values:
+
+- `ask`: show the welcome and wait. This is the fallback when the setting is absent.
+- `check`: on activation, go directly to the read-only attention brief for the
+  configured remit in the inherited Herdr session. Do not ask whether to check
+  agents again; the setting already answers that question.
+
+An explicit request for this run takes precedence over the saved mode. A runner's
+invocation may explicitly supply `default_mode: check` or `default_mode: ask` for
+that run without writing setup. A schedule or repeated invocation alone supplies
+no mode or authorization. If a saved value is invalid or conflicting, explain it
+and use `ask`; do not silently scan or rewrite the setting. Do not infer `check`
+from checkpoint presence, saved thread statuses, or the fact that setup exists.
 
 - **Bare activation** ("be my Shepherd", "you're the Shepherd of this herd"):
   load the skill, check inherited Herdr access, detect/read local standing setup
-  and version information, and check navigation registration. These are lightweight
-  checks only: no agent/workspace/pane inventory, transcript reads, history search,
-  work-record lookup, or checkpoint reconciliation. Show the short welcome below,
-  then **stop and wait for the user's choice**, even when saved setup exists.
+  and version information, and check navigation registration. Before resolving
+  the mode, these are lightweight checks only: no agent/workspace/pane inventory,
+  transcript reads, history search, work-record lookup, or checkpoint reconciliation.
+  With `check`, continue along the brief path below without a welcome question.
+  With `ask`, show the short welcome below, then **stop and wait for the user's
+  choice**.
 - **Explicit brief** ("what needs attention?", "check on my agents"):
   inspect the requested scope and return the brief. Do not insert an onboarding
   menu or block it on optional setup; offer missing navigation setup once at the end.
@@ -52,13 +72,13 @@ user's actual request and choose the smallest appropriate path:
   the requested action. Broaden discovery only to resolve ambiguous identity or
   an explicitly requested scope, not to generate an unrelated herd-wide brief.
 
-For bare activation, send no progress narration about investigating the herd.
-Do not say you will inspect/check/review agents, discover workspaces, read agent
-clues, or summarize what's active—not even as a first response while setup checks
-run. Those phrases imply a scan the user hasn't chosen and make the welcome feel
-like a fake gate. A neutral progress line required by the harness may say it will
-load Shepherd guidance and check local setup, then wait; it must not imply a herd
-scan. After lightweight checks, make the welcome the first substantive answer and
+For bare activation, do not promise a herd scan before loading the skill and
+resolving the mode. A harness-required neutral progress line may say it will load
+Shepherd guidance and check local setup. With `check` resolved, briefly say you
+are checking the configured scope and proceed to the brief. With `ask`, send no
+progress narration about investigating agents, discovering workspaces, reading
+agent clues, or summarizing what's active: those phrases imply a scan the user
+hasn't chosen. In `ask` mode, make the welcome the first substantive answer and
 stop, using this short copy:
 
 - If neither `.shepherd/instructions.md` nor `.shepherd/threads.json` exists:
@@ -83,12 +103,15 @@ exists, not "set things up." Do not list saved thread titles or resume/reconcile
 them before the user chooses. Do not add setup terminology or file names to the
 welcome. The user's explicit intent overrides the menu: "be my Shepherd and
 check on my agents" is an inspection request, not bare activation. Never continue
-from the welcome into a crawl or setup write in the same turn without a choice.
+from an `ask`-mode welcome into a crawl or setup write in the same turn without
+a choice. Configuration-only requests do not trigger a brief, even when saving
+`check`; apply that default on the next activation unless the user also asks to
+check now. An explicit "don't inspect" or targeted request always wins.
 
 ## Optional setup and recovery
 
 On activation, show `Shepherd v0.2.0` once. Version checks do not authorize herd
-inspection. If an existing
+inspection; a resolved `check` mode or explicit inspection request does. If an existing
 checkpoint's last-seen version differs, read [the skill changelog](CHANGELOG.md),
 briefly explain the relevant changes, and record the reviewed version with the
 checkpoint helper. Do not fetch updates or create setup just to remember a
@@ -99,8 +122,9 @@ Once inside Herdr, check navigation availability during startup: read
 [navigation setup](references/navigation.md), inspect `herdr plugin list` and the
 registered `shepherd-navigation` action before generating links. If missing,
 disabled, or registered to another copy, note it without installing anything.
-For bare activation, keep the initial welcome to its two choices; defer navigation
-setup to the setup path. During setup, include the click-to-jump choice in the
+For `ask`-mode bare activation, keep the initial welcome to its two choices;
+defer navigation setup to the setup path. For `check`, do not gate the brief on
+navigation setup; use plain IDs if needed. During setup, include the click-to-jump choice in the
 batched questionnaire, skipping it when already answered. Use plain language:
 "Would you like to click an agent's name in my summaries to jump straight to it?"
 For an explicit brief, offer that option once after the brief. Keep requested
@@ -115,8 +139,9 @@ Look for `.shepherd/instructions.md` and `.shepherd/threads.json` in the current
 working directory. Missing files do not block one-off use and do not imply that
 a brief was requested. Follow the request routing above. When setup is chosen,
 read [the setup guide](references/setup.md) and batch unanswered independent
-choices: work to follow, remember work for next time, clickable agent names, and
-Git privacy (everything local by default, or share instructions only). Use one
+choices: default mode (check directly or ask first), work to follow, remember
+work for next time, clickable agent names, and Git privacy (everything local by
+default, or share instructions only). Use one
 native questionnaire if the harness supports these fields; otherwise ask in one
 compact message. Use the current directory and supplied answers as defaults;
 ask follow-ups only for dependent ambiguities, not one turn per preference.
@@ -126,8 +151,8 @@ for an informed decision. Read [recovery](references/recovery.md) before creatin
 or changing either file, reconciling saved work, or parking a thread. Create setup
 only with explicit approval in a user-chosen directory:
 
-- `instructions.md`: standing name, remit/exclusions, priorities and reporting
-  preferences. No changing statuses or copied backlog.
+- `instructions.md`: standing name, `default_mode`, remit/exclusions, priorities
+  and reporting preferences. No changing statuses or copied backlog.
 - `threads.json`: a small checkpoint of opted-in `active` or `parked` threads,
   native harness/session recovery pointers, concise context and next step. Use
   the bundled helper for scoped, locked, atomic writes. Remove wrapped/discarded
@@ -149,7 +174,9 @@ owner rather than automatically resend or restore. Missing panes are recovery
 leads, not grounds for deletion. On resume, keep the record as active until an
 explicit wrap-up or discard.
 
-Local instructions and checkpoints are not permission to act beyond the current
+A valid `default_mode: check` in local instructions is standing permission for
+read-only briefs within the saved remit, unless the current request overrides it.
+Neither that mode nor checkpoints authorize dispatch or action beyond the current
 request or prior delegation. Derive session scope from the inherited context,
 not saved records. Reconcile only within this herd; a mismatch is a blocker, not
 permission to inspect elsewhere. Two Shepherds may use different directories and
@@ -166,11 +193,15 @@ owner remains a recovery lead, not a live agent. Do not silently rewrite the
 checkpoint from a snapshot. If scope or priorities conflict with evidence, show
 the discrepancy and ask.
 
-## Inspect only when requested
+## Inspect when requested or configured
 
-This workflow runs only on the inspection/action paths above, never during bare
-activation or setup. An explicit herd-wide brief permits inventory across this
-session; a targeted request does not warrant reading every other agent.
+This workflow runs on explicit inspection/action requests or activation with a
+resolved `check` mode, never during `ask`-mode bare activation or setup. A saved
+`check` mode permits read-only inspection of the configured remit; without a
+narrower remit, use the other recognized agents in this inherited session. An
+explicit herd-wide brief permits inventory across this session; a targeted
+request does not warrant reading every other agent. Use the same brief format
+for configured checks as for explicit briefs.
 
 1. Discover recognized agents and their workspaces, preserving one record per
    live pane ID: a workspace can contain several independent agents. Never dedupe

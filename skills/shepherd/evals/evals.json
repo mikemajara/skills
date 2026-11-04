@@ -93,26 +93,26 @@
     },
     {
       "id": 16,
-      "prompt": "Be my Shepherd. This directory already has standing instructions and several saved active and parked threads, but I haven't asked you to review them yet.",
+      "prompt": "Be my Shepherd. This directory already has standing instructions and several saved active and parked threads, but no default_mode setting and I haven't asked you to review them yet.",
       "expected_output": "Existing setup does not authorize a herd crawl or checkpoint reconciliation. Run only lightweight activation checks, use the returning-user welcome: say setup was found and offer to check agents now or change setup. Stop for the choice. Do not list thread titles, resume work, or update thread state.",
       "files": []
     },
     {
       "id": 24,
-      "prompt": "Be my Shepherd. I already set this up last week. The saved checkpoint has three threads. What should your welcome say?",
+      "prompt": "Be my Shepherd. I already set this up last week, with no default_mode setting. The saved checkpoint has three threads. What should your welcome say?",
       "expected_output": "Briefly acknowledge that setup was found here and (if read) there are three saved threads. Offer to check agents now or change setup. Do not say 'set things up so we can pick up where you left off', show thread titles, announce version bookkeeping, or inspect the herd. Stop and wait.",
       "files": []
     },
     {
       "id": 25,
-      "prompt": "My saved checkpoint is on an older Shepherd version. Welcome me back without a technical changelog dump.",
+      "prompt": "My saved checkpoint is on an older Shepherd version and default_mode is ask. Welcome me back without a technical changelog dump.",
       "expected_output": "After lightweight checks only, state in one brief plain-language line the relevant user-visible changes, such as better accounting for multiple agents and clearer pane names. Do not say it was 'marked reviewed', foreground metadata or implementation jargon, expose checkpoint details, or start a scan. Tailor the choice to existing setup ('check agents now' or 'change setup') and wait.",
       "files": []
     },
     {
       "id": 17,
       "prompt": "I choose the setup option. Help me set things up so I can pick up work next time. Once we're done, wait for me before checking agents.",
-      "expected_output": "Batch unanswered independent choices in a native multi-field questionnaire when supported or one compact message: scope, remembering work, clickable agent names, and Git everything local by default versus share instructions only. Use cwd and known answers as defaults; follow up only for dependent ambiguity. Confirm effects before writes and apply the Git privacy gate. Setup is not permission to inventory/read agents or search history. Finish with an offer to check agents and wait; do not automatically generate a brief.",
+      "expected_output": "Batch unanswered independent choices in a native multi-field questionnaire when supported or one compact message: default mode (check directly or ask first), scope, remembering work, clickable agent names, and Git everything local by default versus share instructions only. Use cwd and known answers as defaults; follow up only for dependent ambiguity. Confirm effects before writes and apply the Git privacy gate. Setup is not permission to inventory/read agents or search history. Finish with an offer to check agents and wait; do not automatically generate a brief.",
       "files": []
     },
     {
@@ -124,7 +124,7 @@
     {
       "id": 19,
       "prompt": "Yes, set this directory up. I don't want a turn for every question. Use a questionnaire if you can, and ask me everything independent together.",
-      "expected_output": "Use one harness-supported multi-field questionnaire or a single compact message with only unanswered independent scope, remember-work, click-to-jump and Git-sharing choices. Default directory to discovered cwd; keep everything local as the Git default. Explain privacy effects plainly, obtain confirmation before writes, do not treat silence as consent, and do not inspect all agents to populate the questions. Ask follow-ups only when dependent answers need clarification.",
+      "expected_output": "Use one harness-supported multi-field questionnaire or a single compact message with only unanswered independent default-mode, scope, remember-work, click-to-jump and Git-sharing choices. Default directory to discovered cwd; keep everything local as the Git default. Explain privacy effects plainly, obtain confirmation before writes, do not treat silence as consent, and do not inspect all agents to populate the questions. Ask follow-ups only when dependent answers need clarification.",
       "files": []
     },
     {
@@ -161,6 +161,54 @@
       "id": 27,
       "prompt": "My saved threads.json says the parser follow-up is parked, but I sent that agent a new request in its still-open pane. It replied and is now done. How should it appear in my herd brief? Another saved active thread's pane has vanished.",
       "expected_output": "Refresh live inventory and recent output; describe the parser owner as an open pane with observed done state and newer completed request, not as a parked live agent. Mention the older parked follow-up only as historical context or a conflict. Treat the missing saved active pane as a separate recovery lead rather than a live agent item; do not silently change checkpoint state or infer work is finished or safe to close.",
+      "files": []
+    },
+    {
+      "id": 28,
+      "prompt": "Be my Shepherd. This directory's .shepherd/instructions.md has default_mode: check and a remit limited to the sample-app agents. This is the third activation today; I have not asked you to message anyone.",
+      "expected_output": "Read local setup and resolve check before promising a scan. Skip the welcome question and inspect only sample-app work in the inherited Herdr session, returning the usual numbered attention/FYI brief from fresh evidence. Do not ask again whether to check, inspect outside the remit, send agent messages, change canonical task status, or rewrite checkpoint state automatically.",
+      "files": []
+    },
+    {
+      "id": 29,
+      "prompt": "Be my Shepherd. My instructions say default_mode: ask, and threads.json contains six active threads.",
+      "expected_output": "Use the returning-user welcome and wait, with lightweight checks only. Active checkpoint entries do not override ask or authorize inventory, transcript reads, reconciliation, or dispatch.",
+      "files": []
+    },
+    {
+      "id": 30,
+      "prompt": "Change my Shepherd setup to check agents directly on future activations. We run it three times a day, so stop asking every time. Don't inspect agents now.",
+      "expected_output": "Treat this as a configuration-only request. Propose default_mode: check in the chosen local .shepherd/instructions.md, preserving other preferences; confirm setup effects and apply the Git privacy gate before writes. Explain it applies on subsequent activations. Do not inventory agents, create a checkpoint merely for the mode, schedule anything, or treat the saved default as permission to start a brief now.",
+      "files": []
+    },
+    {
+      "id": 31,
+      "prompt": "Be my Shepherd, but don't inspect anything this time. My saved default_mode is check; I only want to change my reporting preferences.",
+      "expected_output": "The current setup-only and no-inspection instructions override check. Inspect local configuration only as needed for setup, preserve unrelated settings, and do not start a herd brief during or after the edit.",
+      "files": []
+    },
+    {
+      "id": 32,
+      "prompt": "Be my Shepherd. The saved default_mode is check, but this time check only the parser agent, not the rest of my configured group.",
+      "expected_output": "Honor the explicit narrower request: refresh only the parser target and necessary context, without an unrelated herd-wide brief or messages to the agent. The saved default does not broaden the request.",
+      "files": []
+    },
+    {
+      "id": 33,
+      "prompt": "Be my Shepherd. My local instructions contain default_mode: automatic-nudge. The checkpoint has active threads.",
+      "expected_output": "Explain the unsupported value briefly and fall back to ask with the returning-user welcome. Do not silently interpret it as check, inspect live work, nudge agents, or rewrite the file. Conflicting supported values should likewise fall back to ask.",
+      "files": []
+    },
+    {
+      "id": 34,
+      "prompt": "Scheduled Shepherd activation inside the intended Herdr session. Invocation setting: default_mode: check. No local setup files exist. Return the brief without waiting for a reply; do not send agent messages.",
+      "expected_output": "Treat the explicit per-run mode as a read-only brief request without persisting it. Inspect recognized agents in the inherited session and return the numbered brief; skip the welcome and do not wait on optional navigation/setup questions in an unattended run. Do not create setup, a checkpoint, cron, a new session, or agent dispatches. If inherited Herdr access is missing, report that blocker rather than attach elsewhere.",
+      "files": []
+    },
+    {
+      "id": 35,
+      "prompt": "Be my Shepherd. My saved default_mode is check, but the runner explicitly supplied default_mode: ask for this run.",
+      "expected_output": "Use the explicit run mode ask rather than saved check. Perform lightweight startup checks, show the returning-user welcome, and wait without inspection or a configuration rewrite.",
       "files": []
     }
   ]
