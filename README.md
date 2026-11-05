@@ -25,6 +25,7 @@ npx skills add mikemajara/skills --skill unmeta
 npx skills add mikemajara/skills --skill voice
 npx skills add mikemajara/skills --skill scroll-presentation
 npx skills add mikemajara/skills --skill cite-sources
+npx skills add mikemajara/skills --skill agent-conversation
 ```
 
 Each skill has its own version in `SKILL.md` and a `CHANGELOG.md` alongside it
@@ -38,6 +39,7 @@ how future changes are recorded.
 | Skill | What it is |
 | ----- | ---------- |
 | [`shepherd`](skills/shepherd/) | Coordinate existing agents in the current Herdr session; numbered briefs, opt-in pane links, and active/parked recovery checkpoints. |
+| [`agent-conversation`](skills/agent-conversation/) | Talk with another live agent through Herdr, exchange follow-ups, and preserve unresolved differences. Requires Herdr's official `herdr` skill. |
 | [`sdlc-first-principles`](skills/sdlc-first-principles/) | Apply a five-step first-principles process lens to SDLC work. |
 | [`conversation`](skills/conversation/) | Pressure-test a mostly formed idea (gaps, contradictions, edges). |
 | [`brainstorm`](skills/brainstorm/) | Generate new angles and option catalogs. |

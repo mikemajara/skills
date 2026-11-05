@@ -2,6 +2,10 @@
 
 ## Unreleased
 
+### Added
+
+- `agent-conversation` 0.1.0: a Herdr-backed conversation bridge requiring the official `herdr` skill; targets verified live agents, relays bounded follow-ups, and preserves uncertainty without implicitly spawning agents or taking over work. A guarded raw-pane fallback supports known foreground agents that Herdr does not recognize.
+
 ### Changed
 
 - `shepherd`: add a configurable activation mode for direct read-only checks on
