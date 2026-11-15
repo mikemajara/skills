@@ -4,6 +4,10 @@
 
 ### Added
 
+- `agent-enablement` 0.1.0: explicit role-specific enablement with bounded research
+  and selective approval before acquisition or assignment. See its
+  [changelog](skills/agent-enablement/CHANGELOG.md).
+
 - `agent-conversation` 0.1.0: a Herdr-backed conversation bridge requiring the official `herdr` skill; targets verified live agents, relays bounded follow-ups, and preserves uncertainty without implicitly spawning agents or taking over work. A guarded raw-pane fallback supports known foreground agents that Herdr does not recognize.
 
 ### Changed

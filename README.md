@@ -38,6 +38,7 @@ how future changes are recorded.
 
 | Skill | What it is |
 | ----- | ---------- |
+| [`agent-enablement`](skills/agent-enablement/) | Explicitly requested, role-specific learning paths with bounded research and user-approved skill acquisition and assignment. |
 | [`shepherd`](skills/shepherd/) | Coordinate existing agents in the current Herdr session; numbered briefs, opt-in pane links, and active/parked recovery checkpoints. |
 | [`agent-conversation`](skills/agent-conversation/) | Talk with another live agent through Herdr, exchange follow-ups, and preserve unresolved differences. Requires Herdr's official `herdr` skill. |
 | [`sdlc-first-principles`](skills/sdlc-first-principles/) | Apply a five-step first-principles process lens to SDLC work. |
