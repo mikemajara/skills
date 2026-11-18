@@ -1,9 +1,8 @@
-# Role-directed research
+# Research for the current question
 
-Read this only for the external part of enablement. Keep the entrypoint's shared
-budget across marketplace searches, web searches, and inspected pages; changing
-search tools does not reset it. A direct source lookup uses a page slot even when
-no search is needed. Do not exhaust the budget just to reach its limit.
+Read this when external evidence would advance the conversation. Focus on the
+question being discussed, whether it concerns a broad role or one capability.
+Keep research proportionate and respect any user-specified budget across tools.
 
 ## Choose sources that can answer the gap
 
@@ -29,12 +28,12 @@ professional review. Do not claim to have consulted someone from reading a page.
 Keep a compact record of searches, inspected sources, findings, and unresolved
 gaps. Cite the specific pages or files that support recommendations. If a source
 is inaccessible or evidence conflicts, preserve that uncertainty. When the first
-pass is insufficient, explain the remaining question and propose a focused next
-pass for the user to approve.
+pass is insufficient, explain what remains uncertain and use the conversation to
+choose the next useful direction.
 
 For example, a frontend agent may need one framework skill and official library
 documentation. A bookkeeping agent may need local spreadsheet guidance, current
 rules for the applicable jurisdiction, and an accountant to review an ambiguous
-classification. Either proposal should distinguish reusable instructions from
-knowledge and from expert judgment, with an observable practice task for each
-stage. These are examples, not fixed bundles or claims of qualification.
+classification. Distinguish reusable instructions from knowledge and expert
+judgment. If the user wants to try a recommendation, suggest a small practical
+exercise. These are examples, not fixed bundles or claims of qualification.

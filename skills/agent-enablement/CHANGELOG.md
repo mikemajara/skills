@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.2.0 — 2026-11-18
+
+- Make incremental conversation the default, informed by local skills, methods,
+  tools, and internet resources; plans and configuration follow explicit requests.
+- Treat existing skills as the baseline and remove per-agent assignment checks
+  and product-specific configuration assumptions from the workflow.
+- Replace the mandatory research/report package with focused research shaped by
+  the current question and the user's budget.
+
 ## 0.1.0 — 2026-11-13
 
 - Initial explicitly invoked enablement workflow: clarify the role, inspect local

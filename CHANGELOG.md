@@ -12,6 +12,10 @@
 
 ### Changed
 
+- `agent-enablement` 0.2.0: conversational capability exploration with relevant
+  skills and resources, without a per-agent assignment model. See its
+  [changelog](skills/agent-enablement/CHANGELOG.md).
+
 - `shepherd`: add a configurable activation mode for direct read-only checks on
   recurring runs, retaining ask-first behavior when unset and explicit-request
   overrides. See the [Shepherd changelog](skills/shepherd/CHANGELOG.md).
