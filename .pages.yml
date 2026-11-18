@@ -1,0 +1,342 @@
+# Pages CMS keeps these Markdown files as raw text so frontmatter and formatting stay intact.
+content:
+  - name: repository-docs
+    label: Repository docs
+    type: group
+    items:
+      - name: repo-README-md
+        label: README
+        type: file
+        path: README.md
+        format: raw
+        operations:
+          create: false
+          delete: false
+      - name: repo-CHANGELOG-md
+        label: Project changelog
+        type: file
+        path: CHANGELOG.md
+        format: raw
+        operations:
+          create: false
+          delete: false
+      - name: repo-docs-skill-versioning-follow-up-md
+        label: Skill versioning
+        type: file
+        path: docs/skill-versioning-follow-up.md
+        format: raw
+        operations:
+          create: false
+          delete: false
+  - name: skills
+    label: Skills
+    type: group
+    items:
+      - name: agent-conversation
+        label: agent-conversation
+        type: group
+        items:
+          - name: agent-conversation-skill
+            label: Skill definition
+            type: file
+            path: skills/agent-conversation/SKILL.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+          - name: agent-conversation-changelog
+            label: Changelog
+            type: file
+            path: skills/agent-conversation/CHANGELOG.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+      - name: agent-enablement
+        label: agent-enablement
+        type: group
+        items:
+          - name: agent-enablement-skill
+            label: Skill definition
+            type: file
+            path: skills/agent-enablement/SKILL.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+          - name: agent-enablement-changelog
+            label: Changelog
+            type: file
+            path: skills/agent-enablement/CHANGELOG.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+      - name: brainstorm
+        label: brainstorm
+        type: group
+        items:
+          - name: brainstorm-skill
+            label: Skill definition
+            type: file
+            path: skills/brainstorm/SKILL.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+          - name: brainstorm-changelog
+            label: Changelog
+            type: file
+            path: skills/brainstorm/CHANGELOG.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+      - name: cite-sources
+        label: cite-sources
+        type: group
+        items:
+          - name: cite-sources-skill
+            label: Skill definition
+            type: file
+            path: skills/cite-sources/SKILL.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+          - name: cite-sources-changelog
+            label: Changelog
+            type: file
+            path: skills/cite-sources/CHANGELOG.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+      - name: collaboration
+        label: collaboration
+        type: group
+        items:
+          - name: collaboration-skill
+            label: Skill definition
+            type: file
+            path: skills/collaboration/SKILL.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+          - name: collaboration-changelog
+            label: Changelog
+            type: file
+            path: skills/collaboration/CHANGELOG.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+      - name: conversation
+        label: conversation
+        type: group
+        items:
+          - name: conversation-skill
+            label: Skill definition
+            type: file
+            path: skills/conversation/SKILL.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+          - name: conversation-changelog
+            label: Changelog
+            type: file
+            path: skills/conversation/CHANGELOG.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+      - name: google-docs
+        label: google-docs
+        type: group
+        items:
+          - name: google-docs-skill
+            label: Skill definition
+            type: file
+            path: skills/google-docs/SKILL.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+          - name: google-docs-changelog
+            label: Changelog
+            type: file
+            path: skills/google-docs/CHANGELOG.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+      - name: nightly-learn
+        label: nightly-learn
+        type: group
+        items:
+          - name: nightly-learn-skill
+            label: Skill definition
+            type: file
+            path: skills/nightly-learn/SKILL.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+          - name: nightly-learn-changelog
+            label: Changelog
+            type: file
+            path: skills/nightly-learn/CHANGELOG.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+      - name: publish
+        label: publish
+        type: group
+        items:
+          - name: publish-skill
+            label: Skill definition
+            type: file
+            path: skills/publish/SKILL.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+          - name: publish-changelog
+            label: Changelog
+            type: file
+            path: skills/publish/CHANGELOG.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+      - name: scroll-presentation
+        label: scroll-presentation
+        type: group
+        items:
+          - name: scroll-presentation-skill
+            label: Skill definition
+            type: file
+            path: skills/scroll-presentation/SKILL.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+          - name: scroll-presentation-changelog
+            label: Changelog
+            type: file
+            path: skills/scroll-presentation/CHANGELOG.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+      - name: sdlc-first-principles
+        label: sdlc-first-principles
+        type: group
+        items:
+          - name: sdlc-first-principles-skill
+            label: Skill definition
+            type: file
+            path: skills/sdlc-first-principles/SKILL.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+          - name: sdlc-first-principles-changelog
+            label: Changelog
+            type: file
+            path: skills/sdlc-first-principles/CHANGELOG.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+      - name: shepherd
+        label: shepherd
+        type: group
+        items:
+          - name: shepherd-skill
+            label: Skill definition
+            type: file
+            path: skills/shepherd/SKILL.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+          - name: shepherd-changelog
+            label: Changelog
+            type: file
+            path: skills/shepherd/CHANGELOG.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+          - name: shepherd-readme
+            label: Listing page
+            type: file
+            path: skills/shepherd/README.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+      - name: tldr-session
+        label: tldr-session
+        type: group
+        items:
+          - name: tldr-session-skill
+            label: Skill definition
+            type: file
+            path: skills/tldr-session/SKILL.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+          - name: tldr-session-changelog
+            label: Changelog
+            type: file
+            path: skills/tldr-session/CHANGELOG.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+      - name: unmeta
+        label: unmeta
+        type: group
+        items:
+          - name: unmeta-skill
+            label: Skill definition
+            type: file
+            path: skills/unmeta/SKILL.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+          - name: unmeta-changelog
+            label: Changelog
+            type: file
+            path: skills/unmeta/CHANGELOG.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+      - name: voice
+        label: voice
+        type: group
+        items:
+          - name: voice-skill
+            label: Skill definition
+            type: file
+            path: skills/voice/SKILL.md
+            format: raw
+            operations:
+              create: false
+              delete: false
+          - name: voice-changelog
+            label: Changelog
+            type: file
+            path: skills/voice/CHANGELOG.md
+            format: raw
+            operations:
+              create: false
+              delete: false
