@@ -1,4 +1,4 @@
-# Pages CMS keeps these Markdown files as raw text so frontmatter and formatting stay intact.
+# Skill definitions use a Markdown editor; other repository docs stay in raw mode.
 content:
   - name: repository-docs
     label: Repository docs
@@ -38,9 +38,32 @@ content:
         items:
           - name: agent-conversation-skill
             label: Skill definition
-            type: rich-text
+            type: file
             path: skills/agent-conversation/SKILL.md
-            format: raw
+            format: yaml-frontmatter
+            fields:
+              - &skill-name
+                name: name
+                type: string
+                required: true
+              - &skill-description
+                name: description
+                type: text
+                required: true
+              - &skill-metadata
+                name: metadata
+                type: object
+                fields:
+                  - name: version
+                    type: string
+              - name: compatibility
+                type: text
+              - &skill-body
+                name: body
+                type: rich-text
+                options:
+                  format: markdown
+                  switcher: true
             operations:
               create: false
               delete: false
@@ -60,7 +83,12 @@ content:
             label: Skill definition
             type: file
             path: skills/agent-enablement/SKILL.md
-            format: raw
+            format: yaml-frontmatter
+            fields:
+              - *skill-name
+              - *skill-description
+              - *skill-metadata
+              - *skill-body
             operations:
               create: false
               delete: false
@@ -80,7 +108,12 @@ content:
             label: Skill definition
             type: file
             path: skills/brainstorm/SKILL.md
-            format: raw
+            format: yaml-frontmatter
+            fields:
+              - *skill-name
+              - *skill-description
+              - *skill-metadata
+              - *skill-body
             operations:
               create: false
               delete: false
@@ -100,7 +133,12 @@ content:
             label: Skill definition
             type: file
             path: skills/cite-sources/SKILL.md
-            format: raw
+            format: yaml-frontmatter
+            fields:
+              - *skill-name
+              - *skill-description
+              - *skill-metadata
+              - *skill-body
             operations:
               create: false
               delete: false
@@ -120,7 +158,12 @@ content:
             label: Skill definition
             type: file
             path: skills/collaboration/SKILL.md
-            format: raw
+            format: yaml-frontmatter
+            fields:
+              - *skill-name
+              - *skill-description
+              - *skill-metadata
+              - *skill-body
             operations:
               create: false
               delete: false
@@ -140,7 +183,12 @@ content:
             label: Skill definition
             type: file
             path: skills/conversation/SKILL.md
-            format: raw
+            format: yaml-frontmatter
+            fields:
+              - *skill-name
+              - *skill-description
+              - *skill-metadata
+              - *skill-body
             operations:
               create: false
               delete: false
@@ -160,7 +208,12 @@ content:
             label: Skill definition
             type: file
             path: skills/google-docs/SKILL.md
-            format: raw
+            format: yaml-frontmatter
+            fields:
+              - *skill-name
+              - *skill-description
+              - *skill-metadata
+              - *skill-body
             operations:
               create: false
               delete: false
@@ -180,7 +233,12 @@ content:
             label: Skill definition
             type: file
             path: skills/nightly-learn/SKILL.md
-            format: raw
+            format: yaml-frontmatter
+            fields:
+              - *skill-name
+              - *skill-description
+              - *skill-metadata
+              - *skill-body
             operations:
               create: false
               delete: false
@@ -200,7 +258,12 @@ content:
             label: Skill definition
             type: file
             path: skills/publish/SKILL.md
-            format: raw
+            format: yaml-frontmatter
+            fields:
+              - *skill-name
+              - *skill-description
+              - *skill-metadata
+              - *skill-body
             operations:
               create: false
               delete: false
@@ -220,7 +283,12 @@ content:
             label: Skill definition
             type: file
             path: skills/scroll-presentation/SKILL.md
-            format: raw
+            format: yaml-frontmatter
+            fields:
+              - *skill-name
+              - *skill-description
+              - *skill-metadata
+              - *skill-body
             operations:
               create: false
               delete: false
@@ -240,7 +308,12 @@ content:
             label: Skill definition
             type: file
             path: skills/sdlc-first-principles/SKILL.md
-            format: raw
+            format: yaml-frontmatter
+            fields:
+              - *skill-name
+              - *skill-description
+              - *skill-metadata
+              - *skill-body
             operations:
               create: false
               delete: false
@@ -260,7 +333,12 @@ content:
             label: Skill definition
             type: file
             path: skills/shepherd/SKILL.md
-            format: raw
+            format: yaml-frontmatter
+            fields:
+              - *skill-name
+              - *skill-description
+              - *skill-metadata
+              - *skill-body
             operations:
               create: false
               delete: false
@@ -288,7 +366,12 @@ content:
             label: Skill definition
             type: file
             path: skills/tldr-session/SKILL.md
-            format: raw
+            format: yaml-frontmatter
+            fields:
+              - *skill-name
+              - *skill-description
+              - *skill-metadata
+              - *skill-body
             operations:
               create: false
               delete: false
@@ -308,7 +391,12 @@ content:
             label: Skill definition
             type: file
             path: skills/unmeta/SKILL.md
-            format: raw
+            format: yaml-frontmatter
+            fields:
+              - *skill-name
+              - *skill-description
+              - *skill-metadata
+              - *skill-body
             operations:
               create: false
               delete: false
@@ -328,7 +416,14 @@ content:
             label: Skill definition
             type: file
             path: skills/voice/SKILL.md
-            format: raw
+            format: yaml-frontmatter
+            fields:
+              - *skill-name
+              - *skill-description
+              - *skill-metadata
+              - name: disable-model-invocation
+                type: boolean
+              - *skill-body
             operations:
               create: false
               delete: false
