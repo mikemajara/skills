@@ -38,7 +38,7 @@ content:
         items:
           - name: agent-conversation-skill
             label: Skill definition
-            type: file
+            type: rich-text
             path: skills/agent-conversation/SKILL.md
             format: raw
             operations:
