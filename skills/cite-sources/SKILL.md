@@ -40,9 +40,8 @@ own URL. The reader should reach the source in one click.
 | GitHub PR | `https://github.com/<owner>/<repo>/pull/<number>` |
 | GitHub issue | `https://github.com/<owner>/<repo>/issues/<number>` |
 
-For other sources, prefer the canonical permalink the tool or app returns.
-Gmail `u/0` assumes the first signed-in account; adjust if the account index is
-known.
+When sources involve an account the links above may vary slightly. Always prefer
+the the canonical permalink the tool or app returns.
 
 ## Examples
 
