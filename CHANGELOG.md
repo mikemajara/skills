@@ -5,10 +5,17 @@
 ### Added
 
 - `editorial-workflow` 0.1.0: lightweight editorial flow for blog articles and website copy, from brief and sourced research through version-specific approval and publication verification.
+- `agent-enablement` 0.1.0: explicit role-specific enablement with bounded research
+  and selective approval before acquisition or assignment. See its
+  [changelog](skills/agent-enablement/CHANGELOG.md).
 
 - `agent-conversation` 0.1.0: a Herdr-backed conversation bridge requiring the official `herdr` skill; targets verified live agents, relays bounded follow-ups, and preserves uncertainty without implicitly spawning agents or taking over work. A guarded raw-pane fallback supports known foreground agents that Herdr does not recognize.
 
 ### Changed
+
+- `agent-enablement` 0.2.0: conversational capability exploration with relevant
+  skills and resources, without a per-agent assignment model. See its
+  [changelog](skills/agent-enablement/CHANGELOG.md).
 
 - `shepherd`: add a configurable activation mode for direct read-only checks on
   recurring runs, retaining ask-first behavior when unset and explicit-request

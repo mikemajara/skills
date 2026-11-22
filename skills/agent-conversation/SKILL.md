@@ -110,3 +110,5 @@ approval dialog or crossing a new permission boundary. Do not take over the
 other agent's work, edit artifacts, or send follow-up work orders unless the
 user asked for those actions. Conversing is not permission to accept an agent's
 proposed changes or make them yourself.
+
+.
