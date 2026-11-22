@@ -21,6 +21,7 @@ npx skills add mikemajara/skills --skill collaboration
 npx skills add mikemajara/skills --skill nightly-learn
 npx skills add mikemajara/skills --skill tldr-session
 npx skills add mikemajara/skills --skill publish
+npx skills add mikemajara/skills --skill editorial-workflow
 npx skills add mikemajara/skills --skill unmeta
 npx skills add mikemajara/skills --skill voice
 npx skills add mikemajara/skills --skill scroll-presentation
@@ -49,6 +50,7 @@ how future changes are recorded.
 | [`nightly-learn`](skills/nightly-learn/) | Promote sticky how-to from an agent’s own memory into skills (HITL for shared). |
 | [`tldr-session`](skills/tldr-session/) | Four-part recap of the current conversation (start, status, done, pending). |
 | [`publish`](skills/publish/) | Review and reshape work announcements, long-form writing, and social posts before publication. |
+| [`editorial-workflow`](skills/editorial-workflow/) | Move blog articles and website copy from brief through research, review, approval, and publication verification. |
 | [`unmeta`](skills/unmeta/) | Keep the authoring conversation out of authored content; ask whenever the boundary is unclear. |
 | [`voice`](skills/voice/) | Apply a concise, warm, direct personal voice to work or personal writing when explicitly requested. |
 | [`scroll-presentation`](skills/scroll-presentation/) | Build a scroll-driven story page (pinned scenes, morphing objects, snap-to-step) as one offline, mobile-first HTML file, for pitches, explainers, walkthroughs, or lessons. |

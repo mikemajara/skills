@@ -4,6 +4,7 @@
 
 ### Added
 
+- `editorial-workflow` 0.1.0: lightweight editorial flow for blog articles and website copy, from brief and sourced research through version-specific approval and publication verification.
 - `agent-enablement` 0.1.0: explicit role-specific enablement with bounded research
   and selective approval before acquisition or assignment. See its
   [changelog](skills/agent-enablement/CHANGELOG.md).
