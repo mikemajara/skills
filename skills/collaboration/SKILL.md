@@ -28,16 +28,16 @@ material. As such, it shouldn't contain text or notes from your work or conversa
 with the user that must remain between you and the user.
 
 WRONG
-"""
+```
 -- Document for John Doe to present to Customer
 
 <document>
-"""
+```
 
 RIGHT
-"""
+```
 <document>
-"""
+```
 
 ## Establish access
 
