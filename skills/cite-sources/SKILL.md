@@ -5,17 +5,13 @@ metadata:
 description: >-
   Use whenever you report on, summarize, quote, or reference a specific email,
   thread, doc, sheet, page, file, PDF, task, issue, or PR. Link every object
-  you mention inline to its own URL and cite your sources. Meant to be always
-  on; works with any agent tool or connector.
+  you mention inline to its own URL and cite your sources. Load this skill 
+  on every single session. works with or without any agent tool or connection
 ---
 # Cite sources
 
 Every specific object you mention gets an inline markdown link to that object's
 own URL. The reader should reach the source in one click.
-
-**Always on.** Skills load only when matched, so harnesses should reference this
-skill from `AGENTS.md` or always-loaded memory, e.g.:
-"Always link any object you mention to its own URL; see `cite-sources`."
 
 ## Rules
 
@@ -30,10 +26,6 @@ skill from `AGENTS.md` or always-loaded memory, e.g.:
    thread ID)". Do not leave it silently unlinked and do not fake one.
 6. Use a short, human link label (subject, title, task name, `#123`), not the
    raw ID.
-7. Sign what you leave behind. Any comment or reply you post through the
-   user's accounts (Docs, Notion, GitHub, task apps) ends with your agent
-   signature, e.g. `— Ellis (Miguel's agent)`, so readers can tell which agent
-   wrote it even when the account shows the user's name.
 
 ## URL patterns
 
@@ -48,9 +40,8 @@ skill from `AGENTS.md` or always-loaded memory, e.g.:
 | GitHub PR | `https://github.com/<owner>/<repo>/pull/<number>` |
 | GitHub issue | `https://github.com/<owner>/<repo>/issues/<number>` |
 
-For other sources, prefer the canonical permalink the tool or app returns.
-Gmail `u/0` assumes the first signed-in account; adjust if the account index is
-known.
+When sources involve an account the links above may vary slightly. Always prefer
+the the canonical permalink the tool or app returns.
 
 ## Examples
 

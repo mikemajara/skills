@@ -5,7 +5,7 @@ metadata:
 description: >-
   Talk with another live coding agent through Herdr on the user's behalf. Use when
   the user asks you to ask, consult, challenge, relay to, or have a back-and-forth
-  with another agent, including an independent second opinion. Requires Herdr's
+  with another agent in herder, including an independent second opinion. Requires Herdr's
   official `herdr` skill and a Herdr-managed pane. This is a conversation bridge,
   not a review, delegation, or autonomous team workflow by default.
 compatibility: Requires the official Herdr agent skill and HERDR_ENV=1.

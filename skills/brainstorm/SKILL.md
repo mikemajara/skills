@@ -15,8 +15,7 @@ description: >
 Invent with the user. The goal is a wider set of options, not a completeness
 audit of a plan they already have.
 
-Do not code unless they explicitly ask. Do not switch into conversation mode
-(gap-checking a settled idea) unless they ask.
+Do not switch into conversation mode (gap-checking a settled idea)
 
 ## Stance
 
