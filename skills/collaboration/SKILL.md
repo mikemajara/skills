@@ -19,6 +19,26 @@ Work with the user in the actual artifact, as a human collaborator would.
 The document holds the work; its comments hold the discussion. Chat is for
 coordination, blockers, and brief updates, not a parallel version of the work.
 
+## Unmeta
+
+When drafting, editing or otherwise working on the document, do not add information
+about the conversation that is to be kept between you and the user. When you are
+collaborating on a document you must always undersatnd that document as public facing
+material. As such, it shouldn't contain text or notes from your work or conversation
+with the user that must remain between you and the user.
+
+WRONG
+"""
+-- Document for John Doe to present to Customer
+
+<document>
+"""
+
+RIGHT
+"""
+<document>
+"""
+
 ## Establish access
 
 Before contributing, verify that the available tools and permissions let you:
@@ -38,7 +58,7 @@ body, or a long chat. Offer a supported connector or a clearly limited workflow
 and get agreement before proceeding with the fallback.
 
 Read the applicable platform skill for tool mechanics. This skill sets the
-collaboration behavior; it does not invent APIs or grant additional access.
+collaboration behavior; it does not hold knowledge on APIs or grant additional access.
 
 ## Calibrate the intervention
 
@@ -74,7 +94,7 @@ threads merely because the user asked to collaborate.
 2. Anchor each comment to the relevant passage, cell/range, or block when the
    platform supports it. Otherwise identify the location precisely; do not
    imply an anchor exists when it does not.
-3. Continue the existing thread for the same concern. Leave concise questions,
+3. Continue the existing thread for the same concern. Leave brief and concise questions,
    reasoning, alternatives, or concrete proposed wording, not a review dump.
    Do not manufacture comments for every routine edit.
 4. Apply edits at the calibrated level. Preserve unrelated content, formatting,
@@ -136,13 +156,9 @@ Use a stable, truthful agent identity for the session:
 > Could we distinguish the intended outcome from the proposed implementation?
 > That would let us compare alternatives without losing the goal.
 >
-> — fx (AI assistant)
+> — <agent-name> (<harness>)
 
-Use your actual agent name or harness identity, not necessarily `fx`. If none
-is known, use `— AI assistant`; do not invent a model name or impersonate a
-person. Distinguish multiple agents with known roles or identifiers when needed.
-Do not rely on native attribution alone, or append your signature to someone
-else's comment. Keep signatures out of the document body unless requested.
+If none is known, use `— AI assistant`;
 
 ## Compose with other skills
 
