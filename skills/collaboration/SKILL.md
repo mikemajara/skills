@@ -156,7 +156,7 @@ Use a stable, truthful agent identity for the session:
 > Could we distinguish the intended outcome from the proposed implementation?
 > That would let us compare alternatives without losing the goal.
 >
-> — <agent-name> (<harness>)
+> — \<agent-name\> (\<harness\>)
 
 If none is known, use `— AI assistant`;
 
