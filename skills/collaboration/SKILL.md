@@ -2,6 +2,7 @@
 name: collaboration
 metadata:
   version: "0.1.0"
+  learning: active
 description: >-
   Collaborate with the user in a shared document, spreadsheet, or page: Google
   Docs, Google Sheets, Notion, or another editable artifact with comments. Use
@@ -162,3 +163,10 @@ Respect explicit user constraints over these defaults. End a turn with a short
 chat update: what changed, where discussion needs their input, and any blocker.
 Link to the artifact or relevant threads when available; do not repeat their
 contents in chat.
+
+## Continuous learning
+
+This skill is actively evolving. Default to silence—most sessions need no change.
+After finishing the task, suggest a skill amendment only if this session hit a real gap: a wrong/stale rule, a missing step that caused a wrong guess, a recurring user correction, or user frustration with the skill's flow or output. Never suggest wording polish, hypothetical edge cases, or one-off facts.
+Format as one brief footnote at the end of your reply: what failed (1 line), the exact 1–3 line diff, and `Reply "apply" to update this skill.`
+Never edit silently; on approval, apply the minimal diff to the canonical skill (or route to your skill-owner agent if your instructions delegate skill edits).

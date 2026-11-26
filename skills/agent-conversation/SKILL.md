@@ -2,6 +2,7 @@
 name: agent-conversation
 metadata:
   version: "0.1.0"
+  learning: active
 description: >-
   Talk with another live coding agent through Herdr on the user's behalf. Use when
   the user asks you to ask, consult, challenge, relay to, or have a back-and-forth
@@ -111,4 +112,9 @@ other agent's work, edit artifacts, or send follow-up work orders unless the
 user asked for those actions. Conversing is not permission to accept an agent's
 proposed changes or make them yourself.
 
-.
+## Continuous learning
+
+This skill is actively evolving. Default to silence—most sessions need no change.
+After finishing the task, suggest a skill amendment only if this session hit a real gap: a wrong/stale rule, a missing step that caused a wrong guess, a recurring user correction, or user frustration with the skill's flow or output. Never suggest wording polish, hypothetical edge cases, or one-off facts.
+Format as one brief footnote at the end of your reply: what failed (1 line), the exact 1–3 line diff, and `Reply "apply" to update this skill.`
+Never edit silently; on approval, apply the minimal diff to the canonical skill (or route to your skill-owner agent if your instructions delegate skill edits).

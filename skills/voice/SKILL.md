@@ -2,6 +2,7 @@
 name: voice
 metadata:
   version: "0.1.0"
+  learning: active
 description: >
   Write or rewrite a specific message, announcement, article, or social post in
   this personal voice: concise, warm, direct, structured, and plainspoken. Use
@@ -59,3 +60,10 @@ Read the relevant profile before writing:
 5. Are links descriptive and punctuation natural?
 6. Are there any em dashes or en dashes?
 7. Does it sound direct without becoming cold?
+
+## Continuous learning
+
+This skill is actively evolving. Default to silence—most sessions need no change.
+After finishing the task, suggest a skill amendment only if this session hit a real gap: a wrong/stale rule, a missing step that caused a wrong guess, a recurring user correction, or user frustration with the skill's flow or output. Never suggest wording polish, hypothetical edge cases, or one-off facts.
+Format as one brief footnote at the end of your reply: what failed (1 line), the exact 1–3 line diff, and `Reply "apply" to update this skill.`
+Never edit silently; on approval, apply the minimal diff to the canonical skill (or route to your skill-owner agent if your instructions delegate skill edits).

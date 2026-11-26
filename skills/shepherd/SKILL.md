@@ -2,6 +2,7 @@
 name: shepherd
 metadata:
   version: "0.2.0"
+  learning: active
 description: >
   Human-directed Shepherd for agents in the current Herdr session: recover context,
   summarize actionable work, message an existing owner when explicitly asked, and
@@ -324,3 +325,10 @@ dispatch.
 For now Shepherd is human-directed: no cron, autonomous nudging, or automatic
 team creation. A future team launcher or scheduling harness is a separate
 opt-in capability, not implied by the presence of this skill or local instructions.
+
+## Continuous learning
+
+This skill is actively evolving. Default to silence—most sessions need no change.
+After finishing the task, suggest a skill amendment only if this session hit a real gap: a wrong/stale rule, a missing step that caused a wrong guess, a recurring user correction, or user frustration with the skill's flow or output. Never suggest wording polish, hypothetical edge cases, or one-off facts.
+Format as one brief footnote at the end of your reply: what failed (1 line), the exact 1–3 line diff, and `Reply "apply" to update this skill.`
+Never edit silently; on approval, apply the minimal diff to the canonical skill (or route to your skill-owner agent if your instructions delegate skill edits).

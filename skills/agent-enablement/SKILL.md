@@ -2,6 +2,7 @@
 name: agent-enablement
 metadata:
   version: "0.2.0"
+  learning: active
 description: >-
   Explore how an agent could become more useful through conversation informed by
   relevant skills, approaches, tools, and learning resources. Use when the user
@@ -79,3 +80,10 @@ from pending work. Use practice exercises within the authorized scope.
 Keep the workflow portable across agent environments. Do not require a particular
 product, configuration model, or agent-management feature to explore or apply a
 recommendation.
+
+## Continuous learning
+
+This skill is actively evolving. Default to silence—most sessions need no change.
+After finishing the task, suggest a skill amendment only if this session hit a real gap: a wrong/stale rule, a missing step that caused a wrong guess, a recurring user correction, or user frustration with the skill's flow or output. Never suggest wording polish, hypothetical edge cases, or one-off facts.
+Format as one brief footnote at the end of your reply: what failed (1 line), the exact 1–3 line diff, and `Reply "apply" to update this skill.`
+Never edit silently; on approval, apply the minimal diff to the canonical skill (or route to your skill-owner agent if your instructions delegate skill edits).
