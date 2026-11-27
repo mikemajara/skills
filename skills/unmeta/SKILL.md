@@ -1,14 +1,16 @@
 ---
 name: unmeta
 metadata:
-  version: "0.1.0"
+  version: "0.2.0"
 description: >-
-  Separate the authoring conversation from the authored work. Use whenever
-  drafting, editing, or filling documents, drafts, emails, questionnaire answers,
-  form comments, posts, or other content, especially after feedback,
-  clarification, or agreement about what to include or omit. Apply even when
-  the user does not ask for writing cleanup. Prevent instructions such as
-  "no named course" from becoming statements about the response itself.
+  Separate the authoring conversation and internal context from the authored
+  work. Use whenever drafting, editing, or filling customer- or public-facing
+  documents, drafts, emails, questionnaire answers, form comments, posts,
+  slides, tables, spreadsheets, or diagrams/SVGs—especially after feedback,
+  discovery, or agreement about what to include or omit. Apply even when the
+  user does not ask for writing cleanup. Prevent instructions such as "no named
+  course", unrequested internal research notes, or agent-side verification
+  reminders ("verify X", "confirm Y", "TBD") from leaking into the artifact.
   When unsure whether a remark is guidance for you or content for the recipient,
   always ask the user before including or silently omitting it.
 ---
@@ -23,16 +25,23 @@ you without intending any of that discussion to appear in the artifact.
 
 Before drafting or editing, distinguish:
 
-- **Authoring conversation:** instructions, corrections, questions, choices,
-  rationale for edits, and acknowledgments exchanged with the user.
-- **Authored work:** the substantive answer or message intended for its reader,
-  including facts, required explanations, limitations, and uncertainty.
+- **Authoring conversation and internal context:** instructions, corrections,
+  questions, choices, rationale for edits, acknowledgments, internal discovery
+  notes (CRM, call notes, internal chat), and agent-generated checklists or
+  verification reminders (`verify X`, `confirm Y`, `TBD`) not requested for the
+  reader.
+- **Authored work:** the substantive artifact intended for its reader—prose,
+  emails, questionnaires, slide callouts, diagram labels, or table cells—including
+  facts, required explanations, limitations, and uncertainty.
 
-For each relevant remark, act according to its role:
+For each relevant remark or finding, act according to its role:
 
-1. **Clearly an authoring instruction:** apply it silently. "Don't name a course"
-   means omit the name, not announce that the answer omits one. Do not infer
-   unsupported facts about courses or attachments from that instruction.
+1. **Clearly an authoring instruction or internal context:** apply or keep it
+   in the authoring chat only. "Don't name a course" means omit the name, not
+   announce that the answer omits one, and do not infer unsupported facts from
+   it. Unrequested internal discovery notes and verification reminders
+   (`verify X`, `confirm Y`, `TBD`) stay in chat—never slip them into prose,
+   diagram labels, slide callouts, or table cells.
 2. **Clearly intended content:** include its substance. A negative fact or scope
    boundary belongs when the user wants the recipient to know it.
 3. **Unclear which:** always ask the user. Do not guess, silently drop the remark,
@@ -73,10 +82,23 @@ Response: "Not applicable." Comment: "The service does not store payment-card
 data." Do not append "Therefore, this response is not applicable." The comment
 supplies evidence, not narration of the selected label.
 
+### Diagram or slide callout (internal discovery leakage)
+
+- Context: Internal discovery notes flag an open question to check whether the
+  customer's corporate gateway policy allows direct API routing. The user asks
+  for a customer-facing architecture diagram with brief value callouts and does
+  not ask to include that check.
+- Wrong: "Multi-model access and usage caps (verify corporate gateway policy)."
+- Right: "Multi-model access and usage caps." Keep the reminder to verify the
+  gateway policy in the authoring chat only.
+
 ## Check before writing
 
 - Remove announcements of compliance, omitted topics, drafting choices, and
   generic "This document outlines..." introductions that merely echo the brief.
+- Strip unrequested internal discovery notes, CRM/chat context, and internal
+  reminders (`verify X`, `confirm Y`, `TBD`) from customer- or public-facing
+  prose, diagram labels, slide callouts, and table cells.
 - Keep the actual explanation. Preserve facts, requirements, uncertainty, and
   limitations; do not weaken "requires an administrator" into "an administrator
   can do it" or invent facts to make the answer complete.

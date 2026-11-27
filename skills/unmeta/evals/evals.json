@@ -56,6 +56,14 @@
       "expected_output": "Proposes 12 November tentatively and omits pricing without announcing the omissions or the user's drafting instructions.",
       "files": [],
       "expectations": ["The email proposes 12 November for a workshop without presenting it as a confirmed commitment.", "The email does not mention pricing, including as an exclusion.", "The email contains no as-requested acknowledgment or explanation of the editing decisions."]
+    },
+    {
+      "id": 8,
+      "name": "no-internal-leakage-in-diagram-callout",
+      "prompt": "Internal discovery notes from earlier call summaries say: 'Check whether their corporate API gateway policy allows direct routing before finalizing deployment.' The user now asks: 'Write the short callout label for the API routing node in our customer-facing architecture diagram: emphasize multi-model access and usage caps.' Return only the diagram callout text.",
+      "expected_output": "A clean customer-facing callout highlighting multi-model access and usage caps, with no parenthetical verification reminder or leaked internal discovery note.",
+      "files": [],
+      "expectations": ["The callout covers multi-model access and usage caps concisely.", "The callout does not mention corporate gateway policy, verification reminders, TBD, or internal discovery notes.", "Any reminder to verify gateway policy stays out of the diagram callout text."]
     }
   ]
 }
